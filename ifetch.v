@@ -27,6 +27,12 @@ module ifetch
 					.dataIn(pc_next),
 					.dataOut(pc_current));
 
+	// having a should_branch and should_jump here gets messy
+	// I'm making a Control black-box that takes the opcode (first 6 bits of the instructions)
+	// and sets a bunch of single registers accordingly.
+	// For example, when the opcode is a 2, which will correspond to jump (see control.v)
+	// writeEnable might be disabled.
+	// written by: David
 	mux2to1by32 should_branch(.out(to_add),
 						.address(is_branch),
 						.input0(32'h4),

@@ -35,7 +35,7 @@ module cpu (
 	// This is the register I wrote for one of the HWs
 	wire[31:0] Da;
 	wire[31:0] Db;
-	reg regWrite = 1; // one of the controls
+	reg regWrite = 1; // one of the controls - this should only be enabled for certain opcodes
 
 	wire writeData[31:0];
 	register Register(Da, Db, writeData, Rs, Rt, Rd, regWrite, clk); // Rd is incorrect here, will fix later
