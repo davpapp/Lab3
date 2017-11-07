@@ -31,10 +31,11 @@ module testInstructionDecode();
 
 	task checkResult;
 		input[5:0] exp_opcode;
-		input[5:0] opcode;
+		input[4:0] exp_rs, exp_rt, exp_rd, exp_imm, exp_jump_target;
+		input[5:0] opcode, Rs, Rt, Rd, imm, jump_target;
 
 
-		if (opcode == exp_opcode) begin
+		if ((opcode == exp_opcode) && (Rs == exp_rs) && (Rt == exp_rt) && (Rd == exp_rd) && (imm == exp_imm) && (jump_target == exp_jump_target)) begin
 			$display("Passed.");
 		end
 		else begin
@@ -45,6 +46,9 @@ module testInstructionDecode();
 
 	initial begin
 	    instruction = 32'b00000000000000000000000000000000; #10
-	    checkResult(6'b000000, opcode);
+	    checkResult(6'b000000, 5'b00000, 5'b00000, 5'b00000, 15'b000000000000000, 25'b0000000000000000000000000, opcode, Rs, Rt, Rd, imm, jump_target);
+
+	    instruction = 32'b01000010001101010001000000000011; #10
+	    checkResult(6'b010000, 5'b10001, 5'b10101, 5'b00010, 15'b010000000000011, 25'b0000000000000000000000011, opcode, Rs, Rt, Rd, imm, jump_target);
 	end // initial*/
 endmodule
