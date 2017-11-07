@@ -12,8 +12,7 @@ module cpu (
   
 );
 
-
-
+	control CPU_control(opcode, writeReg, /*etc etc didn't finish this */, command);
 
 // ----------------------------Instruction Fetch-------------------------
 	wire instruction[31:0];
@@ -46,12 +45,12 @@ module cpu (
 // ----------------------------Execute-----------------------------------
 	wire[31:0] extended_imm; // need to extend our immediate
 	wire[31:0] operandB;
-	mux ALUSource(ALUOperandSource, Db, extended_imm); // choose between Db or our immediate as the second operand in the ALU
+	mux ALUSource(ALU_OperandSource, Db, extended_imm); // choose between Db or our immediate as the second operand in the ALU
 
 	// Use my ALU from Lab 1 - opcode will need to be converted
-	wire[31:0] resultALU;
+	wire[31:0] ALU_result;
 	wire carryout, zero, overflow; // Don't think we actually use these
 	wire[2:0] command;
-	alu ALU(resultALU, carryout, zero, overflow, Da, Db, command);
+	alu ALU(ALU_result, carryout, zero, overflow, Da, Db, command);
 
 endmodule
