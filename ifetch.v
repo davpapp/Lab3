@@ -33,18 +33,19 @@ module ifetch
 	// For example, when the opcode is a 2, which will correspond to jump (see control.v)
 	// writeEnable might be disabled.
 	// written by: David
-	mux2to1by32 should_branch(.out(to_add),
+	
+	/*mux2to1by32 should_branch(.out(to_add),
 						.address(is_branch),
 						.input0(32'h4),
-						.input1(branch_addr_full));
+						.input1(branch_addr_full));*/
 
 	add32bit add_to_pc(.a(pc_current),
 						.b(to_add),
 						.c(increased_pc),
 						.overflow(_));
 
-	mux2to1by32 should_jump(.out(pc_next),
+	/*mux2to1by32 should_jump(.out(pc_next),
 						.address(is_jump),
 						.input0(branch_addr_full),
-						.input1(jump_addr));
+						.input1(jump_addr));*/
 endmodule

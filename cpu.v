@@ -12,6 +12,9 @@ module cpu (
   
 );
 
+
+
+
 // ----------------------------Instruction Fetch-------------------------
 	wire instruction[31:0];
 	ifetch IF(/* */); // updates instruction, increments PC by 4
@@ -41,13 +44,14 @@ module cpu (
 	register Register(Da, Db, writeData, Rs, Rt, Rd, regWrite, clk); // Rd is incorrect here, will fix later
 
 // ----------------------------Execute-----------------------------------
-	wire[31:0] resultALU;
-	wire carryout, zero, overflow; // Don't think we actually use these
 	wire[31:0] extended_imm; // need to extend our immediate
-
-	wire[31:0] Db_or_imm; // need a mux to choose between Db or our immediate as the second operand in the ALU
+	wire[31:0] operandB;
+	mux ALUSource(ALUOperandSource, Db, extended_imm); // choose between Db or our immediate as the second operand in the ALU
 
 	// Use my ALU from Lab 1 - opcode will need to be converted
-	alu ALU(resultALU, carryout, zero, overflow, Da, Db, opcode);
+	wire[31:0] resultALU;
+	wire carryout, zero, overflow; // Don't think we actually use these
+	wire[2:0] command;
+	alu ALU(resultALU, carryout, zero, overflow, Da, Db, command);
 
 endmodule
