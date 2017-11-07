@@ -1,0 +1,70 @@
+#! /usr/bin/vvp
+:ivl_version "0.9.7 " "(v0_9_7)";
+:vpi_time_precision + 0;
+:vpi_module "system";
+:vpi_module "v2005_math";
+:vpi_module "va_math";
+S_0x26007b0 .scope module, "instructionDecoderI" "instructionDecoderI" 2 2;
+ .timescale 0 0;
+v0x2623e10_0 .net "Rs", 4 0, L_0x2639a80; 1 drivers
+v0x2638b90_0 .net "Rt", 4 0, L_0x2639ba0; 1 drivers
+v0x2638c30_0 .net "imm", 15 0, L_0x2639c40; 1 drivers
+v0x2638cd0_0 .net "instruction", 31 0, C4<zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz>; 0 drivers
+v0x2638d80_0 .net "opcode", 5 0, L_0x2639980; 1 drivers
+L_0x2639980 .part C4<zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz>, 26, 6;
+L_0x2639a80 .part C4<zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz>, 21, 5;
+L_0x2639ba0 .part C4<zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz>, 16, 5;
+L_0x2639c40 .part C4<zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz>, 0, 16;
+S_0x2613f40 .scope module, "instructionDecoderJ" "instructionDecoderJ" 3 2;
+ .timescale 0 0;
+v0x2638e20_0 .net "instruction", 31 0, C4<zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz>; 0 drivers
+v0x2638ee0_0 .net "jump_target", 25 0, L_0x2639ed0; 1 drivers
+v0x2638f80_0 .net "opcode", 5 0, L_0x2639dd0; 1 drivers
+L_0x2639dd0 .part C4<zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz>, 26, 6;
+L_0x2639ed0 .part C4<zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz>, 0, 26;
+S_0x2603540 .scope module, "testInstructionDecode" "testInstructionDecode" 4 5;
+ .timescale 0 0;
+v0x2639830_0 .var "instruction", 31 0;
+v0x26398d0_0 .net "opcode", 5 0, L_0x2639fa0; 1 drivers
+S_0x2639540 .scope function, "checkResult" "checkResult" 4 22, 4 22, S_0x2603540;
+ .timescale 0 0;
+v0x2639630_0 .var "checkResult", 0 0;
+v0x26396f0_0 .var "exp_opcode", 5 0;
+v0x2639790_0 .var "opcode", 5 0;
+TD_testInstructionDecode.checkResult ;
+    %load/v 8, v0x2639790_0, 6;
+    %load/v 14, v0x26396f0_0, 6;
+    %cmp/u 8, 14, 6;
+    %jmp/0xz  T_0.0, 4;
+    %vpi_call 4 27 "$display", "Passed.";
+    %jmp T_0.1;
+T_0.0 ;
+    %vpi_call 4 30 "$display", "Failed";
+T_0.1 ;
+    %end;
+S_0x2639020 .scope module, "ID_R" "instructionDecoderR" 4 16, 5 2, S_0x2603540;
+ .timescale 0 0;
+v0x2639110_0 .net "Rd", 4 0, L_0x263a2b0; 1 drivers
+v0x26391d0_0 .net "Rs", 4 0, L_0x263a0e0; 1 drivers
+v0x2639270_0 .net "Rt", 4 0, L_0x263a180; 1 drivers
+v0x2639310_0 .net "instruction", 31 0, v0x2639830_0; 1 drivers
+v0x26393c0_0 .alias "opcode", 5 0, v0x26398d0_0;
+v0x2639460_0 .net "rest", 10 0, L_0x263a380; 1 drivers
+L_0x2639fa0 .part v0x2639830_0, 26, 6;
+L_0x263a0e0 .part v0x2639830_0, 21, 5;
+L_0x263a180 .part v0x2639830_0, 16, 5;
+L_0x263a2b0 .part v0x2639830_0, 11, 5;
+L_0x263a380 .part v0x2639830_0, 0, 11;
+    .scope S_0x2603540;
+T_1 ;
+    %set/v v0x2639830_0, 0, 32;
+    %end;
+    .thread T_1;
+# The file index is used to find the file name in the following table.
+:file_names 6;
+    "N/A";
+    "<interactive>";
+    "./instructionDecoderI.v";
+    "./instructionDecoderJ.v";
+    "testInstructionDecode.t.v";
+    "./instructionDecoderR.v";

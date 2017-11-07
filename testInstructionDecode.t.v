@@ -1,21 +1,27 @@
 `include "instructionDecoderR.v"
-//`include "instructionDecoderI.v"
-//`include "instructionDecoderJ.v"
+`include "instructionDecoderI.v"
+`include "instructionDecoderJ.v"
 
 module testInstructionDecode();
 	reg[31:0] instruction;
 
-	reg[5:0] opcode;
-	reg[5:0] Rs;
-	reg[4:0] Rt;
-	reg[4:0] Rd;
-	reg[10:0] rest;
-	reg[15:0] imm;
-	reg[25:0] jump_target;
+	wire[5:0] opcode;
+	wire[5:0] Rs;
+	wire[4:0] Rt;
+	wire[4:0] Rd;
+	wire[10:0] rest;
+	wire[15:0] imm;
+	wire[25:0] jump_target;
 
-	instructionDecoderR ID_R(instruction, opcode/*, Rs, Rt, Rd, rest*/);
-	//instructionDecoderR ID_I(instruction, opcode, Rs, Rt, imm);
-	//instructionDecoderR ID_J(instruction, opcode, jump_target);
+	instructionDecoderR ID_R(.instruction(instruction[31:0]),
+							.opcode(opcode));
+	/*instructionDecoderI ID_I(.instruction(instruction[31:0]),
+							.opcode(opcode));
+	instructionDecoderJ ID_J(.instruction(instruction[31:0]),
+							.opcode(opcode));*/
+							///*, Rs[4:0], Rt[4:0], Rd[4:0], rest[10:0]*/);
+	//instructionDecoderI ID_I(instruction[31:0], opcode[6:0], Rs[4:0], Rt[4:0], imm[15:0]);
+	//instructionDecoderJ ID_J(instruction, opcode, jump_target);
 
 
 	function checkResult;
@@ -31,7 +37,7 @@ module testInstructionDecode();
 	endfunction
 
 	initial begin
-	    instruction = 32'b00000000000000000000000000000000; #10
+	    instruction = 32'b00000000000000000000000000000000;
 	    checkResult(6'b000000, opcode);
-	end // initial
+	end // initial*/
 endmodule

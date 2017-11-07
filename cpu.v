@@ -30,8 +30,8 @@ module cpu (
 	wire[25:0] jump_target;
 
 	instructionDecoderR ID_R(instruction, opcode, Rs, Rt, Rd, rest);
-	instructionDecoderR ID_I(instruction, opcode, Rs, Rt, imm);
-	instructionDecoderR ID_J(instruction, opcode, jump_target);
+	instructionDecoderI ID_I(instruction, opcode, Rs, Rt, imm);
+	instructionDecoderJ ID_J(instruction, opcode, jump_target);
 
 // ---------------------------Register Fetch-----------------------------
 	// This is the register I wrote for one of the HWs
