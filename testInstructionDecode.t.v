@@ -6,7 +6,7 @@ module testInstructionDecode();
 	reg[31:0] instruction;
 
 	wire[5:0] opcode;
-	wire[5:0] Rs;
+	wire[4:0] Rs;
 	wire[4:0] Rt;
 	wire[4:0] Rd;
 	wire[10:0] rest;
@@ -14,30 +14,37 @@ module testInstructionDecode();
 	wire[25:0] jump_target;
 
 	instructionDecoderR ID_R(.instruction(instruction[31:0]),
-							.opcode(opcode));
-	/*instructionDecoderI ID_I(.instruction(instruction[31:0]),
-							.opcode(opcode));
+							.opcode(opcode),
+							.Rs(Rs),
+							.Rt(Rt),
+							.Rd(Rd),
+							.rest(rest));
+	instructionDecoderI ID_I(.instruction(instruction[31:0]),
+							.opcode(opcode),
+							.Rs(Rs),
+							.Rt(Rt),
+							.imm(imm));
 	instructionDecoderJ ID_J(.instruction(instruction[31:0]),
-							.opcode(opcode));*/
-							///*, Rs[4:0], Rt[4:0], Rd[4:0], rest[10:0]*/);
-	//instructionDecoderI ID_I(instruction[31:0], opcode[6:0], Rs[4:0], Rt[4:0], imm[15:0]);
-	//instructionDecoderJ ID_J(instruction, opcode, jump_target);
+							.opcode(opcode),
+							.jump_target(jump_target));
 
 
-	function checkResult;
+	task checkResult;
 		input[5:0] exp_opcode;
 		input[5:0] opcode;
+
 
 		if (opcode == exp_opcode) begin
 			$display("Passed.");
 		end
 		else begin
 			$display("Failed");
+			$display(opcode);
 		end
-	endfunction
+	endtask
 
 	initial begin
-	    instruction = 32'b00000000000000000000000000000000;
+	    instruction = 32'b00000000000000000000000000000000; #10
 	    checkResult(6'b000000, opcode);
 	end // initial*/
 endmodule

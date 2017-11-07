@@ -1,4 +1,4 @@
-// The control takes the Opcode from the 32 bit instruction
+// The control takes the opcode from the 32 bit instruction
 // and sets all the control variables (such as writeEnables)
 
 // opcodes we need to support:
