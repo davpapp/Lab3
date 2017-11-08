@@ -18,38 +18,72 @@ module control (
 
 );
 	// all of these will need some if cases or something
+	always @(opcode)
+	case(opcode)
+		// LW - Load word 
+		5'd0: begin
+		end
 
-	// LW - Load word 
+		// SW - store word
+		5'd1: begin	
+			memoryWrite = 1;
 
-	// SW - store word
-		memoryWrite = 1;
+		end
 
-	// J - jump register
+		// J - jump register
+		5'd2: begin
+		end
 
-	// JR - 
+		// JR - 
+		5'd3: begin
+		end
 
-	// JAL - jump and link
+		// JAL - jump and link
+		5'd4: begin
+		end
 
-	// BNE - 
+		// BNE - 
+		5'd5: begin
+		end
 
-	// XORI -
-		ALUoperandSource = 1; 
+		// XORI -
+		5'd6: begin
+			ALUoperandSource = 1; 
 
-	// ADDI - 
-		ALUoperandSource = 1;
-		writeReg = 1;
-		command = 3'b000;
+		end
 
-	// ADD - add (with overflow)
-		ALUoperandSource = 0;
-		writeReg = 1;
-		command = 3'b000;
-	// SUB - 
-		ALUoperandSource = 1;
-		command = 3'b001;
+		// ADDI - 
+		5'd7: begin
 
-	// SLT - 
-		command = 3'b011;
+			ALUoperandSource = 1;
+			writeReg = 1;
+			command = 3'b000;
+
+		end
+
+		// ADD - add (with overflow)
+		5'd8: begin
+
+			ALUoperandSource = 0;
+			writeReg = 1;
+			command = 3'b000;
+
+		end
+		// SUB - 
+		5'd9: begin
+
+			ALUoperandSource = 1;
+			command = 3'b001;
+
+		end
+
+		// SLT - 
+		5'd10: begin
+
+			command = 3'b011;
+
+		end
+	endcase // opcode
 	
 
 endmodule
