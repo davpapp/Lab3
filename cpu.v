@@ -1,4 +1,7 @@
 // Single cycle-cpu
+`include "ifetch.v"
+`include "control.v"
+`include "cpu.v"
 
 // This is the top level module for our single cycle CPU
 // It consists of 5 sub-modules:
@@ -9,7 +12,7 @@
 // Write
 
 module cpu (
-  
+  input clk;
 );
 
 	control CPU_control(opcode, writeReg, /*etc etc didn't finish this */, command);
@@ -17,7 +20,6 @@ module cpu (
 // ----------------------------Instruction Fetch-------------------------
 	wire instruction[31:0];
 	ifetch IF(/* */); // updates instruction, increments PC by 4
-
 
 // ----------------------------Instruction Decode------------------------
 	// Break the instruction into its pieces
@@ -52,5 +54,8 @@ module cpu (
 	wire carryout, zero, overflow; // Don't think we actually use these
 	wire[2:0] command;
 	alu ALU(ALU_result, carryout, zero, overflow, Da, Db, command);
-
+// ----------------------------Memory/Write-----------------------------------
+//data memory, from lab 2:
+datamemory DM(clk,dataOut,address, WrEn,dataIn); 
+	
 endmodule
