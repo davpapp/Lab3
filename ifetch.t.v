@@ -19,7 +19,6 @@ module testifetch();
 
 	initial begin
 		clk=0;
-		assign dut.pc_reg.mem = 32'b0;
 	end
 
 	always #5 clk=!clk;    // 50MHz Clock
@@ -28,20 +27,22 @@ module testifetch();
 		$dumpfile("ifetch.vcd");
 	    $dumpvars();
 
-	    // Some Nonsense
-	    write_pc = 1; is_branch = 0; is_jump = 0; branch_addr = 16'b0; jump_addr = 31'b0; # 10
-	    write_pc = 0;
-	    $display("OutPut: %h", out); #10
-
-	    write_pc = 1; is_branch = 1; is_jump = 0; branch_addr = 16'd12; jump_addr = 31'b0; # 10
-	    write_pc = 0;
-
-	    $display("OutPut: %h", out); #10
-
-		write_pc = 1; is_branch = 0; is_jump = 1; branch_addr = 16'b0; jump_addr = 31'd32; # 10
-	    write_pc = 0;
+	    write_pc = 1; is_branch = 0; is_jump = 0; branch_addr = 16'd4; jump_addr = 31'b0;
+	    #10//@(posedge clk);
 	    $display("OutPut: %h", out);
-	   	#100 $finish;
+
+	    write_pc = 1; is_branch = 1; is_jump = 0; branch_addr = 16'd12; jump_addr = 31'b0;
+	    #10//@(posedge clk);
+	    $display("OutPut: %h", out);
+
+		write_pc = 1; is_branch = 0; branch_addr = 16'd4; jump_addr = 31'd32; is_jump = 1;
+	    #10//@(posedge clk);
+	    $display("OutPut: %h", out);
+
+	    write_pc = 1; is_branch = 0; is_jump = 0; branch_addr = 16'd4; jump_addr = 31'd32;
+	    #10//@(posedge clk);
+	    $display("OutPut: %h", out);
+	   	$finish;
 
 	end // initial
 endmodule // testifetch

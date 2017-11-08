@@ -16,6 +16,7 @@ wire sameSign;
   and ovrflTest(overflow, carryXorSign, sameSign);
 
 always @(a or b) begin
+  $display("Adding, %b", b);
   {carry, c} = a + b;
 end
 endmodule

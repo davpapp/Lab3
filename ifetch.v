@@ -5,40 +5,44 @@
 
 module ifetch
 	(
-		input clk, write_pc, is_branch, is_jump,
-		input [15:0] branch_addr,
-		input [31:0] jump_addr,
-		output[31:0] out
+		input clk,                // clk updates the PC
+		input write_pc,           // if write_pc is high, pc can change
+		input is_branch,          // is_branch selects between add 4 (0) and add branch (1) 
+		input  is_jump,           // is jump selects between incrementing by 4/branch (0) or putting PC to jump_addr (1)
+		input [15:0] branch_addr, // add this to PC to go to the branch location
+		input [31:0] jump_addr,   // instruction memory address to jump to
+		output[31:0] out          // returns instruction encoding (32 bits)
 		);
 
-	wire [31:0] pc_current, pc_next, to_add, increased_pc;
-	wire [31:0] branch_addr_full;
+	wire [31:0] pc_next, to_add, increased_pc; // create connecting wires
+	reg [31:0] pc = 32'd0, branch_addr_full = 32'd4; // pc keeps track of position, branch_addr_full is the sign extended version of branch_addr 
 
-	assign branch_addr_full = {{16{branch_addr[15]}}, branch_addr};
+	// Get instruction encoding from the instruction memory
+	instruction_memory program_mem(.clk(clk), // only happens on clock edge
+						.regWE(0), // We don't want to write to instruction memory
+						.Addr(pc), // pc is the 32 bit address
+						.DataIn(32'b0), // doesn't actually matter, we're not writing
+						.DataOut(out)); // this will be instruction encoding
 
-	memory program_mem(.clk(clk),
-						.regWE(0),
-						.Addr(pc_current),
-						.DataIn(32'b0),
-						.DataOut(out));
+	mux2to1by32 should_branch(.out(to_add), // to_add is either 4 or the branch value
+						.address(is_branch), // selector
+						.input0(32'd4),      // constant 4 (normal incrememnt)
+						.input1(branch_addr_full)); // second option is the se branch addr
 
-	dff #(32) pc_reg(.clk(clk),
-					.ce(write_pc),
-					.dataIn(pc_next),
-					.dataOut(pc_current));
+	add32bit add_to_pc(.a(pc), // pc is base
+						.b(to_add), // add to_add
+						.c(increased_pc), // the potential incremented value
+						.overflow(_)); // I don't think we care about overflow
 
-	mux2to1by32 should_branch(.out(to_add),
-						.address(is_branch),
-						.input0(32'h4),
-						.input1(branch_addr_full));
-
-	add32bit add_to_pc(.a(pc_current),
-						.b(to_add),
-						.c(increased_pc),
-						.overflow(_));
-
-	mux2to1by32 should_jump(.out(pc_next),
-						.address(is_jump),
-						.input0(branch_addr_full),
+	mux2to1by32 should_jump(.out(pc_next), // next PC value
+						.address(is_jump), // chooses either the incrememnted value (4/branch) or a jump
+						.input0(increased_pc),
 						.input1(jump_addr));
+
+	always @(posedge clk) begin // update on clock
+		branch_addr_full <= {{16{branch_addr[15]}}, branch_addr}; // se branch_addr
+		if(write_pc == 1) begin // register!
+			pc <= pc_next;
+		end
+	end
 endmodule
