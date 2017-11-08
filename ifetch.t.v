@@ -29,20 +29,20 @@ module testifetch();
 
 	    write_pc = 1; is_branch = 0; is_jump = 0; branch_addr = 16'd4; jump_addr = 31'b0;
 	    #10//@(posedge clk);
-	    $display("OutPut: %h", out);
+	    $display("OutPut: %h", out); #10
 
 	    write_pc = 1; is_branch = 1; is_jump = 0; branch_addr = 16'd12; jump_addr = 31'b0;
 	    #10//@(posedge clk);
-	    $display("OutPut: %h", out);
+	    $display("OutPut: %h", out); #10
 
 		write_pc = 1; is_branch = 0; branch_addr = 16'd4; jump_addr = 31'd32; is_jump = 1;
 	    #10//@(posedge clk);
-	    $display("OutPut: %h", out);
+	    $display("OutPut: %h", out); #10
 
 	    write_pc = 1; is_branch = 0; is_jump = 0; branch_addr = 16'd4; jump_addr = 31'd32;
 	    #10//@(posedge clk);
-	    $display("OutPut: %h", out);
-	   	$finish;
+	    $display("OutPut: %h", out); #10
+	   	#20 $finish;
 
 	end // initial
 endmodule // testifetch
