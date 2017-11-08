@@ -7,9 +7,9 @@ module instructionDecoderI (
 	output[15:0] imm
 );
 	// I-type
-	wire[5:0] opcode = instruction[31:26];
-	wire[4:0] Rs = instruction[25:21];
-	wire[4:0] Rt = instruction[20:16];
-	wire[15:0] imm = instruction[15:0];
+	assign opcode = instruction[31:26];
+	assign Rs = instruction[25:21];
+	assign Rt = instruction[20:16];
+	assign imm = instruction[15:0];
 
 endmodule
