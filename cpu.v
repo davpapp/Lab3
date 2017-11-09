@@ -2,7 +2,7 @@
 `include "ifetch.v"
 `include "control.v"
 `include "datamemory.v"
-`include "register.v"
+`include "regfile.v"
 
 // This is the top level module for our single cycle CPU
 // It consists of 5 sub-modules:
@@ -53,6 +53,7 @@ module cpu (
 						.isbranch(is_branch));
 
 // ----------------------------Instruction Fetch-------------------------
+	// Tests: [TO DO]
 	wire instruction[31:0];
 	ifetch IF(.clk(clk),
 				.write_pc(1'b1),
@@ -63,6 +64,7 @@ module cpu (
 				.out(instruction)); // updates instruction, increments PC by 4
 
 // ----------------------------Instruction Decode------------------------
+	// Testing: [DONE]
 	// Break the instruction into its pieces
 
 	instructionDecoderR ID_R(instruction, opcode, Rs, Rt, Rd, shift, funct);
@@ -71,7 +73,6 @@ module cpu (
 
 // ---------------------------Register Fetch-----------------------------
 	// This is the register I wrote for one of the HWs
-
 	regfile register(Da, Db, writeData[31:0], Rs, Rt, Rd, regWrite, clk); // Rd is incorrect here, will fix later
 																	//Q: Could you include a testfile?
 

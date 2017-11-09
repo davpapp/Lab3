@@ -30,14 +30,14 @@
 module control (
 	input[5:0] opcode,
 	input[5:0] funct,
-	output writeReg,
-	output ALUoperandSource, // 0 for Db, 1 for immediate
-	output memoryRead,
-	output memoryWrite,
-	output memoryToRegister,
-	output[2:0] command, // sets the command for our ALU
-	output isjump,
-	output isbranch
+	output reg writeReg,
+	output reg ALUoperandSource, // 0 for Db, 1 for immediate
+	output reg memoryRead,
+	output reg memoryWrite,
+	output reg memoryToRegister,
+	output reg [2:0] command, // sets the command for our ALU
+	output reg isjump,
+	output reg isbranch
 );
 	// all of these will need some if cases or something
 	always @(opcode or funct) begin
