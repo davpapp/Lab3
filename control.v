@@ -3,7 +3,14 @@
 
 // opcodes we need to support:
 // LW, SW, J, JR, JAL, BNE, XORI, ADDI, ADD, SUB, SLT
-// 0   1   2  3   4    5    6     7     8    9    10
+
+// define controls for ALU
+`define ADD 3'b000
+`define SUB 3'b001
+`define SLT 3'b010
+`define XOR 3'b011
+`define ALUDB 0
+`define ALUIMM 1
 
 // Look at http://www.mrc.uidaho.edu/mrc/people/jff/digital/MIPSir.html
 // to find what each opcode should do
@@ -23,40 +30,57 @@ module control (
 	always @(opcode)
 	case(opcode)
 		// R - type
-		5'h0: begin
+		6'h0: begin
+			ALUoperandSource = `ALUDB;
+			memoryRead = 0;
+			memoryWrite = 0;
+			memoryToRegister = 0;
+			isbranch = 0;	
 			case(funct)
 				// Jump Register
-				5'h08: begin
+				6'h08: begin
+					writeReg = 0;
+					command = 3'h0;
+					isjump = 1;
 				end
 				// ADD
-				5'h24: begin
+				6'h24: begin
+					writeReg = 1;
+					command = `ADD;
+					isjump = 0;
 				end
 				// SUB
-				5'h22: begin
+				6'h22: begin
+					writeReg = 1;
+					command = `SUB;
+					isjump = 0;
 				end
 				// SLT
-				5'h2a: begin
+				6'h2a: begin
+					writeReg = 1;
+					command = `SLT;
+					isjump = 0;
 				end
 		end
 
 		// Load Word
-		5'h23: begin
+		6'h23: begin
 			writeReg = 1;
 			ALUoperandSource = 0;
 			memoryRead = 1;
 			memoryWrite = 0;
-			memoryToRegister = 0;
+			memoryToRegister = 1;
 			command = 3'h0;
 			isjump = 0;
 			isbranch = 0;	
 		end
 
 		// Store Word
-		5'h2b: begin
+		6'h2b: begin
 			writeReg = 0;
 			ALUoperandSource = 0;
 			memoryRead = 0;
-			memoryWrite = 0;
+			memoryWrite = 1;
 			memoryToRegister = 0;
 			command = 3'h0;
 			isjump = 0;
@@ -64,61 +88,61 @@ module control (
 		end
 
 		// Jump 
-		5'h2: begin
+		6'h2: begin
 			writeReg = 0;
 			ALUoperandSource = 0;
 			memoryRead = 0;
 			memoryWrite = 0;
 			memoryToRegister = 0;
 			command = 3'h0;
-			isjump = 0;
+			isjump = 1;
 			isbranch = 0;	
 		end
 
 		// Jump ad Link
-		5'h3: begin
+		6'h3: begin
 			writeReg = 0;
 			ALUoperandSource = 0;
 			memoryRead = 0;
 			memoryWrite = 0;
 			memoryToRegister = 0;
 			command = 3'h0;
-			isjump = 0;
+			isjump = 1;
 			isbranch = 0;	
 		end
 
 		// BNE 
-		5'h5: begin
+		6'h5: begin
 			writeReg = 0;
-			ALUoperandSource = 0;
+			ALUoperandSource = `ALUDB;
 			memoryRead = 0;
 			memoryWrite = 0;
 			memoryToRegister = 0;
-			command = 3'h0;
+			command = `SUB;
 			isjump = 0;
-			isbranch = 0;	
+			isbranch = 1;	
 		end
 
 		// XORI -
-		5'h0e: begin
-			writeReg = 0;
-			ALUoperandSource = 1;
+		6'h0e: begin
+			writeReg = 1;
+			ALUoperandSource = `ALUIMM;
 			memoryRead = 0;
 			memoryWrite = 0;
 			memoryToRegister = 0;
-			command = 3'h0;
+			command = `XOR;
 			isjump = 0;
 			isbranch = 0;	
 		end
 
 		// ADDI - 
-		5'h8: begin
+		6'h8: begin
 			writeReg = 1;
-			ALUoperandSource = 1;
+			ALUoperandSource = `ALUIMM;
 			memoryRead = 0;
 			memoryWrite = 0;
 			memoryToRegister = 0;
-			command = 3'h0;
+			command = `ADD;
 			isjump = 0;
 			isbranch = 0;	
 		end
