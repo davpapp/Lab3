@@ -13,22 +13,22 @@ module instruction_memory
   assign DataOut = mem[Addr];
 
   initial begin
-    mem[0] <= 32'h0;
-    mem[4] <= 32'h4;
-    mem[8] <= 32'h8;
-    mem[12] <= 32'h12;
-    mem[16] <= 32'h16;
-    mem[20] <= 32'h20;
-    mem[24] <= 32'h24;
-    mem[28] <= 32'h28;
-    mem[32] <= 32'h32;
-    mem[36] <= 32'h36;
-    mem[40] <= 32'h40;
-    mem[44] <= 32'h44;
-    mem[48] <= 32'h48;
-    mem[52] <= 32'h52;
-    mem[56] <= 32'h56;
-    mem[60] <= 32'h60;
+    mem[0] <= 32'd0;
+    mem[4] <= 32'd4;
+    mem[8] <= 32'd8;
+    mem[12] <= 32'd12;
+    mem[16] <= 32'd16;
+    mem[20] <= 32'd20;
+    mem[24] <= 32'd24;
+    mem[28] <= 32'd28;
+    mem[32] <= 32'd32;
+    mem[36] <= 32'd36;
+    mem[40] <= 32'd40;
+    mem[44] <= 32'd44;
+    mem[48] <= 32'd48;
+    mem[52] <= 32'd52;
+    mem[56] <= 32'd56;
+    mem[60] <= 32'd60;
   end
   always @(Addr) begin
     if (regWE) begin
