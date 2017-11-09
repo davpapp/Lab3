@@ -51,6 +51,14 @@ module testControl();
 		else begin
 			$display("Failed");
 			$display(opcode, funct);
+			$display("Command-current: %b expected: %b", command, exp_command);
+			$display("WriteReg-current: %b expected: %b", wr, exp_wr);
+			$display("ALU-current: %b expected: %b", alu_choose, exp_alu_choose);
+			$display("MemoryRead-current: %b expected: %b", mr, exp_mr);
+			$display("MemoryWrite-current: %b expected: %b", mw, exp_mw);
+			$display("MemToReg-current: %b expected: %b", m2r, exp_m2r);
+			$display("Jump-current: %b expected: %b", j, exp_j);
+			$display("Branch-current: %b expected: %b", b, exp_b);
 		end
 		end
 	endtask
@@ -73,7 +81,7 @@ module testControl();
 				memoryToRegister, is_jump, is_branch);
 
 		opcode = `JAL; #10
-		checkResult(3'h0, 1'b1, 1'b0, 1'b0, 1'b0, 1'b0, 1'b1, 1'b0,
+		checkResult(3'h0, 1'b0, 1'b0, 1'b0, 1'b0, 1'b0, 1'b1, 1'b0,
 				command, writeReg, ALU_OperandSource, memoryRead, memoryWrite, 
 				memoryToRegister, is_jump, is_branch);
 
