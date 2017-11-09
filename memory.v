@@ -30,7 +30,7 @@ module instruction_memory
     mem[56] <= 32'h56;
     mem[60] <= 32'h60;
   end
-  always @(posedge clk) begin
+  always @(Addr) begin
     if (regWE) begin
       mem[Addr] <= DataIn;
     end

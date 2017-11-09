@@ -10,7 +10,7 @@ module ifetch
 		input is_branch,          // is_branch selects between add 4 (0) and add branch (1) 
 		input  is_jump,           // is jump selects between incrementing by 4/branch (0) or putting PC to jump_addr (1)
 		input [15:0] branch_addr, // add this to PC to go to the branch location
-		input [31:0] jump_addr,   // instruction memory address to jump to
+		input [25:0] jump_addr,   // instruction memory address to jump to
 		output[31:0] out          // returns instruction encoding (32 bits)
 		);
 
@@ -27,7 +27,7 @@ module ifetch
 	mux2to1by32 should_branch(.out(to_add), // to_add is either 4 or the branch value
 						.address(is_branch), // selector
 						.input0(32'd4),      // constant 4 (normal incrememnt)
-						.input1(branch_addr_full)); // second option is the se branch addr
+						.input1({{16{branch_addr[15]}}, branch_addr})); // second option is the se branch addr
 
 	add32bit add_to_pc(.a(pc), // pc is base
 						.b(to_add), // add to_add
@@ -37,10 +37,10 @@ module ifetch
 	mux2to1by32 should_jump(.out(pc_next), // next PC value
 						.address(is_jump), // chooses either the incrememnted value (4/branch) or a jump
 						.input0(increased_pc),
-						.input1(jump_addr));
+						.input1({pc[31:28], jump_addr, 2'b0}));
 
 	always @(posedge clk) begin // update on clock
-		branch_addr_full <= {{16{branch_addr[15]}}, branch_addr}; // se branch_addr
+		//branch_addr_full <= {{16{branch_addr[15]}}, branch_addr}; // se branch_addr
 		if(write_pc == 1) begin // register!
 			pc <= pc_next;
 		end
