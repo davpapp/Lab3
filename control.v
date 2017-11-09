@@ -9,80 +9,120 @@
 // to find what each opcode should do
 module control (
 	input[5:0] opcode,
+	input[5:0] funct,
 	output writeReg,
 	output ALUoperandSource, // 0 for Db, 1 for immediate
 	output memoryRead,
 	output memoryWrite,
 	output memoryToRegister,
 	output[2:0] command // sets the command for our ALU
-
+	output isjump,
+	output isbranch
 );
 	// all of these will need some if cases or something
 	always @(opcode)
 	case(opcode)
-		// LW - Load word 
-		5'd0: begin
+		// R - type
+		5'h0: begin
+			case(funct)
+				// Jump Register
+				5'h08: begin
+				end
+				// ADD
+				5'h24: begin
+				end
+				// SUB
+				5'h22: begin
+				end
+				// SLT
+				5'h2a: begin
+				end
 		end
 
-		// SW - store word
-		5'd1: begin	
-			memoryWrite = 1;
-
+		// Load Word
+		5'h23: begin
+			writeReg = 1;
+			ALUoperandSource = 0;
+			memoryRead = 1;
+			memoryWrite = 0;
+			memoryToRegister = 0;
+			command = 3'h0;
+			isjump = 0;
+			isbranch = 0;	
 		end
 
-		// J - jump register
-		5'd2: begin
+		// Store Word
+		5'h2b: begin
+			writeReg = 0;
+			ALUoperandSource = 0;
+			memoryRead = 0;
+			memoryWrite = 0;
+			memoryToRegister = 0;
+			command = 3'h0;
+			isjump = 0;
+			isbranch = 0;	
 		end
 
-		// JR - 
-		5'd3: begin
+		// Jump 
+		5'h2: begin
+			writeReg = 0;
+			ALUoperandSource = 0;
+			memoryRead = 0;
+			memoryWrite = 0;
+			memoryToRegister = 0;
+			command = 3'h0;
+			isjump = 0;
+			isbranch = 0;	
 		end
 
-		// JAL - jump and link
-		5'd4: begin
+		// Jump ad Link
+		5'h3: begin
+			writeReg = 0;
+			ALUoperandSource = 0;
+			memoryRead = 0;
+			memoryWrite = 0;
+			memoryToRegister = 0;
+			command = 3'h0;
+			isjump = 0;
+			isbranch = 0;	
 		end
 
-		// BNE - 
-		5'd5: begin
+		// BNE 
+		5'h5: begin
+			writeReg = 0;
+			ALUoperandSource = 0;
+			memoryRead = 0;
+			memoryWrite = 0;
+			memoryToRegister = 0;
+			command = 3'h0;
+			isjump = 0;
+			isbranch = 0;	
 		end
 
 		// XORI -
-		5'd6: begin
-			ALUoperandSource = 1; 
-
+		5'h0e: begin
+			writeReg = 0;
+			ALUoperandSource = 1;
+			memoryRead = 0;
+			memoryWrite = 0;
+			memoryToRegister = 0;
+			command = 3'h0;
+			isjump = 0;
+			isbranch = 0;	
 		end
 
 		// ADDI - 
-		5'd7: begin
-
-			ALUoperandSource = 1;
+		5'h8: begin
 			writeReg = 1;
-			command = 3'b000;
-
-		end
-
-		// ADD - add (with overflow)
-		5'd8: begin
-
-			ALUoperandSource = 0;
-			writeReg = 1;
-			command = 3'b000;
-
-		end
-		// SUB - 
-		5'd9: begin
-
 			ALUoperandSource = 1;
-			command = 3'b001;
-
+			memoryRead = 0;
+			memoryWrite = 0;
+			memoryToRegister = 0;
+			command = 3'h0;
+			isjump = 0;
+			isbranch = 0;	
 		end
 
-		// SLT - 
-		5'd10: begin
-
-			command = 3'b011;
-
-		end
 	endcase // opcode
 	
 
