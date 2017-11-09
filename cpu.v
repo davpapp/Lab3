@@ -72,7 +72,7 @@ module cpu (
 // ---------------------------Register Fetch-----------------------------
 	// This is the register I wrote for one of the HWs
 
-	regfile register(Da, Db, writeData, Rs, Rt, Rd, regWrite, clk); // Rd is incorrect here, will fix later
+	regfile register(Da, Db, writeData[31:0], Rs, Rt, Rd, regWrite, clk); // Rd is incorrect here, will fix later
 																	//Q: Could you include a testfile?
 
 // ----------------------------Execute-----------------------------------
@@ -90,8 +90,8 @@ module cpu (
 
 // ----------------------------Memory/Write-----------------------------------
 	//data memory, from lab 2:
-	datamemory DM(clk,dataOut,address, WrEn,dataIn); 
-	mux ToReg(WriteData[31:0], memoryToRegister, ALU_result,dataOut); 
+	datamemory DM(dataOut[31:0],address, WrEn,ALU_result[31:0]); 
+	mux ToReg(WriteData[31:0], memoryToRegister, ALU_result[31:0],dataOut[31:0]); 
 
 //----------------------------Control-----------------------------------
 	//control CTL(opcode[5:0], regWrite, ALU_OperandSource,memoryRead,memoryWrite,memoryToRegister,command[2:0]); //inputs/outpus to control
