@@ -2,7 +2,7 @@
 `include "ifetch.v"
 `include "control.v"
 `include "datamemory.v"
-`include "register.v"
+`include "regfile.v"
 
 // This is the top level module for our single cycle CPU
 // It consists of 5 sub-modules:
@@ -74,7 +74,7 @@ module cpu (
 // ---------------------------Register Fetch-----------------------------
 	// This is the register I wrote for one of the HWs
 
-	regfile register(Da, Db, writeData, Rs, Rt, Rd, regWrite, clk); // Rd is incorrect here, will fix later
+	regfile regfile(Da, Db, writeData, Rs, Rt, Rd, regWrite, clk); // Rd is incorrect here, will fix later
 																	//Q: Could you include a testfile?
 
 // ----------------------------Execute-----------------------------------

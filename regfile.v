@@ -1,5 +1,3 @@
-// This is the register we will use
-
 //------------------------------------------------------------------------------
 // MIPS register file
 //   width: 32 bits
@@ -25,6 +23,7 @@ input[4:0]	WriteRegister,	// Address of register to write
 input		RegWrite,	// Enable writing of register when High
 input		Clk		// Clock (Positive Edge Triggered)
 );
+
 
   wire[31:0] decoder;
   wire[31:0] reg0, reg1, reg2, reg3, reg4, reg5, reg6, reg7, reg8, reg9;
