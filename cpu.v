@@ -2,7 +2,7 @@
 `include "ifetch.v"
 `include "control.v"
 `include "datamemory.v"
-`include "register.v"
+`include "regfile.v"
 
 // This is the top level module for our single cycle CPU
 // It consists of 5 sub-modules:
@@ -53,6 +53,7 @@ module cpu (
 						.isbranch(is_branch));
 
 // ----------------------------Instruction Fetch-------------------------
+	// Tests: [TO DO]
 	wire instruction[31:0];
 	ifetch IF(.clk(clk),
 				.write_pc(1'b1),
@@ -63,6 +64,7 @@ module cpu (
 				.out(instruction)); // updates instruction, increments PC by 4
 
 // ----------------------------Instruction Decode------------------------
+	// Testing: [DONE]
 	// Break the instruction into its pieces
 
 	instructionDecoderR ID_R(instruction, opcode, Rs, Rt, Rd, shift, funct);
@@ -70,28 +72,27 @@ module cpu (
 	instructionDecoderJ ID_J(instruction, opcode, jump_target);
 
 // ---------------------------Register Fetch-----------------------------
-	// This is the register I wrote for one of the HWs
+	// Testing: [DONE]
 
-	regfile register(Da, Db, writeData, Rs, Rt, Rd, regWrite, clk); // Rd is incorrect here, will fix later
-																	//Q: Could you include a testfile?
+	regfile regfile(Da, Db, writeData[31:0], Rs, Rt, Rd, regWrite, clk); // Rd is incorrect here, will fix later
 
 // ----------------------------Execute-----------------------------------
 	always @(imm) //not sure if this is exactly correct, but not sure if this op can run continuously
-		extended_imm <= {{16{imm[15]}}, imm}; // extending the immediate
+		extended_imm <= {{16{imm[15]}}, imm};
 	end
 
 	mux2to1by32 ALUSource(.out(Operand),
 						.address(ALU_OperandSource),
 						.input0(Db),
-						.input1(extended_imm)); // choose between Db or our immediate as the second operand in the ALU
-							//Q: Db/ALU_operandsource???
-	// Use my ALU from Lab 1 - opcode will need to be converted
+						.input1(extended_imm)); 
 	alu ALU(ALU_result, carryout, zero, overflow, Da, Operand, command[2:0]);
 
 // ----------------------------Memory/Write-----------------------------------
+	// Testing: [DONE]
+
 	//data memory, from lab 2:
-	datamemory DM(clk,dataOut,address, WrEn,dataIn); 
-	mux ToReg(WriteData[31:0], memoryToRegister, ALU_result,dataOut); 
+	datamemory DM(dataOut[31:0],address, WrEn,ALU_result[31:0]); 
+	mux ToReg(WriteData[31:0], memoryToRegister, ALU_result[31:0],dataOut[31:0]); 
 
 //----------------------------Control-----------------------------------
 	//control CTL(opcode[5:0], regWrite, ALU_OperandSource,memoryRead,memoryWrite,memoryToRegister,command[2:0]); //inputs/outpus to control
