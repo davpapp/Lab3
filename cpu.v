@@ -74,7 +74,7 @@ module cpu (
 // ---------------------------Register Fetch-----------------------------
 	// Testing: [DONE]
 
-	regfile regfile(Da, Db, writeData, Rs, Rt, Rd, regWrite, clk); // Rd is incorrect here, will fix later
+	regfile regfile(Da, Db, writeData[31:0], Rs, Rt, Rd, regWrite, clk); // Rd is incorrect here, will fix later
 
 // ----------------------------Execute-----------------------------------
 	always @(imm) //not sure if this is exactly correct, but not sure if this op can run continuously
@@ -91,8 +91,8 @@ module cpu (
 	// Testing: [DONE]
 
 	//data memory, from lab 2:
-	datamemory DM(clk,dataOut,address, WrEn,dataIn); 
-	mux ToReg(WriteData[31:0], memoryToRegister, ALU_result,dataOut); 
+	datamemory DM(dataOut[31:0],address, WrEn,ALU_result[31:0]); 
+	mux ToReg(WriteData[31:0], memoryToRegister, ALU_result[31:0],dataOut[31:0]); 
 
 //----------------------------Control-----------------------------------
 	//control CTL(opcode[5:0], regWrite, ALU_OperandSource,memoryRead,memoryWrite,memoryToRegister,command[2:0]); //inputs/outpus to control
