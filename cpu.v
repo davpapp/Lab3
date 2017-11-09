@@ -53,6 +53,7 @@ module cpu (
 						.isbranch(is_branch));
 
 // ----------------------------Instruction Fetch-------------------------
+	// Tests: [TO DO]
 	wire instruction[31:0];
 	ifetch IF(.clk(clk),
 				.write_pc(1'b1),
@@ -63,6 +64,7 @@ module cpu (
 				.out(instruction)); // updates instruction, increments PC by 4
 
 // ----------------------------Instruction Decode------------------------
+	// Testing: [DONE]
 	// Break the instruction into its pieces
 
 	instructionDecoderR ID_R(instruction, opcode, Rs, Rt, Rd, shift, funct);
