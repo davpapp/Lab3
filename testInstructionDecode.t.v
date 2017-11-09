@@ -9,7 +9,8 @@ module testInstructionDecode();
 	wire[4:0] Rs;
 	wire[4:0] Rt;
 	wire[4:0] Rd;
-	wire[10:0] rest;
+	wire[4:0] shift;
+	wire[5:0] funct;
 	wire[15:0] imm;
 	wire[25:0] jump_target;
 
@@ -18,7 +19,8 @@ module testInstructionDecode();
 							.Rs(Rs),
 							.Rt(Rt),
 							.Rd(Rd),
-							.rest(rest));
+							.shift(shift),
+							.funct(funct));
 	instructionDecoderI ID_I(.instruction(instruction[31:0]),
 							.opcode(opcode),
 							.Rs(Rs),

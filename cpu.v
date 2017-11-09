@@ -21,7 +21,8 @@ module cpu (
 	wire[4:0] Rs;
 	wire[4:0] Rt;
 	wire[4:0] Rd;
-	wire[10:0] rest;
+	wire[4:0] shift;
+	wire[5:0] funct;
 	wire[15:0] imm;
 	wire[25:0] jump_target;
 
@@ -37,23 +38,34 @@ module cpu (
 	wire carryout, zero, overflow; // Don't think we actually use these
 	wire[2:0] command;
 
+	// Control Wires
+	wire writeReg, ALU_OperandSource, memoryRead, memoryWrite, memoryToRegister, is_jump, is_branch;
 
-	control CPU_control(opcode, writeReg, /*etc etc didn't finish this */, command);
+	control CPU_control(.opcode(opcode),
+						.funct(funct),
+						.writeReg(writeReg),
+						.ALUOperandSource(ALU_OperandSource),
+						.memoryRead(memoryRead),
+						.memoryWrite(memoryWrite),
+						.memoryToRegister(memoryToRegister),
+						.command(command),
+						.isjump(is_jump),
+						.isbranch(is_branch));
 
 // ----------------------------Instruction Fetch-------------------------
 	wire instruction[31:0];
 	ifetch IF(.clk(clk),
-				.write_pc(),
-				.is_branch(),
-				.is_jump(),
-				.branch_addr(),
+				.write_pc(1'b1),
+				.is_branch(is_branch),
+				.is_jump(is_jump),
+				.branch_addr(imm),
 				.jump_addr(jump_target),
 				.out(instruction)); // updates instruction, increments PC by 4
 
 // ----------------------------Instruction Decode------------------------
 	// Break the instruction into its pieces
 
-	instructionDecoderR ID_R(instruction, opcode, Rs, Rt, Rd, rest);
+	instructionDecoderR ID_R(instruction, opcode, Rs, Rt, Rd, shift, funct);
 	instructionDecoderI ID_I(instruction, opcode, Rs, Rt, imm);
 	instructionDecoderJ ID_J(instruction, opcode, jump_target);
 
@@ -77,11 +89,11 @@ module cpu (
 	alu ALU(ALU_result, carryout, zero, overflow, Da, Operand, command[2:0]);
 
 // ----------------------------Memory/Write-----------------------------------
-//data memory, from lab 2:
-datamemory DM(clk,dataOut,address, WrEn,dataIn); 
-mux ToReg(WriteData[31:0], memoryToRegister, ALU_result,dataOut); 
+	//data memory, from lab 2:
+	datamemory DM(clk,dataOut,address, WrEn,dataIn); 
+	mux ToReg(WriteData[31:0], memoryToRegister, ALU_result,dataOut); 
 
 //----------------------------Control-----------------------------------
-control CTL(opcode[5:0], regWrite, ALU_OperandSource,memoryRead,memoryWrite,memoryToRegister,command[2:0]); //inputs/outpus to control
+	//control CTL(opcode[5:0], regWrite, ALU_OperandSource,memoryRead,memoryWrite,memoryToRegister,command[2:0]); //inputs/outpus to control
 
 endmodule
