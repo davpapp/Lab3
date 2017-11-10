@@ -3,6 +3,7 @@
 `include "control.v"
 `include "datamemory.v"
 `include "regfile.v"
+`include "excecute.v"
 
 // This is the top level module for our single cycle CPU
 // It consists of 5 sub-modules:
@@ -77,17 +78,7 @@ module cpu (
 																	//Q: Could you include a testfile?
 
 // ----------------------------Execute-----------------------------------
-	always @(imm) //not sure if this is exactly correct, but not sure if this op can run continuously
-		extended_imm <= {{16{imm[15]}}, imm}; // extending the immediate
-	end
-
-	mux2to1by32 ALUSource(.out(Operand),
-						.address(ALU_OperandSource),
-						.input0(Db),
-						.input1(extended_imm)); // choose between Db or our immediate as the second operand in the ALU
-							//Q: Db/ALU_operandsource???
-	// Use my ALU from Lab 1 - opcode will need to be converted
-	alu ALU(ALU_result, carryout, zero, overflow, Da, Operand, command[2:0]);
+	execute exe(ALU_result, zero, carryout, overflow, Da, Db, imm, ALU_OperandSource, command);
 
 // ----------------------------Memory/Write-----------------------------------
 	//data memory, from lab 2:
