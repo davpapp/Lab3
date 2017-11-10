@@ -1,0 +1,80 @@
+#! /usr/bin/vvp
+:ivl_version "0.9.7 " "(v0_9_7)";
+:vpi_time_precision + 0;
+:vpi_module "system";
+:vpi_module "v2005_math";
+:vpi_module "va_math";
+S_0x2613fc0 .scope module, "testDM" "testDM" 2 5;
+ .timescale 0 0;
+v0x26290e0_0 .var "WrEn", 0 0;
+v0x26291b0_0 .var "address", 6 0;
+v0x2629260_0 .var "dIn", 31 0;
+v0x2629310_0 .net "dOut", 31 0, v0x2628f10_0; 1 drivers
+S_0x26140b0 .scope module, "DM" "datamemory" 2 12, 3 8, S_0x2613fc0;
+ .timescale 0 0;
+P_0x2614508 .param/l "addresswidth" 3 10, +C4<0111>;
+P_0x2614530 .param/l "depth" 3 11, +C4<010000000>;
+P_0x2614558 .param/l "width" 3 12, +C4<0100000>;
+v0x2615fb0_0 .net "address", 6 0, v0x26291b0_0; 1 drivers
+v0x2628e70_0 .net "dataIn", 31 0, v0x2629260_0; 1 drivers
+v0x2628f10_0 .var "dataOut", 31 0;
+v0x2628fb0 .array "memory", 0 127, 31 0;
+v0x2629060_0 .net "writeEnable", 0 0, v0x26290e0_0; 1 drivers
+E_0x25f1140 .event edge, v0x2628e70_0, v0x2615fb0_0, v0x2629060_0;
+    .scope S_0x26140b0;
+T_0 ;
+    %wait E_0x25f1140;
+    %load/v 8, v0x2629060_0, 1;
+    %jmp/0xz  T_0.0, 8;
+    %load/v 8, v0x2628e70_0, 32;
+    %ix/getv 3, v0x2615fb0_0;
+    %jmp/1 t_0, 4;
+    %ix/load 0, 32, 0; word width
+    %ix/load 1, 0, 0; part off
+    %assign/av v0x2628fb0, 0, 8;
+t_0 ;
+T_0.0 ;
+    %ix/getv 3, v0x2615fb0_0;
+    %load/av 8, v0x2628fb0, 32;
+    %ix/load 0, 32, 0;
+    %assign/v0 v0x2628f10_0, 0, 8;
+    %jmp T_0;
+    .thread T_0, $push;
+    .scope S_0x2613fc0;
+T_1 ;
+    %set/v v0x26290e0_0, 1, 1;
+    %movi 8, 20, 32;
+    %set/v v0x2629260_0, 8, 32;
+    %movi 8, 5, 7;
+    %set/v v0x26291b0_0, 8, 7;
+    %delay 15, 0;
+    %vpi_call 2 19 "$display", "%b", v0x2629310_0;
+    %set/v v0x26290e0_0, 0, 1;
+    %movi 8, 20, 32;
+    %set/v v0x2629260_0, 8, 32;
+    %movi 8, 5, 7;
+    %set/v v0x26291b0_0, 8, 7;
+    %delay 15, 0;
+    %vpi_call 2 25 "$display", "%b", v0x2629310_0;
+    %set/v v0x26290e0_0, 1, 1;
+    %movi 8, 15, 32;
+    %set/v v0x2629260_0, 8, 32;
+    %movi 8, 7, 7;
+    %set/v v0x26291b0_0, 8, 7;
+    %delay 15, 0;
+    %vpi_call 2 31 "$display", "%b", v0x2629310_0;
+    %set/v v0x26290e0_0, 0, 1;
+    %movi 8, 30, 32;
+    %set/v v0x2629260_0, 8, 32;
+    %movi 8, 7, 7;
+    %set/v v0x26291b0_0, 8, 7;
+    %delay 15, 0;
+    %vpi_call 2 37 "$display", "%b", v0x2629310_0;
+    %end;
+    .thread T_1;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "datamemory.t.v";
+    "./datamemory.v";

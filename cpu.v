@@ -73,14 +73,16 @@ module cpu (
 	instructionDecoderJ ID_J(instruction, opcode, jump_target);
 
 // ---------------------------Register Fetch-----------------------------
-	// This is the register I wrote for one of the HWs
-	regfile register(Da, Db, writeData[31:0], Rs, Rt, Rd, regWrite, clk); // Rd is incorrect here, will fix later
-																	//Q: Could you include a testfile?
+	// Testing: [DONE]
+
+	regfile regfile(Da, Db, writeData[31:0], Rs, Rt, Rd, regWrite, clk); // Rd is incorrect here, will fix later
 
 // ----------------------------Execute-----------------------------------
 	execute exe(ALU_result, zero, carryout, overflow, Da, Db, imm, ALU_OperandSource, command);
 
 // ----------------------------Memory/Write-----------------------------------
+	// Testing: [DONE]
+
 	//data memory, from lab 2:
 	datamemory DM(dataOut[31:0],address, WrEn,ALU_result[31:0]); 
 	mux ToReg(WriteData[31:0], memoryToRegister, ALU_result[31:0],dataOut[31:0]); 
