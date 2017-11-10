@@ -72,24 +72,24 @@ module cpu (
 	instructionDecoderJ ID_J(instruction, opcode, jump_target);
 
 // ---------------------------Register Fetch-----------------------------
-	// This is the register I wrote for one of the HWs
-	regfile register(Da, Db, writeData[31:0], Rs, Rt, Rd, regWrite, clk); // Rd is incorrect here, will fix later
-																	//Q: Could you include a testfile?
+	// Testing: [DONE]
+
+	regfile regfile(Da, Db, writeData[31:0], Rs, Rt, Rd, regWrite, clk); // Rd is incorrect here, will fix later
 
 // ----------------------------Execute-----------------------------------
 	always @(imm) //not sure if this is exactly correct, but not sure if this op can run continuously
-		extended_imm <= {{16{imm[15]}}, imm}; // extending the immediate
+		extended_imm <= {{16{imm[15]}}, imm};
 	end
 
 	mux2to1by32 ALUSource(.out(Operand),
 						.address(ALU_OperandSource),
 						.input0(Db),
-						.input1(extended_imm)); // choose between Db or our immediate as the second operand in the ALU
-							//Q: Db/ALU_operandsource???
-	// Use my ALU from Lab 1 - opcode will need to be converted
+						.input1(extended_imm)); 
 	alu ALU(ALU_result, carryout, zero, overflow, Da, Operand, command[2:0]);
 
 // ----------------------------Memory/Write-----------------------------------
+	// Testing: [DONE]
+
 	//data memory, from lab 2:
 	datamemory DM(dataOut[31:0],address, WrEn,ALU_result[31:0]); 
 	mux ToReg(WriteData[31:0], memoryToRegister, ALU_result[31:0],dataOut[31:0]); 
