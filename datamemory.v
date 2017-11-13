@@ -9,7 +9,7 @@ module datamemory
 #(
     parameter addresswidth  = 7,
     parameter depth         = 2**addresswidth,
-    parameter width         = 8
+    parameter width         = 32
 )
 (
     output reg [width-1:0]      dataOut,
@@ -18,10 +18,8 @@ module datamemory
     input [width-1:0]           dataIn
 );
 
-
     reg [width-1:0] memory [depth-1:0];
-
-    always @(address) begin
+    always @(writeEnable or address or dataIn) begin
         if(writeEnable)
             memory[address] <= dataIn;
         dataOut <= memory[address];

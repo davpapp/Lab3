@@ -31,6 +31,7 @@ module control (
 	input[5:0] opcode,
 	input[5:0] funct,
 	output reg writeReg,
+	output reg linkToPC,
 	output reg ALUoperandSource, // 0 for Db, 1 for immediate
 	output reg memoryRead,
 	output reg memoryWrite,
@@ -44,6 +45,7 @@ module control (
 		case(opcode)
 			// R - type
 			`R: begin
+				linkToPC = 0;
 				ALUoperandSource = `ALUDB;
 				memoryRead = 0;
 				memoryWrite = 0;
@@ -80,6 +82,7 @@ module control (
 			// Load Word
 			`LW: begin
 				writeReg = 1;
+				linkToPC = 0;
 				ALUoperandSource = 0;
 				memoryRead = 1;
 				memoryWrite = 0;
@@ -92,6 +95,7 @@ module control (
 			// Store Word
 			`SW: begin
 				writeReg = 0;
+				linkToPC = 0;
 				ALUoperandSource = 0;
 				memoryRead = 0;
 				memoryWrite = 1;
@@ -104,6 +108,7 @@ module control (
 			// Jump 
 			6'h2: begin
 				writeReg = 0;
+				linkToPC = 0;
 				ALUoperandSource = 0;
 				memoryRead = 0;
 				memoryWrite = 0;
@@ -115,7 +120,8 @@ module control (
 
 			// Jump ad Link
 			6'h3: begin
-				writeReg = 0;
+				writeReg = 1;
+				linkToPC = 1;
 				ALUoperandSource = 0;
 				memoryRead = 0;
 				memoryWrite = 0;
@@ -128,6 +134,7 @@ module control (
 			// BNE 
 			6'h5: begin
 				writeReg = 0;
+				linkToPC = 0;
 				ALUoperandSource = `ALUDB;
 				memoryRead = 0;
 				memoryWrite = 0;
@@ -140,6 +147,7 @@ module control (
 			// XORI -
 			6'h0e: begin
 				writeReg = 1;
+				linkToPC = 0;
 				ALUoperandSource = `ALUIMM;
 				memoryRead = 0;
 				memoryWrite = 0;
@@ -152,6 +160,7 @@ module control (
 			// ADDI - 
 			6'h8: begin
 				writeReg = 1;
+				linkToPC = 0;
 				ALUoperandSource = `ALUIMM;
 				memoryRead = 0;
 				memoryWrite = 0;

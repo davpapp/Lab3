@@ -5,7 +5,7 @@ module testifetch();
 	reg write_pc, is_branch, is_jump;
 	reg[15:0] branch_addr;
 	reg[27:0] jump_addr;
-	wire[31:0] out;
+	wire[31:0] out, pc;
 
 	ifetch dut(
 		.clk(clk),
@@ -14,7 +14,8 @@ module testifetch();
 		.is_jump(is_jump),
 		.branch_addr(branch_addr),
 		.jump_addr(jump_addr[27:2]),
-		.out(out)
+		.out(out),
+		.pc(pc)
 		);
 
 	initial begin

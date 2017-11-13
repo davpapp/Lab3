@@ -11,7 +11,8 @@ module ifetch
 		input  is_jump,           // is jump selects between incrementing by 4/branch (0) or putting PC to jump_addr (1)
 		input [15:0] branch_addr, // add this to PC to go to the branch location
 		input [25:0] jump_addr,   // instruction memory address to jump to
-		output[31:0] out          // returns instruction encoding (32 bits)
+		output[31:0] out,         // returns instruction encoding (32 bits)
+		output[31:0] pc           // returns the PC for use in JAL
 		);
 
 	wire [31:0] pc_next, to_add, increased_pc; // create connecting wires

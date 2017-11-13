@@ -3,6 +3,7 @@
 `include "control.v"
 `include "datamemory.v"
 `include "regfile.v"
+`include "excecute.v"
 
 // This is the top level module for our single cycle CPU
 // It consists of 5 sub-modules:
@@ -79,28 +80,25 @@ module cpu (
 	regfile regfile(Da, Db, writeData[31:0], Rs, Rt, Rd, regWrite, clk); // Rd is incorrect here, will fix later
 
 // ----------------------------Execute-----------------------------------
-	always @(linkToPC) begin
-		if(linkToPC == 1'b1) begin
-			writ
-		end
-	end
+
 	always @(imm) //not sure if this is exactly correct, but not sure if this op can run continuously
 		extended_imm <= {{16{imm[15]}}, imm};
 	end
 
-	mux2to1by32 ALUSource(.out(Operand),
+	mux (#32) ALUSource(.out(Operand),
 						.address(ALU_OperandSource),
 						.input0(Db),
 						.input1(extended_imm)); 
 	alu ALU(ALU_result, carryout, zero, overflow, Da, Operand, command[2:0]);
+	execute exe(ALU_result, zero, carryout, overflow, Da, Db, imm, ALU_OperandSource, command);
 
 // ----------------------------Memory/Write-----------------------------------
 	// Testing: [DONE]
 
 	//data memory, from lab 2:
 	datamemory DM(dataOut[31:0],address, WrEn,ALU_result[31:0]); 
-	mux2to1by32 ToReg(tempWriteData[31:0], memoryToRegister, ALU_result[31:0],dataOut[31:0]);
-	mux2to1by32 dataOrPC(writeData[31:0], linkToPC, tempWriteData[31:0], );
+	mux (#32) ToReg(tempWriteData[31:0], memoryToRegister, ALU_result[31:0],dataOut[31:0]);
+	mux (#32) dataOrPC(writeData[31:0], linkToPC, tempWriteData[31:0], );
 
 //----------------------------Control-----------------------------------
 	//control CTL(opcode[5:0], regWrite, ALU_OperandSource,memoryRead,memoryWrite,memoryToRegister,command[2:0]); //inputs/outpus to control

@@ -21,12 +21,13 @@ module testControl();
 
 	reg[5:0] opcode;
 	reg[5:0] funct = 6'h0;
-	wire writeReg, ALU_OperandSource, memoryRead, memoryWrite, memoryToRegister, is_jump, is_branch;
+	wire writeReg, linkToPC, ALU_OperandSource, memoryRead, memoryWrite, memoryToRegister, is_jump, is_branch;
 	wire[2:0] command;
 
 	control dut(.opcode(opcode),
 				.funct(funct),
 				.writeReg(writeReg),
+				.linkToPC(linkToPC),
 				.ALUoperandSource(ALU_OperandSource),
 				.memoryRead(memoryRead),
 				.memoryWrite(memoryWrite),
@@ -37,12 +38,12 @@ module testControl();
 
 	task checkResult;
 		input[2:0] exp_command;
-		input exp_wr, exp_alu_choose, exp_mr, exp_mw, exp_m2r, exp_j, exp_b;
+		input exp_wr, exp_l, exp_alu_choose, exp_mr, exp_mw, exp_m2r, exp_j, exp_b;
 		input[2:0] command;
-		input wr, alu_choose, mr, mw, m2r, j, b;
+		input wr, l, alu_choose, mr, mw, m2r, j, b;
 
 		begin
-		if ((command == exp_command) && (wr == exp_wr) &&
+		if ((command == exp_command) && (wr == exp_wr) && (l == exp_l) &&
 			(alu_choose == exp_alu_choose) && (mr == exp_mr) && 
 			(mw == exp_mw) && (m2r == exp_m2r) && 
 			(m2r == exp_m2r) && (j == exp_j) && (b == exp_b)) begin
@@ -66,59 +67,59 @@ module testControl();
 	initial begin
 		
 		opcode = `LW; #10
-		checkResult(3'h0, 1'b1, 1'b0, 1'b1, 1'b0, 1'b1, 1'b0, 1'b0,
-				command, writeReg, ALU_OperandSource, memoryRead, memoryWrite, 
+		checkResult(3'h0, 1'b1, 1'b0, 1'b0, 1'b1, 1'b0, 1'b1, 1'b0, 1'b0,
+				command, writeReg, linkToPC, ALU_OperandSource, memoryRead, memoryWrite, 
 				memoryToRegister, is_jump, is_branch);
 
 		opcode = `SW; #10
-		checkResult(3'h0, 1'b0, 1'b0, 1'b0, 1'b1, 1'b0, 1'b0, 1'b0,
-				command, writeReg, ALU_OperandSource, memoryRead, memoryWrite, 
+		checkResult(3'h0, 1'b0, 1'b0, 1'b0, 1'b0, 1'b1, 1'b0, 1'b0, 1'b0,
+				command, writeReg, linkToPC, ALU_OperandSource, memoryRead, memoryWrite, 
 				memoryToRegister, is_jump, is_branch);
 
 		opcode = `J; #10
-		checkResult(3'h0, 1'b0, 1'b0, 1'b0, 1'b0, 1'b0, 1'b1, 1'b0,
-				command, writeReg, ALU_OperandSource, memoryRead, memoryWrite, 
+		checkResult(3'h0, 1'b0, 1'b0, 1'b0, 1'b0, 1'b0, 1'b0, 1'b1, 1'b0,
+				command, writeReg, linkToPC, ALU_OperandSource, memoryRead, memoryWrite, 
 				memoryToRegister, is_jump, is_branch);
 
 		opcode = `JAL; #10
-		checkResult(3'h0, 1'b0, 1'b0, 1'b0, 1'b0, 1'b0, 1'b1, 1'b0,
-				command, writeReg, ALU_OperandSource, memoryRead, memoryWrite, 
+		checkResult(3'h0, 1'b1, 1'b1, 1'b0, 1'b0, 1'b0, 1'b0, 1'b1, 1'b0,
+				command, writeReg, linkToPC, ALU_OperandSource, memoryRead, memoryWrite, 
 				memoryToRegister, is_jump, is_branch);
 
 		opcode = `BNE; #10
-		checkResult(3'h1, 1'b0, 1'b0, 1'b0, 1'b0, 1'b0, 1'b0, 1'b1,
-				command, writeReg, ALU_OperandSource, memoryRead, memoryWrite, 
+		checkResult(3'h1, 1'b0, 1'b0, 1'b0, 1'b0, 1'b0, 1'b0, 1'b0, 1'b1,
+				command, writeReg, linkToPC, ALU_OperandSource, memoryRead, memoryWrite, 
 				memoryToRegister, is_jump, is_branch);
 
 		opcode = `XORI; #10
-		checkResult(3'b011, 1'b1, 1'b1, 1'b0, 1'b0, 1'b0, 1'b0, 1'b0,
-				command, writeReg, ALU_OperandSource, memoryRead, memoryWrite, 
+		checkResult(3'b011, 1'b1, 1'b0, 1'b1, 1'b0, 1'b0, 1'b0, 1'b0, 1'b0,
+				command, writeReg, linkToPC, ALU_OperandSource, memoryRead, memoryWrite, 
 				memoryToRegister, is_jump, is_branch);
 
 		opcode = `ADDI; #10
-		checkResult(3'h0, 1'b1, 1'b1, 1'b0, 1'b0, 1'b0, 1'b0, 1'b0,
-				command, writeReg, ALU_OperandSource, memoryRead, memoryWrite, 
+		checkResult(3'h0, 1'b1, 1'b0, 1'b1, 1'b0, 1'b0, 1'b0, 1'b0, 1'b0,
+				command, writeReg, linkToPC, ALU_OperandSource, memoryRead, memoryWrite, 
 				memoryToRegister, is_jump, is_branch);
 
 		opcode = `R;
 		funct = `JR; #10
-		checkResult(3'h0, 1'b0, 1'b0, 1'b0, 1'b0, 1'b0, 1'b1, 1'b0,
-				command, writeReg, ALU_OperandSource, memoryRead, memoryWrite, 
+		checkResult(3'h0, 1'b0, 1'b0, 1'b0, 1'b0, 1'b0, 1'b0, 1'b1, 1'b0,
+				command, writeReg, linkToPC, ALU_OperandSource, memoryRead, memoryWrite, 
 				memoryToRegister, is_jump, is_branch);
 
 		funct = `ADD; #10
-		checkResult(3'h0, 1'b1, 1'b0, 1'b0, 1'b0, 1'b0, 1'b0, 1'b0,
-				command, writeReg, ALU_OperandSource, memoryRead, memoryWrite, 
+		checkResult(3'h0, 1'b1, 1'b0, 1'b0, 1'b0, 1'b0, 1'b0, 1'b0, 1'b0,
+				command, writeReg, linkToPC, ALU_OperandSource, memoryRead, memoryWrite, 
 				memoryToRegister, is_jump, is_branch);
 
 		funct = `SUB; #10
-		checkResult(3'b001, 1'b1, 1'b0, 1'b0, 1'b0, 1'b0, 1'b0, 1'b0,
-				command, writeReg, ALU_OperandSource, memoryRead, memoryWrite, 
+		checkResult(3'b001, 1'b1, 1'b0, 1'b0, 1'b0, 1'b0, 1'b0, 1'b0, 1'b0,
+				command, writeReg, linkToPC, ALU_OperandSource, memoryRead, memoryWrite, 
 				memoryToRegister, is_jump, is_branch);
 
 		funct = `SLT; #10
-		checkResult(3'b010, 1'b1, 1'b0, 1'b0, 1'b0, 1'b0, 1'b0, 1'b0,
-				command, writeReg, ALU_OperandSource, memoryRead, memoryWrite, 
+		checkResult(3'b010, 1'b1, 1'b0, 1'b0, 1'b0, 1'b0, 1'b0, 1'b0, 1'b0,
+				command, writeReg, linkToPC, ALU_OperandSource, memoryRead, memoryWrite, 
 				memoryToRegister, is_jump, is_branch);
 
 	end // initial
