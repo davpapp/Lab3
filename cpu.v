@@ -15,7 +15,7 @@
 module cpu (
   input clk;
 );
-	
+	wire[31:0] pc;
 	// Primarily used in Decode
 	wire[5:0] opcode;
 	wire[4:0] Rs;
@@ -27,7 +27,7 @@ module cpu (
 	wire[25:0] jump_target;
 
 	// Primarily used in Register Fetch
-	wire writeData[31:0];
+	wire[31:0] writeData, tempWriteData;
 	wire[31:0] Da;
 	wire[31:0] Db;
 
@@ -39,11 +39,12 @@ module cpu (
 	wire[2:0] command;
 
 	// Control Wires
-	wire writeReg, ALU_OperandSource, memoryRead, memoryWrite, memoryToRegister, is_jump, is_branch;
+	wire writeReg, linkToPC, ALU_OperandSource, memoryRead, memoryWrite, memoryToRegister, is_jump, is_branch;
 
 	control CPU_control(.opcode(opcode),
 						.funct(funct),
 						.writeReg(writeReg),
+						.linkToAddr(linkToPC),
 						.ALUOperandSource(ALU_OperandSource),
 						.memoryRead(memoryRead),
 						.memoryWrite(memoryWrite),
@@ -61,7 +62,8 @@ module cpu (
 				.is_jump(is_jump),
 				.branch_addr(imm),
 				.jump_addr(jump_target),
-				.out(instruction)); // updates instruction, increments PC by 4
+				.out(instruction),
+				.pc(pc)); // updates instruction, increments PC by 4
 
 // ----------------------------Instruction Decode------------------------
 	// Testing: [DONE]
@@ -77,6 +79,11 @@ module cpu (
 	regfile regfile(Da, Db, writeData[31:0], Rs, Rt, Rd, regWrite, clk); // Rd is incorrect here, will fix later
 
 // ----------------------------Execute-----------------------------------
+	always @(linkToPC) begin
+		if(linkToPC == 1'b1) begin
+			writ
+		end
+	end
 	always @(imm) //not sure if this is exactly correct, but not sure if this op can run continuously
 		extended_imm <= {{16{imm[15]}}, imm};
 	end
@@ -92,7 +99,8 @@ module cpu (
 
 	//data memory, from lab 2:
 	datamemory DM(dataOut[31:0],address, WrEn,ALU_result[31:0]); 
-	mux ToReg(WriteData[31:0], memoryToRegister, ALU_result[31:0],dataOut[31:0]); 
+	mux2to1by32 ToReg(tempWriteData[31:0], memoryToRegister, ALU_result[31:0],dataOut[31:0]);
+	mux2to1by32 dataOrPC(writeData[31:0], linkToPC, tempWriteData[31:0], );
 
 //----------------------------Control-----------------------------------
 	//control CTL(opcode[5:0], regWrite, ALU_OperandSource,memoryRead,memoryWrite,memoryToRegister,command[2:0]); //inputs/outpus to control
