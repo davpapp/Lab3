@@ -39,7 +39,7 @@ module addressmux
 	);
 	always @(addr0 or addr1 or mux_address) begin // if anything changes, check
     	case(mux_address)
-      		0: out <= addrt0;
+      		0: out <= addr0;
       		1: out <= addr1;
     	endcase // address
   end
