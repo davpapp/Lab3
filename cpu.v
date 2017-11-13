@@ -55,7 +55,7 @@ module cpu (
 						.isbranch(is_branch));
 
 // ----------------------------Instruction Fetch-------------------------
-	// Tests: [TO DO]
+	// Tests: [DONE]
 	wire instruction[31:0];
 	ifetch IF(.clk(clk),
 				.write_pc(1'b1),
@@ -81,15 +81,6 @@ module cpu (
 
 // ----------------------------Execute-----------------------------------
 
-	always @(imm) //not sure if this is exactly correct, but not sure if this op can run continuously
-		extended_imm <= {{16{imm[15]}}, imm};
-	end
-
-	mux (#32) ALUSource(.out(Operand),
-						.address(ALU_OperandSource),
-						.input0(Db),
-						.input1(extended_imm)); 
-	alu ALU(ALU_result, carryout, zero, overflow, Da, Operand, command[2:0]);
 	execute exe(ALU_result, zero, carryout, overflow, Da, Db, imm, ALU_OperandSource, command);
 
 // ----------------------------Memory/Write-----------------------------------
@@ -98,7 +89,7 @@ module cpu (
 	//data memory, from lab 2:
 	datamemory DM(dataOut[31:0],address, WrEn,ALU_result[31:0]); 
 	mux (#32) ToReg(tempWriteData[31:0], memoryToRegister, ALU_result[31:0],dataOut[31:0]);
-	mux (#32) dataOrPC(writeData[31:0], linkToPC, tempWriteData[31:0], );
+	mux (#32) dataOrPC(writeData[31:0], linkToPC, tempWriteData[31:0], pc);
 
 //----------------------------Control-----------------------------------
 	//control CTL(opcode[5:0], regWrite, ALU_OperandSource,memoryRead,memoryWrite,memoryToRegister,command[2:0]); //inputs/outpus to control
