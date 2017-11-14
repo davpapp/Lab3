@@ -57,7 +57,7 @@ module control (
 					// Jump Register
 					`JRF: begin
 						writeReg = 0;
-						command = 3'h0;
+						command = `ADD;
 						isjump = 1;
 						isjr = 1;
 					end
@@ -83,6 +83,7 @@ module control (
 			end
 
 			// Load Word
+
 			`LW: begin
 				writeReg = 1;
 				linkToPC = 0;

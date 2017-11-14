@@ -36,7 +36,7 @@ module cpu (
 	wire[31:0] extended_imm; // need to extend our immediate
 	wire[31:0] Operand;
 	wire[31:0] ALU_result;
-	wire carryout, zero, overflow; // Don't think we actually use these
+	wire carryout, zero, overflow, nzero, do_branch;
 	wire[2:0] command;
 
 	// Control Wires
@@ -60,7 +60,7 @@ module cpu (
 	wire instruction[31:0];
 	ifetch IF(.clk(clk),
 				.write_pc(1'b1),
-				.is_branch(is_branch),
+				.is_branch(do_branch),
 				.is_jump(is_jump),
 				.branch_addr(imm),
 				.jump_addr(jump_target),
@@ -83,6 +83,11 @@ module cpu (
 // ----------------------------Execute-----------------------------------
 
 	execute exe(ALU_result, zero, carryout, overflow, Da, Db, imm, ALU_OperandSource, command);
+
+	// These should implement BNE. If the two are not equal (zero flag not set) and is_branch is true, it will branch
+	//  Otherwise, it will pass 0 to the ifetch is_branch
+	not     inv_zero(nzero, zero);
+	and     bne_true(do_branch, nzero, is_branch);
 
 // ----------------------------Memory/Write-----------------------------------
 	// Testing: [DONE]
