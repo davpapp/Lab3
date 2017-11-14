@@ -38,6 +38,7 @@ module control (
 	output reg memoryToRegister,
 	output reg [2:0] command, // sets the command for our ALU
 	output reg isjump,
+	output reg isjr,
 	output reg isbranch
 );
 	// all of these will need some if cases or something
@@ -50,13 +51,15 @@ module control (
 				memoryRead = 0;
 				memoryWrite = 0;
 				memoryToRegister = 0;
-				isbranch = 0;	
+				isbranch = 0;
+				isjr = 0;
 				case(funct)
 					// Jump Register
 					`JRF: begin
 						writeReg = 0;
 						command = 3'h0;
 						isjump = 1;
+						isjr = 1;
 					end
 					// ADD
 					`ADDF: begin
@@ -89,6 +92,7 @@ module control (
 				memoryToRegister = 1;
 				command = 3'h0;
 				isjump = 0;
+				isjr = 0;
 				isbranch = 0;	
 			end
 
@@ -102,6 +106,7 @@ module control (
 				memoryToRegister = 0;
 				command = 3'h0;
 				isjump = 0;
+				isjr = 0;
 				isbranch = 0;	
 			end
 
@@ -115,6 +120,7 @@ module control (
 				memoryToRegister = 0;
 				command = 3'h0;
 				isjump = 1;
+				isjr = 0;
 				isbranch = 0;	
 			end
 
@@ -128,6 +134,7 @@ module control (
 				memoryToRegister = 0;
 				command = 3'h0;
 				isjump = 1;
+				isjr = 0;
 				isbranch = 0;	
 			end
 
@@ -141,6 +148,7 @@ module control (
 				memoryToRegister = 0;
 				command = `SUB;
 				isjump = 0;
+				isjr = 0;
 				isbranch = 1;	
 			end
 
@@ -154,6 +162,7 @@ module control (
 				memoryToRegister = 0;
 				command = `XOR;
 				isjump = 0;
+				isjr = 0;
 				isbranch = 0;	
 			end
 
@@ -167,6 +176,7 @@ module control (
 				memoryToRegister = 0;
 				command = `ADD;
 				isjump = 0;
+				isjr = 0;
 				isbranch = 0;	
 			end
 

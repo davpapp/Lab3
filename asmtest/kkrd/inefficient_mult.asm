@@ -9,9 +9,16 @@ addi  $a1, $zero, 10	# arg1 = 10
 
 jal   multTestWrapper
 
-addi  $a0, $zero, 72	# arg0 = 4
-addi  $a1, $zero, 5	# arg1 = 10
+add   $s7, $zero, $v0   # s7 = 40
+
+addi  $a0, $zero, 72	# arg0 = 72
+addi  $a1, $zero, 5	# arg1 = 5
 jal   multTestWrapper
+
+add   $s6, $zero, $v0   # s6 = 360
+
+sub   $v0, $s7, $s6     # v0 = -320
+
 
 # Jump to "exit", rather than falling through to subroutines
 j     program_end
