@@ -8,8 +8,8 @@ module instruction_memory
   output[31:0]  DataOut
 );
 
-  reg [31:0] mem[60:0];  
-  //initial $readmemh(“test_mem.dat”, mem);
+  reg [31:0] mem[16384:0];  
+  //initial $readmemh(“inefficient_mult.tex”, mem);
   assign DataOut = mem[Addr];
 
   initial begin

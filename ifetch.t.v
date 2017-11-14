@@ -15,7 +15,7 @@ module testifetch();
 		.branch_addr(branch_addr),
 		.jump_addr(jump_addr[27:2]),
 		.out(out),
-		.pc(pc)
+		.increased_pc(pc)
 		);
 
 	initial begin
