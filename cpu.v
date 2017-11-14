@@ -88,7 +88,8 @@ module cpu (
 	// Testing: [DONE]
 
 	//data memory, from lab 2:
-	datamemory DM(dataOut[31:0], address, memoryWrite ,ALU_result[31:0]); 
+	// TODO: make address a thing
+	datamemory DM(dataOut[31:0], ALU_result, memoryWrite ,ALU_result[31:0]); 
 	mux (#32) ToReg(tempWriteData[31:0], memoryToRegister, ALU_result[31:0],dataOut[31:0]);
 	mux (#32) dataOrPC(writeData[31:0], linkToPC, tempWriteData[31:0], pc);
 
