@@ -100,7 +100,7 @@ module control (
 			`SW: begin
 				writeReg = 0;
 				linkToPC = 0;
-				ALUoperandSource = 0;
+				ALUoperandSource = 1;
 				memoryRead = 0;
 				memoryWrite = 1;
 				memoryToRegister = 0;
