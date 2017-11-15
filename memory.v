@@ -9,10 +9,11 @@ module instruction_memory
 );
 
   reg [31:0] mem[60:0];  
-  //initial $readmemh(“test_mem.dat”, mem);
+  //initial $readmemh("file.dat", mem);
   assign DataOut = mem[Addr];
 
-  initial begin
+  //initial $readmemh("file.dat", mem);
+  /*initial begin
     mem[0] <= 32'd0;
     mem[4] <= 32'd4;
     mem[8] <= 32'd8;
@@ -29,7 +30,7 @@ module instruction_memory
     mem[52] <= 32'd52;
     mem[56] <= 32'd56;
     mem[60] <= 32'd60;
-  end
+  end*/
   always @(Addr) begin
     if (regWE) begin
       mem[Addr] <= DataIn;

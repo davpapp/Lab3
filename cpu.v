@@ -68,7 +68,6 @@ module cpu (
 
 // ----------------------------Instruction Decode------------------------
 	// Testing: [DONE]
-	// Break the instruction into its pieces
 
 	instructionDecoderR ID_R(instruction, opcode, Rs, Rt, Rd, shift, funct);
 	instructionDecoderI ID_I(instruction, opcode, Rs, Rt, imm);
@@ -91,7 +90,5 @@ module cpu (
 	mux (#32) ToReg(tempWriteData[31:0], memoryToRegister, ALU_result[31:0],dataOut[31:0]);
 	mux (#32) dataOrPC(writeData[31:0], linkToPC, tempWriteData[31:0], pc);
 
-//----------------------------Control-----------------------------------
-	//control CTL(opcode[5:0], regWrite, ALU_OperandSource,memoryRead,memoryWrite,memoryToRegister,command[2:0]); //inputs/outpus to control
 
 endmodule

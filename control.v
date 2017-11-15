@@ -25,8 +25,6 @@
 `define SUBF 6'h22
 `define SLTF 6'h2a
 
-// Look at http://www.mrc.uidaho.edu/mrc/people/jff/digital/MIPSir.html
-// to find what each opcode should do
 module control (
 	input[5:0] opcode,
 	input[5:0] funct,

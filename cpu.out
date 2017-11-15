@@ -1,0 +1,150 @@
+#! /usr/bin/vvp
+:ivl_version "0.9.7 " "(v0_9_7)";
+:vpi_time_precision + 0;
+:vpi_module "system";
+:vpi_module "v2005_math";
+:vpi_module "va_math";
+S_0x8eba20 .scope module, "addressmux" "addressmux" 2 34;
+ .timescale 0 0;
+v0x8d7870_0 .net "addr0", 4 0, C4<zzzzz>; 0 drivers
+v0x923000_0 .net "addr1", 4 0, C4<zzzzz>; 0 drivers
+v0x9230a0_0 .net "mux_address", 0 0, C4<z>; 0 drivers
+v0x923140_0 .var "out", 0 0;
+E_0x8ebb10 .event edge, v0x9230a0_0, v0x923000_0, v0x8d7870_0;
+S_0x911f30 .scope module, "dff" "dff" 3 9;
+ .timescale 0 0;
+P_0x911338 .param/l "width" 3 10, +C4<01000>;
+v0x923260_0 .net "ce", 0 0, C4<z>; 0 drivers
+v0x923320_0 .net "clk", 0 0, C4<z>; 0 drivers
+v0x9233c0_0 .net "dataIn", 7 0, C4<zzzzzzzz>; 0 drivers
+v0x923460_0 .net "dataOut", 7 0, v0x923510_0; 1 drivers
+v0x923510_0 .var "mem", 7 0;
+E_0x9231f0 .event posedge, v0x923320_0;
+S_0x912020 .scope module, "instruction_memory" "instruction_memory" 4 3;
+ .timescale 0 0;
+L_0x9242c0 .functor BUFZ 32, L_0x9241c0, C4<00000000000000000000000000000000>, C4<00000000000000000000000000000000>, C4<00000000000000000000000000000000>;
+v0x923620_0 .net "Addr", 31 0, C4<zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz>; 0 drivers
+v0x9236e0_0 .net "DataIn", 31 0, C4<zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz>; 0 drivers
+v0x923780_0 .net "DataOut", 31 0, L_0x9242c0; 1 drivers
+v0x923820_0 .net *"_s0", 31 0, L_0x9241c0; 1 drivers
+v0x9238d0_0 .net "clk", 0 0, C4<z>; 0 drivers
+v0x923970 .array "mem", 0 60, 31 0;
+v0x923a30_0 .net "regWE", 0 0, C4<z>; 0 drivers
+E_0x9235b0 .event edge, v0x923620_0;
+L_0x9241c0 .array/port v0x923970, C4<zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz>;
+S_0x8d7690 .scope module, "mux" "mux" 2 1;
+ .timescale 0 0;
+P_0x90fac8 .param/l "width" 2 2, +C4<0100000>;
+v0x923b10_0 .net "address", 0 0, C4<z>; 0 drivers
+v0x923bd0_0 .net "input0", 31 0, C4<zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz>; 0 drivers
+v0x923c70_0 .net "input1", 31 0, C4<zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz>; 0 drivers
+v0x923d10_0 .var "out", 31 0;
+E_0x9238a0 .event edge, v0x923b10_0, v0x923c70_0, v0x923bd0_0;
+S_0x8d7780 .scope module, "mux2to1by32" "mux2to1by32" 2 17;
+ .timescale 0 0;
+v0x923e30_0 .net "address", 0 0, C4<z>; 0 drivers
+v0x923ef0_0 .net "input0", 31 0, C4<zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz>; 0 drivers
+v0x923f90_0 .net "input1", 31 0, C4<zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz>; 0 drivers
+v0x924030_0 .var "out", 31 0;
+E_0x923dc0 .event edge, v0x923e30_0, v0x923f90_0, v0x923ef0_0;
+    .scope S_0x8eba20;
+T_0 ;
+    %wait E_0x8ebb10;
+    %load/v 8, v0x9230a0_0, 1;
+    %cmpi/u 8, 0, 1;
+    %jmp/1 T_0.0, 6;
+    %cmpi/u 8, 1, 1;
+    %jmp/1 T_0.1, 6;
+    %jmp T_0.2;
+T_0.0 ;
+    %load/v 8, v0x8d7870_0, 5;
+    %ix/load 0, 1, 0;
+    %assign/v0 v0x923140_0, 0, 8;
+    %jmp T_0.2;
+T_0.1 ;
+    %load/v 8, v0x923000_0, 5;
+    %ix/load 0, 1, 0;
+    %assign/v0 v0x923140_0, 0, 8;
+    %jmp T_0.2;
+T_0.2 ;
+    %jmp T_0;
+    .thread T_0, $push;
+    .scope S_0x911f30;
+T_1 ;
+    %wait E_0x9231f0;
+    %load/v 8, v0x923260_0, 1;
+    %mov 9, 0, 2;
+    %cmpi/u 8, 1, 3;
+    %jmp/0xz  T_1.0, 4;
+    %load/v 8, v0x9233c0_0, 8;
+    %ix/load 0, 8, 0;
+    %assign/v0 v0x923510_0, 0, 8;
+T_1.0 ;
+    %jmp T_1;
+    .thread T_1;
+    .scope S_0x912020;
+T_2 ;
+    %wait E_0x9235b0;
+    %load/v 8, v0x923a30_0, 1;
+    %jmp/0xz  T_2.0, 8;
+    %load/v 8, v0x9236e0_0, 32;
+    %ix/getv 3, v0x923620_0;
+    %jmp/1 t_0, 4;
+    %ix/load 0, 32, 0; word width
+    %ix/load 1, 0, 0; part off
+    %assign/av v0x923970, 0, 8;
+t_0 ;
+T_2.0 ;
+    %jmp T_2;
+    .thread T_2, $push;
+    .scope S_0x8d7690;
+T_3 ;
+    %wait E_0x9238a0;
+    %load/v 8, v0x923b10_0, 1;
+    %cmpi/u 8, 0, 1;
+    %jmp/1 T_3.0, 6;
+    %cmpi/u 8, 1, 1;
+    %jmp/1 T_3.1, 6;
+    %jmp T_3.2;
+T_3.0 ;
+    %load/v 8, v0x923bd0_0, 32;
+    %ix/load 0, 32, 0;
+    %assign/v0 v0x923d10_0, 0, 8;
+    %jmp T_3.2;
+T_3.1 ;
+    %load/v 8, v0x923c70_0, 32;
+    %ix/load 0, 32, 0;
+    %assign/v0 v0x923d10_0, 0, 8;
+    %jmp T_3.2;
+T_3.2 ;
+    %jmp T_3;
+    .thread T_3, $push;
+    .scope S_0x8d7780;
+T_4 ;
+    %wait E_0x923dc0;
+    %load/v 8, v0x923e30_0, 1;
+    %cmpi/u 8, 0, 1;
+    %jmp/1 T_4.0, 6;
+    %cmpi/u 8, 1, 1;
+    %jmp/1 T_4.1, 6;
+    %jmp T_4.2;
+T_4.0 ;
+    %load/v 8, v0x923ef0_0, 32;
+    %ix/load 0, 32, 0;
+    %assign/v0 v0x924030_0, 0, 8;
+    %jmp T_4.2;
+T_4.1 ;
+    %load/v 8, v0x923f90_0, 32;
+    %ix/load 0, 32, 0;
+    %assign/v0 v0x924030_0, 0, 8;
+    %jmp T_4.2;
+T_4.2 ;
+    %jmp T_4;
+    .thread T_4, $push;
+# The file index is used to find the file name in the following table.
+:file_names 5;
+    "N/A";
+    "<interactive>";
+    "./mux.v";
+    "./dff.v";
+    "./memory.v";
