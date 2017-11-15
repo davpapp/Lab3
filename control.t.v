@@ -93,7 +93,7 @@ module testControl();
 				memoryToRegister, is_jump, is_branch);
 
 		opcode = `XORI; #10
-		checkResult(3'b011, 1'b1, 1'b0, 1'b1, 1'b0, 1'b0, 1'b0, 1'b0, 1'b0,
+		checkResult(3'b011, 1'b1, 1'b0, 1'b1, 1'b1, 1'b0, 1'b0, 1'b0, 1'b0,
 				command, writeReg, linkToPC, ALU_OperandSource, memoryRead, memoryWrite, 
 				memoryToRegister, is_jump, is_branch);
 

@@ -157,7 +157,7 @@ module control (
 				writeReg = 1;
 				linkToPC = 0;
 				ALUoperandSource = `ALUIMM;
-				memoryRead = 0;
+				memoryRead = 1;
 				memoryWrite = 0;
 				memoryToRegister = 0;
 				command = `XOR;
