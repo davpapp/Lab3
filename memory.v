@@ -37,3 +37,23 @@ module instruction_memory
   end
   
 endmodule
+
+module memory
+(
+  input clk, regWE,
+  input[31:0] Addr,
+  input[31:0] DataIn,
+  output[31:0]  DataOut
+);
+
+  reg [31:0] mem[60:0];  
+  initial $readmemh(“test_mem.dat”, mem);
+
+  always @(Addr) begin
+    if (regWE) begin
+      mem[Addr] <= DataIn;
+    end
+  end
+  assign DataOut = mem[Addr];
+  
+endmodule
