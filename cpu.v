@@ -21,11 +21,11 @@ module cpu (
 	wire[5:0] opcode;
 	wire[4:0] Rs;
 	wire[4:0] Rt;
-	wire[4:0] Rd;
+	wire[4:0] Rd, reg_to_write, regAddr;
 	wire[4:0] shift;
 	wire[5:0] funct;
 	wire[15:0] imm;
-	wire[25:0] jump_target;
+	wire[25:0] jump_target, temp_jump_target;
 
 	// Primarily used in Register Fetch
 	wire[31:0] writeData, tempWriteData;
@@ -40,7 +40,7 @@ module cpu (
 	wire[2:0] command;
 
 	// Control Wires
-	wire writeReg, linkToPC, ALU_OperandSource, memoryRead, memoryWrite, memoryToRegister, is_jump, is_branch;
+	wire writeReg, linkToPC, ALU_OperandSource, memoryRead, memoryWrite, memoryToRegister, is_jump, isjr, is_branch;
 
 	control CPU_control(.opcode(opcode),
 						.funct(funct),
@@ -52,6 +52,7 @@ module cpu (
 						.memoryToRegister(memoryToRegister),
 						.command(command),
 						.isjump(is_jump),
+						.isjr(isjr),
 						.isbranch(is_branch));
 
 // ----------------------------Instruction Fetch-------------------------
@@ -71,7 +72,7 @@ module cpu (
 
 	instructionDecoderR ID_R(instruction, opcode, Rs, Rt, Rd, shift, funct);
 	instructionDecoderI ID_I(instruction, opcode, Rs, Rt, imm);
-	instructionDecoderJ ID_J(instruction, opcode, jump_target);
+	instructionDecoderJ ID_J(instruction, opcode, temp_jump_target);
 
 // ---------------------------Register Fetch-----------------------------
 	// Testing: [DONE]
@@ -86,9 +87,14 @@ module cpu (
 	// Testing: [DONE]
 
 	//data memory, from lab 2:
-	datamemory DM(dataOut[31:0],address, WrEn,ALU_result[31:0]); 
+	// TODO: make address a thing
+	datamemory memory(dataOut[31:0], ALU_result, memoryWrite ,ALU_result[31:0]); 
 	mux (#32) ToReg(tempWriteData[31:0], memoryToRegister, ALU_result[31:0],dataOut[31:0]);
 	mux (#32) dataOrPC(writeData[31:0], linkToPC, tempWriteData[31:0], pc);
 
-
+//----------------------------Control-----------------------------------
+	//control CTL(opcode[5:0], regWrite, ALU_OperandSource,memoryRead,memoryWrite,memoryToRegister,command[2:0]); //inputs/outpus to control
+	mux (#26) jumpto(jump_target, isjr, temp_jump_target, Da[25:0]);
+	mux (#5) Rd_or_Rt(reg_to_write, memoryRead, Rd, Rt);
+	mux (#5) writeRA(regAddr[4:0], linkToPC, reg_to_write, 5'd31);
 endmodule
