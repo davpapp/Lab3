@@ -3,6 +3,7 @@
 
 # multiply $a0x$a1
 main: 
+addi  $sp, $zero, 0x3ffc
 # Set up arguments for call multiTest
 addi  $a0, $zero, 4	# arg0 = 4
 addi  $a1, $zero, 10	# arg1 = 10
