@@ -91,7 +91,10 @@ module cpu (
 
 	//data memory, from lab 2:
 	// TODO: make address a thing
-	datamemory memory(dataOut[31:0], ALU_result, memoryWrite ,ALU_result[31:0]); 
+	datamemory memory(.regWE(memoryWrite),
+					.Addr(),
+					.DataIn(),
+					.DataOut());dataOut[31:0], ALU_result, memoryWrite ,ALU_result[31:0]); 
 	mux #(.width(32)) ToReg(.out(tempWriteData[31:0]),
 					.address(memoryToRegister),
 					.input0(ALU_result[31:0]),
