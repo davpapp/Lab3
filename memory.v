@@ -55,8 +55,7 @@ module memory
       mem[Addr] <= DataIn;
     end
   end
-  //assign DataOut = mem[Addr];
-  assign DataOut=32'd75;
 
+  assign DataOut = mem[{2'b0, Addr[31:2]}];
 
 endmodule
