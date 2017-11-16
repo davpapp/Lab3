@@ -4,6 +4,9 @@
 `include "datamemory.v"
 `include "regfile.v"
 `include "execute.v"
+`include "instructionDecoderR.v"
+`include "instructionDecoderI.v"
+`include "instructionDecoderJ.v"
 
 // This is the top level module for our single cycle CPU
 // It consists of 5 sub-modules:
@@ -14,7 +17,7 @@
 // Write
 
 module cpu (
-  input clk;
+  input clk
 );
 	wire[31:0] pc;
 	// Primarily used in Decode
@@ -45,8 +48,8 @@ module cpu (
 	control CPU_control(.opcode(opcode),
 						.funct(funct),
 						.writeReg(writeReg),
-						.linkToAddr(linkToPC),
-						.ALUOperandSource(ALU_OperandSource),
+						.linkToPC(linkToPC),
+						.ALUoperandSource(ALU_OperandSource),
 						.memoryRead(memoryRead),
 						.memoryWrite(memoryWrite),
 						.memoryToRegister(memoryToRegister),
@@ -57,22 +60,22 @@ module cpu (
 
 // ----------------------------Instruction Fetch-------------------------
 	// Tests: [DONE]
-	wire instruction[31:0];
+	wire[31:0] instruction;
 	ifetch IF(.clk(clk),
 				.write_pc(1'b1),
 				.is_branch(is_branch),
 				.is_jump(is_jump),
-				.branch_addr(imm),
-				.jump_addr(jump_target),
-				.out(instruction),
-				.pc(pc)); // updates instruction, increments PC by 4
+				.branch_addr(imm[15:0]),
+				.jump_addr(jump_target[25:0]),
+				.out(instruction[31:0]),
+				.pc(pc[31:0])); // updates instruction, increments PC by 4
 
 // ----------------------------Instruction Decode------------------------
 	// Testing: [DONE]
 
-	instructionDecoderR ID_R(instruction, opcode, Rs, Rt, Rd, shift, funct);
-	instructionDecoderI ID_I(instruction, opcode, Rs, Rt, imm);
-	instructionDecoderJ ID_J(instruction, opcode, temp_jump_target);
+	instructionDecoderR ID_R(instruction[31:0], opcode[5:0], Rs[4:0], Rt[4:0], Rd[4:0], shift[4:0], funct[5:0]);
+	instructionDecoderI ID_I(instruction[31:0], opcode[5:0], Rs[4:0], Rt[4:0], imm[15:0]);
+	instructionDecoderJ ID_J(instruction[31:0], opcode[5:0], temp_jump_target[25:0]);
 
 // ---------------------------Register Fetch-----------------------------
 	// Testing: [DONE]
@@ -89,12 +92,15 @@ module cpu (
 	//data memory, from lab 2:
 	// TODO: make address a thing
 	datamemory memory(dataOut[31:0], ALU_result, memoryWrite ,ALU_result[31:0]); 
-	mux (#32) ToReg(tempWriteData[31:0], memoryToRegister, ALU_result[31:0],dataOut[31:0]);
-	mux (#32) dataOrPC(writeData[31:0], linkToPC, tempWriteData[31:0], pc);
+	mux #(.width(32)) ToReg(.out(tempWriteData[31:0]),
+					.address(memoryToRegister),
+					.input0(ALU_result[31:0]),
+					.input1(dataOut[31:0]));
+	//mux (#32) dataOrPC(writeData[31:0], linkToPC, tempWriteData[31:0], pc);
 
 //----------------------------Control-----------------------------------
 	//control CTL(opcode[5:0], regWrite, ALU_OperandSource,memoryRead,memoryWrite,memoryToRegister,command[2:0]); //inputs/outpus to control
-	mux (#26) jumpto(jump_target, isjr, temp_jump_target, Da[25:0]);
-	mux (#5) Rd_or_Rt(reg_to_write, memoryRead, Rd, Rt);
-	mux (#5) writeRA(regAddr[4:0], linkToPC, reg_to_write, 5'd31);
+	//mux (#26) jumpto(jump_target, isjr, temp_jump_target, Da[25:0]);
+	//mux (#5) Rd_or_Rt(reg_to_write, memoryRead, Rd, Rt);
+	//mux (#5) writeRA(regAddr[4:0], linkToPC, reg_to_write, 5'd31);
 endmodule
