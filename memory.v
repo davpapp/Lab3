@@ -41,7 +41,7 @@ endmodule
 
 module memory
 (
-  input clk, regWE,
+  input regWE,
   input[31:0] Addr,
   input[31:0] DataIn,
   output[31:0]  DataOut
