@@ -47,7 +47,7 @@ module memory
   output[31:0]  DataOut
 );
 
-  reg [31:0] mem[60:0];  
+  reg [31:0] mem[1023:0];  
   initial $readmemh("data", mem);
 
   always @(Addr) begin
