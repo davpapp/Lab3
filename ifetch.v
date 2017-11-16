@@ -28,7 +28,7 @@ module ifetch
 	mux2to1by32 should_branch(.out(to_add), // to_add is either 4 or the branch value
 						.address(is_branch), // selector
 						.input0(32'd4),      // constant 4 (normal incrememnt)
-						.input1({{16{branch_addr[15]}}, branch_addr})); // second option is the se branch addr
+						.input1({{14{branch_addr[15]}}, branch_addr, 2'b0})); // second option is the se branch addr
 
 	add32bit add_to_pc(.a(pc), // pc is base
 						.b(to_add), // add to_add

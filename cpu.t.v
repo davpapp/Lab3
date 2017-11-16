@@ -45,8 +45,8 @@ module cpu_test ();
     // Load CPU memory from (assembly) dump file
 	//$readmemh(mem_fn, cpu.memory);
     // Alternate: Explicitly state which array element range to read into
-    $readmemh("inefficient_mult.tex", CPU.memory0.mem);
-    $readmemh("inefficient_mult.tex", CPU.IF.program_mem.mem);
+    $readmemh("text", CPU.memory0.mem);
+    $readmemh("text", CPU.IF.program_mem.mem);
     //$readmemh("inefficient_mult.tex", CPU.memory.memory);
 	//$readmemh("inefficient_mult.tex", CPU.IF.program_mem.memory);
 	// Dump waveforms to file
