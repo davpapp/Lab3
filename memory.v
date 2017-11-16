@@ -48,7 +48,7 @@ module memory
 );
 
   reg [31:0] mem[60:0];  
-  initial $readmemh(“test_mem.dat”, mem);
+  initial $readmemh("test_mem.dat", mem);
 
   always @(Addr) begin
     if (regWE) begin
