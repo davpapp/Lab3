@@ -102,5 +102,5 @@ module full_slt_32bit
     single_slt bit28(slt28, a[28], b[28], slt27);
     single_slt bit29(slt29, a[29], b[29], slt28);
     single_slt bit30(slt30, a[30], b[30], slt29);
-    single_slt_reversed bit31(out, a[31], b[31], slt30);
+    single_slt_reversed bit31(out[0], a[31], b[31], slt30);
 endmodule

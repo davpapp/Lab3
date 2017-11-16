@@ -44,6 +44,7 @@ module cpu (
 	// Control Wires
 	wire writeReg, linkToPC, ALU_OperandSource, memoryRead, memoryWrite, memoryToRegister, is_jump, isjr, is_branch;
 
+	wire[31:0] dataOut;
 	control CPU_control(.opcode(opcode),
 						.funct(funct),
 						.writeReg(writeReg),

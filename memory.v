@@ -8,7 +8,7 @@ module instruction_memory
   output[31:0]  DataOut
 );
 
-  reg [31:0] mem[60:0];  
+  reg [31:0] mem[4095:0];  
   //initial $readmemh("file.dat", mem);
   assign DataOut = mem[Addr];
 
@@ -47,8 +47,8 @@ module memory
   output[31:0]  DataOut
 );
 
-  reg [31:0] mem[1023:0];  
-  initial $readmemh("data", mem);
+  reg [31:0] mem[4095:0];  
+  //initial $readmemh("data", mem);
 
   always @(Addr) begin
     if (regWE) begin

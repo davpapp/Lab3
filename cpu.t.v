@@ -14,7 +14,7 @@ module cpu_test ();
     always #10 clk = !clk;
 
     // Instantiate fake CPU
-    cpu CPU(.clk(clk), .reset(reset));
+    cpu CPU(.clk(clk));
 
 
     reg [1023:0] mem_fn;
@@ -39,7 +39,8 @@ module cpu_test ();
     // Load CPU memory from (assembly) dump file
 	//$readmemh(mem_fn, cpu.memory);
     // Alternate: Explicitly state which array element range to read into
-    $readmemh("data", cpu.memory, 10, 80);
+    $readmemh("data", CPU.memory0.mem);
+    $readmemh("text", CPU.IF.program_mem.mem);
 	
 	// Dump waveforms to file
 	// Note: arrays (e.g. memory) are not dumped by default
@@ -57,7 +58,7 @@ module cpu_test ();
 	// automatically report the results.
 	$display("Time | PC       | Instruction");
 	repeat(3) begin
-        $display("%4t | %h | %h", $time, cpu.PC_A, cpu.INS_A); #20 ;
+        //$display("%4t | %h | %h", $time, cpu.PC_A, cpu.INS_A); #20 ;
         end
 	$display("... more execution (see waveform)");
     
