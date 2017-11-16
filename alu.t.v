@@ -1,6 +1,6 @@
 // 1 Bit alu test bench
 `timescale 1 ns / 1 ps
-`include "alu.v"
+`include "aluK.v"
 
 module testALU ();
   wire[31:0] out;
@@ -11,7 +11,7 @@ module testALU ();
   integer passed_tests = 0;
   integer tests = 0;
 
-  ALU alu (out,cout,zero,overflow,a,b,op);
+  ALUcontrolLUT alu (cout,overflow,zero,out,op,a,b);
 
   function integer test;
     input test_case;
@@ -30,7 +30,7 @@ module testALU ();
       $display("b:   %b", b);
       $display("out: %b", out);
       if (show_extras) begin
-        $display("Cout: %b, Overflow: %b", cout, overflow);
+        $display("Cout: %b, Overflow: %b, Zero: %b", cout, overflow, zero);
       end
     end
   endfunction
@@ -44,15 +44,15 @@ module testALU ();
     $display("\nAddition");
     $display("-----------------------------------------------------------------");
     op=3'b000;
-    a=32'b00000000000011111111111111111111; b=32'b0000000000000000000000000000001;#2000
+    a=32'b00000000000011111111111111111111; b=32'b0000000000000000000000000000001;#500
     tests = tests + 1;
     passed_tests = passed_tests + test(((a + b) == out) && (overflow == 0) && (cout == 0), 1);
 
-    a=32'b11111111111111111111111111111111; b=32'b0000000000000000000000000000000;#2000
+    a=32'b11111111111111111111111111111111; b=32'b0000000000000000000000000000000;#500
     tests = tests + 1;
     passed_tests = passed_tests + test(((a + b) == out) && (overflow == 0) && (cout == 0), 1);
 
-    a=32'b11111111111111111111111111111111; b=32'b0000000000000000000000000000001;#2000
+    a=32'b11111111111111111111111111111111; b=32'b0000000000000000000000000000001;#500
     tests = tests + 1;
     passed_tests = passed_tests + test(((a + b) == out) && (overflow == 0) && (cout == 1), 1);
 

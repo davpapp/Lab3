@@ -1,5 +1,6 @@
 // Execude block for CPU
 `include "aluK.v"
+`include "mux.v"
 
 module execute(
   output[31:0] result,

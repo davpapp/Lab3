@@ -8,12 +8,12 @@
 // b101 -> NAND
 // b110 -> NOR
 // b111 -> OR
-`define AND and #30
-`define OR or #30
-`define NOT not #10
-`define XOR xor #30
-`define NOR nor #20
-`define NAND nand #20
+`define AND and
+`define OR or
+`define NOT not
+`define XOR xor
+`define NOR nor
+`define NAND nand
 
 `include "alu1bit.v"
 
