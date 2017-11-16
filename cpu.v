@@ -30,7 +30,7 @@ module cpu (
 	wire[25:0] jump_target, temp_jump_target;
 
 	// Primarily used in Register Fetch
-	wire[31:0] writeData, tempWriteData;
+	wire[31:0] writeData, tempWriteData, dataOut;
 	wire[31:0] Da;
 	wire[31:0] Db;
 

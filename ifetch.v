@@ -19,7 +19,7 @@ module ifetch
 	reg [31:0] pc = 32'd0, branch_addr_full = 32'd4; // pc keeps track of position, branch_addr_full is the sign extended version of branch_addr 
 
 	// Get instruction encoding from the instruction memory
-	instruction_memory program_mem(.clk(clk), // only happens on clock edge
+	memory program_mem(.clk(clk), // only happens on clock edge
 						.regWE(0), // We don't want to write to instruction memory
 						.Addr(pc), // pc is the 32 bit address
 						.DataIn(32'b0), // doesn't actually matter, we're not writing

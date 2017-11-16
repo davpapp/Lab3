@@ -20,6 +20,12 @@ module cpu_test ();
     reg [1023:0] mem_fn;
     reg [1023:0] dump_fn;
 
+    always @(CPU.instruction) begin
+		if(CPU.instruction === 31'bx) begin
+			$finish();
+		end
+	end
+
     // Test sequence
     initial begin
 
@@ -39,9 +45,10 @@ module cpu_test ();
     // Load CPU memory from (assembly) dump file
 	//$readmemh(mem_fn, cpu.memory);
     // Alternate: Explicitly state which array element range to read into
-    $readmemh("data", CPU.memory.memory);
-    $readmemh("text", CPU.IF.program_mem.mem);
-	
+    $readmemh("inefficient_mult.tex", CPU.memory0.mem);
+    $readmemh("inefficient_mult.tex", CPU.IF.program_mem.mem);
+    //$readmemh("inefficient_mult.tex", CPU.memory.memory);
+	//$readmemh("inefficient_mult.tex", CPU.IF.program_mem.memory);
 	// Dump waveforms to file
 	// Note: arrays (e.g. memory) are not dumped by default
 	$dumpfile("dump_fn");
@@ -61,7 +68,7 @@ module cpu_test ();
         //$display("%4t | %h | %h", $time, cpu.PC_A, cpu.INS_A); #20 ;
         end
 	$display("... more execution (see waveform)");
-    
+
 	// End execution after some time delay - adjust to match your program
 	// or use a smarter approach like looking for an exit syscall or the
 	// PC to be the value of the last instruction in your program.
