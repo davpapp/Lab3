@@ -1,6 +1,6 @@
 `include "adder.v"
 
-/*module mux
+module muxtype1
   (
     output[31:0] out,
     input address,
@@ -170,7 +170,7 @@
   or or29(out[29], in029addr, in129addr);
   or or30(out[30], in030addr, in130addr);
   or or31(out[31], in031addr, in131addr);
-endmodule*/
+endmodule
 
 module adder_subtracter
   (
@@ -232,7 +232,7 @@ module adder_subtracter
   not  invertB30(invertedB[30], opB[30]);
   not  invertB31(invertedB[31], opB[31]);
 
-  mux #(32) addsubmux(finalB[31:0],command[0],opB[31:0], invertedB[31:0]);
+  muxtype1 addsubmux(finalB[31:0],command[0],opB[31:0], invertedB[31:0]);
   
   FullAdder4bit  adder0(ans[3:0], cout0, _, opA[3:0], finalB[3:0], command[0]); //coupling 4 adders makes a 32-bit adder, note that overflow flags do not matter except for the last one
   FullAdder4bit  adder1(ans[7:4], cout1, _1, opA[7:4], finalB[7:4], cout0);

@@ -96,11 +96,11 @@ module cpu (
 					.address(memoryToRegister),
 					.input0(ALU_result[31:0]),
 					.input1(dataOut[31:0]));
-	//mux (#32) dataOrPC(writeData[31:0], linkToPC, tempWriteData[31:0], pc);
+	mux #(32) dataOrPC(writeData[31:0], linkToPC, tempWriteData[31:0], pc);
 
 //----------------------------Control-----------------------------------
 	//control CTL(opcode[5:0], regWrite, ALU_OperandSource,memoryRead,memoryWrite,memoryToRegister,command[2:0]); //inputs/outpus to control
-	//mux (#26) jumpto(jump_target, isjr, temp_jump_target, Da[25:0]);
-	//mux (#5) Rd_or_Rt(reg_to_write, memoryRead, Rd, Rt);
-	//mux (#5) writeRA(regAddr[4:0], linkToPC, reg_to_write, 5'd31);
+	mux #(26) jumpto(jump_target, isjr, temp_jump_target, Da[25:0]);
+	mux #(5) Rd_or_Rt(reg_to_write, memoryRead, Rd, Rt);
+	mux #(5) writeRA(regAddr[4:0], linkToPC, reg_to_write, 5'd31);
 endmodule
