@@ -39,7 +39,7 @@ module cpu_test ();
     // Load CPU memory from (assembly) dump file
 	//$readmemh(mem_fn, cpu.memory);
     // Alternate: Explicitly state which array element range to read into
-    $readmemh("data", CPU.memory0.mem);
+    $readmemh("data", CPU.memory.memory);
     $readmemh("text", CPU.IF.program_mem.mem);
 	
 	// Dump waveforms to file
