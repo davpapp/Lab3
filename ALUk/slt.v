@@ -9,11 +9,11 @@ module single_slt
 	wire bxorand;
 	wire xornot;
 	wire xornotand;
-	xor #10 axb(abxor, a, b);
-	and #20 baxb(bxorand, b, abxor);
-	not #10 invxor(xornot, abxor);
-	and #20 xorandinput(xornotand, xornot, defaultCompare);
-	or #20 compare(out, bxorand, xornotand);
+	xor axb(abxor, a, b);
+	and baxb(bxorand, b, abxor);
+	not invxor(xornot, abxor);
+	and xorandinput(xornotand, xornot, defaultCompare);
+	or compare(out, bxorand, xornotand);
 endmodule
 
 module single_slt_reversed
@@ -27,11 +27,11 @@ module single_slt_reversed
     wire axorand;
     wire xornot;
     wire xornotand;
-    xor #10 axb(abxor, a, b);
-    and #20 aaxb(axorand, a, abxor);
-    not #10 invxor(xornot, abxor);
-    and #20 xorandinput(xornotand, xornot, defaultCompare);
-    or #20 compare(out, axorand, xornotand);
+    xor axb(abxor, a, b);
+    and aaxb(axorand, a, abxor);
+    not invxor(xornot, abxor);
+    and xorandinput(xornotand, xornot, defaultCompare);
+    or compare(out, axorand, xornotand);
 endmodule
 
 module full_slt_32bit

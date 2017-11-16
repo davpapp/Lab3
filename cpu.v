@@ -3,7 +3,7 @@
 `include "control.v"
 `include "datamemory.v"
 `include "regfile.v"
-`include "excecute.v"
+`include "execute.v"
 
 // This is the top level module for our single cycle CPU
 // It consists of 5 sub-modules:
