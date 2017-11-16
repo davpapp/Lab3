@@ -25,5 +25,5 @@ always @(imm) begin//not sure if this is exactly correct, but not sure if this o
                                                 .input1(extended_imm)); // choose between Db or our immediate as the second operand in the ALU
                                                         //Q: Db/ALU_operandsource???
         // Use my ALU from Lab 1 - opcode will need to be converted
-        ALU Alu(result, carryout, zero, overflow, Da, Operand, command[2:0]);
+        ALUcontrolLUT Alu(carryout, overflow, zero, result [31:0],command[2:0],Da, Operand);
 endmodule
