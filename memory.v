@@ -47,8 +47,8 @@ module memory
   output[31:0]  DataOut
 );
 
-  reg [31:0] mem[60:0];  
-  initial $readmemh("test_mem.dat", mem);
+  reg [31:0] mem[1023:0];  
+  initial $readmemh("data", mem);
 
   always @(Addr) begin
     if (regWE) begin
