@@ -1,7 +1,6 @@
 // Single cycle-cpu
 `include "ifetch.v"
 `include "control.v"
-`include "datamemory.v"
 `include "regfile.v"
 `include "execute.v"
 `include "instructionDecoderR.v"
@@ -80,30 +79,26 @@ module cpu (
 // ---------------------------Register Fetch-----------------------------
 	// Testing: [DONE]
 
-	regfile regfile(Da, Db, writeData[31:0], Rs, Rt, Rd, regWrite, clk); // Rd is incorrect here, will fix later
+	regfile regfile(Da, Db, writeData[31:0], Rs, Rt, regAddr[4:0], regWrite, clk); // Rd is incorrect here, will fix later
 
 // ----------------------------Execute-----------------------------------
 
 	execute exe(ALU_result, zero, carryout, overflow, Da, Db, imm, ALU_OperandSource, command);
 
 // ----------------------------Memory/Write-----------------------------------
-	// Testing: [DONE]
 
-	//data memory, from lab 2:
-	// TODO: make address a thing
-	datamemory memory(.regWE(memoryWrite),
-					.Addr(),
-					.DataIn(),
-					.DataOut());dataOut[31:0], ALU_result, memoryWrite ,ALU_result[31:0]); 
-	mux #(.width(32)) ToReg(.out(tempWriteData[31:0]),
-					.address(memoryToRegister),
+	memory memory0(.regWE(memoryWrite), .Addr(ALU_result[31:0]), .DataIn(Db), .DataOut(dataOut)); //the only time we're writing to mem is during sw, so it 																									//will only ever be this.
+	mux #(.width(32)) ToReg(.out(tempWriteData[31:0]),				 // Chooses between writing the ALU result or the output of DataMemory
+					.address(memoryToRegister),						 //  to the Register File
 					.input0(ALU_result[31:0]),
 					.input1(dataOut[31:0]));
-	mux #(32) dataOrPC(writeData[31:0], linkToPC, tempWriteData[31:0], pc);
+	mux #(32) dataOrPC(writeData[31:0], linkToPC, tempWriteData[31:0], pc); // Chooses between writing the above value or PC (JAL) to the
+																			//  Register File.
+//----------------------------Misc.-----------------------------------
 
-//----------------------------Control-----------------------------------
-	//control CTL(opcode[5:0], regWrite, ALU_OperandSource,memoryRead,memoryWrite,memoryToRegister,command[2:0]); //inputs/outpus to control
-	mux #(26) jumpto(jump_target, isjr, temp_jump_target, Da[25:0]);
-	mux #(5) Rd_or_Rt(reg_to_write, memoryRead, Rd, Rt);
-	mux #(5) writeRA(regAddr[4:0], linkToPC, reg_to_write, 5'd31);
+	mux #(26) jumpto(jump_target, isjr, temp_jump_target, Da[25:0]); // If instruction is j/jal, jump to temp_jump_target.
+																	 //  If instruction is jr, jump to the value stored in the register given 
+																	 //  (jr $ra means PC = Reg[ra])
+	mux #(5) Rd_or_Rt(reg_to_write, memoryRead, Rd, Rt);			 // Chooses between writing to Reg[Rd] for R-type or Reg[Rt] for I-type
+	mux #(5) writeRA(regAddr[4:0], linkToPC, reg_to_write, 5'd31);	 // Chooses between writing Rd/Rt in the reg file or $31 (for JAL)
 endmodule
