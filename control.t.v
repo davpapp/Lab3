@@ -21,7 +21,7 @@ module testControl();
 
 	reg[5:0] opcode;
 	reg[5:0] funct = 6'h0;
-	wire writeReg, linkToPC, ALU_OperandSource, memoryRead, memoryWrite, memoryToRegister, is_jump, is_branch;
+	wire writeReg, linkToPC, ALU_OperandSource, memoryRead, memoryWrite, memoryToRegister, is_jump, is_jr, is_branch;
 	wire[2:0] command;
 
 	control dut(.opcode(opcode),
@@ -34,6 +34,7 @@ module testControl();
 				.memoryToRegister(memoryToRegister),
 				.command(command),
 				.isjump(is_jump),
+				.isjr(isjr),
 				.isbranch(is_branch));
 
 	task checkResult;
@@ -92,7 +93,7 @@ module testControl();
 				memoryToRegister, is_jump, is_branch);
 
 		opcode = `XORI; #10
-		checkResult(3'b011, 1'b1, 1'b0, 1'b1, 1'b0, 1'b0, 1'b0, 1'b0, 1'b0,
+		checkResult(3'b011, 1'b1, 1'b0, 1'b1, 1'b1, 1'b0, 1'b0, 1'b0, 1'b0,
 				command, writeReg, linkToPC, ALU_OperandSource, memoryRead, memoryWrite, 
 				memoryToRegister, is_jump, is_branch);
 
