@@ -4,6 +4,9 @@
 `include "datamemory.v"
 `include "regfile.v"
 `include "execute.v"
+`include "instructionDecoderI.v"
+`include "instructionDecoderJ.v"
+`include "instructionDecoderR.v"
 
 // This is the top level module for our single cycle CPU
 // It consists of 5 sub-modules:
@@ -14,7 +17,7 @@
 // Write
 
 module cpu (
-  input clk;
+  input clk
 );
 	wire[31:0] pc;
 	// Primarily used in Decode
@@ -89,12 +92,12 @@ module cpu (
 	//data memory, from lab 2:
 	// TODO: make address a thing
 	datamemory memory(dataOut[31:0], ALU_result, memoryWrite ,ALU_result[31:0]); 
-	mux (#32) ToReg(tempWriteData[31:0], memoryToRegister, ALU_result[31:0],dataOut[31:0]);
-	mux (#32) dataOrPC(writeData[31:0], linkToPC, tempWriteData[31:0], pc);
+	mux #(32) ToReg(tempWriteData[31:0], memoryToRegister, ALU_result[31:0],dataOut[31:0]);
+	mux #(32) dataOrPC(writeData[31:0], linkToPC, tempWriteData[31:0], pc);
 
 //----------------------------Control-----------------------------------
 	//control CTL(opcode[5:0], regWrite, ALU_OperandSource,memoryRead,memoryWrite,memoryToRegister,command[2:0]); //inputs/outpus to control
-	mux (#26) jumpto(jump_target, isjr, temp_jump_target, Da[25:0]);
-	mux (#5) Rd_or_Rt(reg_to_write, memoryRead, Rd, Rt);
-	mux (#5) writeRA(regAddr[4:0], linkToPC, reg_to_write, 5'd31);
+	mux #(26) jumpto(jump_target, isjr, temp_jump_target, Da[25:0]);
+	mux #(5) Rd_or_Rt(reg_to_write, memoryRead, Rd, Rt);
+	mux #(5) writeRA(regAddr[4:0], linkToPC, reg_to_write, 5'd31);
 endmodule
