@@ -19,7 +19,6 @@ add   $s6, $zero, $v0   # s6 = 360
 
 sub   $v0, $s7, $s6     # v0 = -320
 
-
 # Jump to "exit", rather than falling through to subroutines
 j     program_end
 
