@@ -44,7 +44,7 @@ module cpu (
 	wire[2:0] command;
 
 	// Control Wires
-	wire writeReg, linkToPC, ALU_OperandSource, memoryRead, memoryWrite, memoryToRegister, is_jump, isjr, is_branch;
+	wire writeReg, linkToPC, ALU_OperandSource, memoryRead, memoryWrite, memoryToRegister, is_jump, isjr, is_branch, branch_taken;
 
 	control CPU_control(.opcode(opcode),
 						.funct(funct),
@@ -62,9 +62,10 @@ module cpu (
 // ----------------------------Instruction Fetch-------------------------
 	// Tests: [DONE]
 	wire[31:0] instruction;
+	and (branch_taken, is_branch, !zero);
 	ifetch IF(.clk(clk),
 				.write_pc(1'b1),
-				.is_branch(is_branch),
+				.is_branch(branch_taken),
 				.is_jump(is_jump),
 				.branch_addr(imm[15:0]),
 				.jump_addr(jump_target[25:0]),
@@ -101,6 +102,9 @@ module cpu (
 	mux #(26) jumpto(jump_target, isjr, temp_jump_target, Da[25:0]); // If instruction is j/jal, jump to temp_jump_target.
 																	 //  If instruction is jr, jump to the value stored in the register given 
 																	 //  (jr $ra means PC = Reg[ra])
-	mux #(5) Rd_or_Rt(reg_to_write, memoryRead, Rd, Rt);			 // Chooses between writing to Reg[Rd] for R-type or Reg[Rt] for I-type
+	mux #(5) Rd_or_Rt(.out(reg_to_write), 
+						.address(memoryRead),
+						.input0(Rd), 
+						.input1(Rt));								 // Chooses between writing to Reg[Rd] for R-type or Reg[Rt] for I-type
 	mux #(5) writeRA(regAddr, linkToPC, reg_to_write, 5'd31);		 // Chooses between writing Rd/Rt in the reg file or $31 (for JAL)
 endmodule

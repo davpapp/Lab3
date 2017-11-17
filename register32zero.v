@@ -5,7 +5,7 @@ input[31:0]		d,
 input		wrenable,
 input		clk
 );
-    always @(d or wrenable) begin
+    always @(negedge clk) begin
         q = 0;
     end
     
