@@ -69,7 +69,7 @@ module cpu (
 				.branch_addr(imm[15:0]),
 				.jump_addr(jump_target[25:0]),
 				.out(instruction[31:0]),
-				.pc(pc[31:0])); // updates instruction, increments PC by 4
+				.increased_pc(pc[31:0])); // updates instruction, increments PC by 4
 
 // ----------------------------Instruction Decode------------------------
 	// Testing: [DONE]
@@ -81,7 +81,7 @@ module cpu (
 // ---------------------------Register Fetch-----------------------------
 	// Testing: [DONE]
 
-	regfile regfile(Da, Db, writeData[31:0], Rs, Rt, regAddr[4:0], regWrite, clk); // Rd is incorrect here, will fix later
+	regfile regfile(Da, Db, writeData[31:0], Rs, Rt, regAddr, writeReg, clk); // Rd is incorrect here, will fix later
 
 // ----------------------------Execute-----------------------------------
 
@@ -102,5 +102,5 @@ module cpu (
 																	 //  If instruction is jr, jump to the value stored in the register given 
 																	 //  (jr $ra means PC = Reg[ra])
 	mux #(5) Rd_or_Rt(reg_to_write, memoryRead, Rd, Rt);			 // Chooses between writing to Reg[Rd] for R-type or Reg[Rt] for I-type
-	mux #(5) writeRA(regAddr[4:0], linkToPC, reg_to_write, 5'd31);	 // Chooses between writing Rd/Rt in the reg file or $31 (for JAL)
+	mux #(5) writeRA(regAddr, linkToPC, reg_to_write, 5'd31);		 // Chooses between writing Rd/Rt in the reg file or $31 (for JAL)
 endmodule

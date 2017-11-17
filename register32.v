@@ -6,7 +6,7 @@ input		wrenable,
 input		clk
 );
 
-    always @(posedge clk) begin
+    always @(d or wrenable) begin
     	if (wrenable == 1)
     		q = d;
     end

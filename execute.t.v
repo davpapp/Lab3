@@ -1,3 +1,4 @@
+`include "mux.v"
 `include "execute.v"
 
 `define LW   6'h23

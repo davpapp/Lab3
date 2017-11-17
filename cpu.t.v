@@ -28,7 +28,6 @@ module cpu_test ();
 
     // Test sequence
     initial begin
-
 	// Get command line arguments for memory image and VCD dump file
 	//   http://iverilog.wikia.com/wiki/Simulation
 	//   http://www.project-veripage.com/plusarg.php
@@ -68,7 +67,7 @@ module cpu_test ();
 	// automatically report the results.
 	$display("Time | PC       | Instruction");
 	repeat(3) begin
-        $display("%4t | %h | %h", $time, cpu.PC_A, cpu.INS_A); #20 ;
+        $display("%4t | %h | %h", $time, CPU.pc, CPU.instruction); #20 ;
         end
 	$display("... more execution (see waveform)");
 
