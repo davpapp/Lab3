@@ -48,8 +48,8 @@ module cpu_test ();
     $readmemh("text", CPU.memory0.mem);
 
     $readmemh("text", CPU.IF.program_mem.mem);
-    //$readmemh("inefficient_mult.tex", CPU.memory.memory);
-	//$readmemh("inefficient_mult.tex", CPU.IF.program_mem.memory);
+ //    $readmemh("inefficient_mult.tex", CPU.memory0.mem);
+	// $readmemh("inefficient_mult.tex", CPU.IF.program_mem.mem);
 	// Dump waveforms to file
 	// Note: arrays (e.g. memory) are not dumped by default
 	$dumpfile("dump_fn");

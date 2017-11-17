@@ -99,6 +99,9 @@ module cpu (
 	mux #(26) jumpto(jump_target, isjr, temp_jump_target, Da[25:0]); // If instruction is j/jal, jump to temp_jump_target.
 																	 //  If instruction is jr, jump to the value stored in the register given 
 																	 //  (jr $ra means PC = Reg[ra])
-	mux #(5) Rd_or_Rt(reg_to_write, memoryRead, Rd, Rt);			 // Chooses between writing to Reg[Rd] for R-type or Reg[Rt] for I-type
+	mux #(5) Rd_or_Rt(.out(reg_to_write), 
+						.address(memoryRead),
+						.input0(Rd), 
+						.input1(Rt));								 // Chooses between writing to Reg[Rd] for R-type or Reg[Rt] for I-type
 	mux #(5) writeRA(regAddr, linkToPC, reg_to_write, 5'd31);		 // Chooses between writing Rd/Rt in the reg file or $31 (for JAL)
 endmodule
