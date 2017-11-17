@@ -28,7 +28,6 @@ module cpu_test ();
 
     // Test sequence
     initial begin
-
 	// Get command line arguments for memory image and VCD dump file
 	//   http://iverilog.wikia.com/wiki/Simulation
 	//   http://www.project-veripage.com/plusarg.php

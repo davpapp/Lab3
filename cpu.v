@@ -67,7 +67,7 @@ module cpu (
 				.branch_addr(imm[15:0]),
 				.jump_addr(jump_target[25:0]),
 				.out(instruction[31:0]),
-				.pc(pc[31:0])); // updates instruction, increments PC by 4
+				.increased_pc(pc[31:0])); // updates instruction, increments PC by 4
 
 // ----------------------------Instruction Decode------------------------
 	// Testing: [DONE]
@@ -79,7 +79,7 @@ module cpu (
 // ---------------------------Register Fetch-----------------------------
 	// Testing: [DONE]
 
-	regfile regfile(Da, Db, writeData[31:0], Rs, Rt, regAddr[4:0], regWrite, clk); // Rd is incorrect here, will fix later
+	regfile regfile(Da, Db, writeData[31:0], Rs, Rt, regAddr[4:0], writeReg, clk); // Rd is incorrect here, will fix later
 
 // ----------------------------Execute-----------------------------------
 
