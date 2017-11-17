@@ -1,4 +1,4 @@
-all: control regfile ifetch datamemory alu execute testInstructionDecode
+all: control regfile ifetch datamemory alu execute testInstructionDecode add32bit alu1bit mux3bit
 
 cpu: cpu.v cpu.t.v
 	iverilog -Wall -o cpu cpu.t.v
