@@ -87,7 +87,7 @@ module cpu (
 
 // ----------------------------Memory/Write-----------------------------------
 
-	memory memory0(.regWE(memoryWrite), .Addr(ALU_result[31:0]), .DataIn(Db), .DataOut(dataOut)); //the only time we're writing to mem is during sw, so it 																									//will only ever be this.
+	memory memory0(.clk(clk),.regWE(memoryWrite), .Addr(ALU_result[31:0]), .DataIn(Db), .DataOut(dataOut)); //the only time we're writing to mem is during sw, so it 																									//will only ever be this.
 	mux #(.width(32)) ToReg(.out(tempWriteData[31:0]),				 // Chooses between writing the ALU result or the output of DataMemory
 					.address(memoryToRegister),						 //  to the Register File
 					.input0(ALU_result[31:0]),

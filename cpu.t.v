@@ -44,7 +44,9 @@ module cpu_test ();
     // Load CPU memory from (assembly) dump file
 	//$readmemh(mem_fn, cpu.memory);
     // Alternate: Explicitly state which array element range to read into
+
     $readmemh("text", CPU.memory0.mem);
+
     $readmemh("text", CPU.IF.program_mem.mem);
     //$readmemh("inefficient_mult.tex", CPU.memory.memory);
 	//$readmemh("inefficient_mult.tex", CPU.IF.program_mem.memory);
@@ -58,13 +60,14 @@ module cpu_test ();
 	reset = 1; #10;
 	reset = 0; #10;
 
+
 	// Display a few cycles just for quick checking
 	// Note: I'm just dumping instruction bits, but you can do some
 	// self-checking test cases based on your CPU and program and
 	// automatically report the results.
 	$display("Time | PC       | Instruction");
 	repeat(3) begin
-        //$display("%4t | %h | %h", $time, cpu.PC_A, cpu.INS_A); #20 ;
+        $display("%4t | %h | %h", $time, cpu.PC_A, cpu.INS_A); #20 ;
         end
 	$display("... more execution (see waveform)");
 

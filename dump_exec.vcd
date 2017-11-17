@@ -1,0 +1,2830 @@
+$date
+	Thu Nov 16 18:56:08 2017
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module addressmux $end
+$var wire 5 ! addr0 [4:0] $end
+$var wire 5 " addr1 [4:0] $end
+$var wire 1 # mux_address $end
+$var reg 1 $ out $end
+$upscope $end
+$scope module behavioralFullAdder $end
+$var wire 1 % a $end
+$var wire 1 & b $end
+$var wire 1 ' carryin $end
+$var wire 1 ( carryout $end
+$var wire 1 ) sum $end
+$upscope $end
+$scope module mux $end
+$var wire 1 * address $end
+$var wire 32 + input0 [31:0] $end
+$var wire 32 , input1 [31:0] $end
+$var reg 32 - out [31:0] $end
+$upscope $end
+$scope module testExecute $end
+$var wire 1 . carryout $end
+$var wire 1 / overflow $end
+$var wire 32 0 result [31:0] $end
+$var wire 1 1 zero $end
+$var reg 1 2 ALU_OperandSource $end
+$var reg 3 3 ALU_cmd [2:0] $end
+$var reg 32 4 Da [31:0] $end
+$var reg 32 5 Db [31:0] $end
+$var reg 16 6 imm [15:0] $end
+$scope module dut $end
+$var wire 1 7 ALU_OperandSource $end
+$var wire 32 8 Da [31:0] $end
+$var wire 32 9 Db [31:0] $end
+$var wire 32 : Operand [31:0] $end
+$var wire 1 . carryout $end
+$var wire 3 ; command [2:0] $end
+$var wire 16 < imm [15:0] $end
+$var wire 1 / overflow $end
+$var wire 32 = result [31:0] $end
+$var wire 1 1 zero $end
+$var reg 32 > extended_imm [31:0] $end
+$scope module ALUSource $end
+$var wire 1 7 address $end
+$var wire 32 ? input0 [31:0] $end
+$var wire 32 @ input1 [31:0] $end
+$var reg 32 A out [31:0] $end
+$upscope $end
+$scope module Alu $end
+$var wire 3 B ALUcommand [2:0] $end
+$var wire 32 C a [31:0] $end
+$var wire 1 D adder_cout $end
+$var wire 1 E adder_flag $end
+$var wire 32 F addsub [31:0] $end
+$var wire 32 G andin [31:0] $end
+$var wire 32 H b [31:0] $end
+$var wire 32 I nandin [31:0] $end
+$var wire 32 J norin [31:0] $end
+$var wire 32 K orin [31:0] $end
+$var wire 32 L slt [31:0] $end
+$var wire 32 M xorin [31:0] $end
+$var reg 1 N cout $end
+$var reg 32 O finalsignal [31:0] $end
+$var reg 1 P flag $end
+$var reg 1 Q zeroflag $end
+$scope module addsub0 $end
+$var wire 1 R _ $end
+$var wire 1 S _1 $end
+$var wire 1 T _2 $end
+$var wire 1 U _3 $end
+$var wire 1 V _4 $end
+$var wire 1 W _5 $end
+$var wire 1 X _6 $end
+$var wire 32 Y ans [31:0] $end
+$var wire 1 D carryout $end
+$var wire 3 Z command [2:0] $end
+$var wire 1 [ cout0 $end
+$var wire 1 \ cout1 $end
+$var wire 1 ] cout2 $end
+$var wire 1 ^ cout3 $end
+$var wire 1 _ cout4 $end
+$var wire 1 ` cout5 $end
+$var wire 1 a cout6 $end
+$var wire 32 b finalB [31:0] $end
+$var wire 32 c invertedB [31:0] $end
+$var wire 32 d opA [31:0] $end
+$var wire 32 e opB [31:0] $end
+$var wire 1 E overflow $end
+$scope module addsubmux $end
+$var wire 1 f address $end
+$var wire 32 g in0 [31:0] $end
+$var wire 1 h in00addr $end
+$var wire 1 i in010addr $end
+$var wire 1 j in011addr $end
+$var wire 1 k in012addr $end
+$var wire 1 l in013addr $end
+$var wire 1 m in014addr $end
+$var wire 1 n in015addr $end
+$var wire 1 o in016addr $end
+$var wire 1 p in017addr $end
+$var wire 1 q in018addr $end
+$var wire 1 r in019addr $end
+$var wire 1 s in01addr $end
+$var wire 1 t in020addr $end
+$var wire 1 u in021addr $end
+$var wire 1 v in022addr $end
+$var wire 1 w in023addr $end
+$var wire 1 x in024addr $end
+$var wire 1 y in025addr $end
+$var wire 1 z in026addr $end
+$var wire 1 { in027addr $end
+$var wire 1 | in028addr $end
+$var wire 1 } in029addr $end
+$var wire 1 ~ in02addr $end
+$var wire 1 !" in030addr $end
+$var wire 1 "" in031addr $end
+$var wire 1 #" in03addr $end
+$var wire 1 $" in04addr $end
+$var wire 1 %" in05addr $end
+$var wire 1 &" in06addr $end
+$var wire 1 '" in07addr $end
+$var wire 1 (" in08addr $end
+$var wire 1 )" in09addr $end
+$var wire 32 *" in1 [31:0] $end
+$var wire 1 +" in10addr $end
+$var wire 1 ," in110addr $end
+$var wire 1 -" in111addr $end
+$var wire 1 ." in112addr $end
+$var wire 1 /" in113addr $end
+$var wire 1 0" in114addr $end
+$var wire 1 1" in115addr $end
+$var wire 1 2" in116addr $end
+$var wire 1 3" in117addr $end
+$var wire 1 4" in118addr $end
+$var wire 1 5" in119addr $end
+$var wire 1 6" in11addr $end
+$var wire 1 7" in120addr $end
+$var wire 1 8" in121addr $end
+$var wire 1 9" in122addr $end
+$var wire 1 :" in123addr $end
+$var wire 1 ;" in124addr $end
+$var wire 1 <" in125addr $end
+$var wire 1 =" in126addr $end
+$var wire 1 >" in127addr $end
+$var wire 1 ?" in128addr $end
+$var wire 1 @" in129addr $end
+$var wire 1 A" in12addr $end
+$var wire 1 B" in130addr $end
+$var wire 1 C" in131addr $end
+$var wire 1 D" in13addr $end
+$var wire 1 E" in14addr $end
+$var wire 1 F" in15addr $end
+$var wire 1 G" in16addr $end
+$var wire 1 H" in17addr $end
+$var wire 1 I" in18addr $end
+$var wire 1 J" in19addr $end
+$var wire 1 K" invaddr $end
+$var wire 32 L" out [31:0] $end
+$upscope $end
+$scope module adder0 $end
+$var wire 4 M" a [3:0] $end
+$var wire 1 N" aandb $end
+$var wire 1 O" abandnoror $end
+$var wire 1 P" anorb $end
+$var wire 4 Q" b [3:0] $end
+$var wire 1 R" bandsum $end
+$var wire 1 S" bnorsum $end
+$var wire 1 T" bsumandnornor $end
+$var wire 1 U" carryin $end
+$var wire 1 [ carryout $end
+$var wire 1 V" carryout1 $end
+$var wire 1 W" carryout2 $end
+$var wire 1 X" carryout3 $end
+$var wire 1 R overflow $end
+$var wire 4 Y" sum [3:0] $end
+$scope module adder1 $end
+$var wire 1 Z" a $end
+$var wire 1 [" ab $end
+$var wire 1 \" acarryin $end
+$var wire 1 ]" andall $end
+$var wire 1 ^" andsingleintermediate $end
+$var wire 1 _" andsumintermediate $end
+$var wire 1 `" b $end
+$var wire 1 a" bcarryin $end
+$var wire 1 U" carryin $end
+$var wire 1 V" carryout $end
+$var wire 1 b" invcarryout $end
+$var wire 1 c" orall $end
+$var wire 1 d" orpairintermediate $end
+$var wire 1 e" orsingleintermediate $end
+$var wire 1 f" sum $end
+$upscope $end
+$scope module adder2 $end
+$var wire 1 g" a $end
+$var wire 1 h" ab $end
+$var wire 1 i" acarryin $end
+$var wire 1 j" andall $end
+$var wire 1 k" andsingleintermediate $end
+$var wire 1 l" andsumintermediate $end
+$var wire 1 m" b $end
+$var wire 1 n" bcarryin $end
+$var wire 1 V" carryin $end
+$var wire 1 W" carryout $end
+$var wire 1 o" invcarryout $end
+$var wire 1 p" orall $end
+$var wire 1 q" orpairintermediate $end
+$var wire 1 r" orsingleintermediate $end
+$var wire 1 s" sum $end
+$upscope $end
+$scope module adder3 $end
+$var wire 1 t" a $end
+$var wire 1 u" ab $end
+$var wire 1 v" acarryin $end
+$var wire 1 w" andall $end
+$var wire 1 x" andsingleintermediate $end
+$var wire 1 y" andsumintermediate $end
+$var wire 1 z" b $end
+$var wire 1 {" bcarryin $end
+$var wire 1 W" carryin $end
+$var wire 1 X" carryout $end
+$var wire 1 |" invcarryout $end
+$var wire 1 }" orall $end
+$var wire 1 ~" orpairintermediate $end
+$var wire 1 !# orsingleintermediate $end
+$var wire 1 "# sum $end
+$upscope $end
+$scope module adder4 $end
+$var wire 1 ## a $end
+$var wire 1 $# ab $end
+$var wire 1 %# acarryin $end
+$var wire 1 &# andall $end
+$var wire 1 '# andsingleintermediate $end
+$var wire 1 (# andsumintermediate $end
+$var wire 1 )# b $end
+$var wire 1 *# bcarryin $end
+$var wire 1 X" carryin $end
+$var wire 1 [ carryout $end
+$var wire 1 +# invcarryout $end
+$var wire 1 ,# orall $end
+$var wire 1 -# orpairintermediate $end
+$var wire 1 .# orsingleintermediate $end
+$var wire 1 /# sum $end
+$upscope $end
+$upscope $end
+$scope module adder1 $end
+$var wire 4 0# a [3:0] $end
+$var wire 1 1# aandb $end
+$var wire 1 2# abandnoror $end
+$var wire 1 3# anorb $end
+$var wire 4 4# b [3:0] $end
+$var wire 1 5# bandsum $end
+$var wire 1 6# bnorsum $end
+$var wire 1 7# bsumandnornor $end
+$var wire 1 [ carryin $end
+$var wire 1 \ carryout $end
+$var wire 1 8# carryout1 $end
+$var wire 1 9# carryout2 $end
+$var wire 1 :# carryout3 $end
+$var wire 1 S overflow $end
+$var wire 4 ;# sum [3:0] $end
+$scope module adder1 $end
+$var wire 1 <# a $end
+$var wire 1 =# ab $end
+$var wire 1 ># acarryin $end
+$var wire 1 ?# andall $end
+$var wire 1 @# andsingleintermediate $end
+$var wire 1 A# andsumintermediate $end
+$var wire 1 B# b $end
+$var wire 1 C# bcarryin $end
+$var wire 1 [ carryin $end
+$var wire 1 8# carryout $end
+$var wire 1 D# invcarryout $end
+$var wire 1 E# orall $end
+$var wire 1 F# orpairintermediate $end
+$var wire 1 G# orsingleintermediate $end
+$var wire 1 H# sum $end
+$upscope $end
+$scope module adder2 $end
+$var wire 1 I# a $end
+$var wire 1 J# ab $end
+$var wire 1 K# acarryin $end
+$var wire 1 L# andall $end
+$var wire 1 M# andsingleintermediate $end
+$var wire 1 N# andsumintermediate $end
+$var wire 1 O# b $end
+$var wire 1 P# bcarryin $end
+$var wire 1 8# carryin $end
+$var wire 1 9# carryout $end
+$var wire 1 Q# invcarryout $end
+$var wire 1 R# orall $end
+$var wire 1 S# orpairintermediate $end
+$var wire 1 T# orsingleintermediate $end
+$var wire 1 U# sum $end
+$upscope $end
+$scope module adder3 $end
+$var wire 1 V# a $end
+$var wire 1 W# ab $end
+$var wire 1 X# acarryin $end
+$var wire 1 Y# andall $end
+$var wire 1 Z# andsingleintermediate $end
+$var wire 1 [# andsumintermediate $end
+$var wire 1 \# b $end
+$var wire 1 ]# bcarryin $end
+$var wire 1 9# carryin $end
+$var wire 1 :# carryout $end
+$var wire 1 ^# invcarryout $end
+$var wire 1 _# orall $end
+$var wire 1 `# orpairintermediate $end
+$var wire 1 a# orsingleintermediate $end
+$var wire 1 b# sum $end
+$upscope $end
+$scope module adder4 $end
+$var wire 1 c# a $end
+$var wire 1 d# ab $end
+$var wire 1 e# acarryin $end
+$var wire 1 f# andall $end
+$var wire 1 g# andsingleintermediate $end
+$var wire 1 h# andsumintermediate $end
+$var wire 1 i# b $end
+$var wire 1 j# bcarryin $end
+$var wire 1 :# carryin $end
+$var wire 1 \ carryout $end
+$var wire 1 k# invcarryout $end
+$var wire 1 l# orall $end
+$var wire 1 m# orpairintermediate $end
+$var wire 1 n# orsingleintermediate $end
+$var wire 1 o# sum $end
+$upscope $end
+$upscope $end
+$scope module adder2 $end
+$var wire 4 p# a [3:0] $end
+$var wire 1 q# aandb $end
+$var wire 1 r# abandnoror $end
+$var wire 1 s# anorb $end
+$var wire 4 t# b [3:0] $end
+$var wire 1 u# bandsum $end
+$var wire 1 v# bnorsum $end
+$var wire 1 w# bsumandnornor $end
+$var wire 1 \ carryin $end
+$var wire 1 ] carryout $end
+$var wire 1 x# carryout1 $end
+$var wire 1 y# carryout2 $end
+$var wire 1 z# carryout3 $end
+$var wire 1 T overflow $end
+$var wire 4 {# sum [3:0] $end
+$scope module adder1 $end
+$var wire 1 |# a $end
+$var wire 1 }# ab $end
+$var wire 1 ~# acarryin $end
+$var wire 1 !$ andall $end
+$var wire 1 "$ andsingleintermediate $end
+$var wire 1 #$ andsumintermediate $end
+$var wire 1 $$ b $end
+$var wire 1 %$ bcarryin $end
+$var wire 1 \ carryin $end
+$var wire 1 x# carryout $end
+$var wire 1 &$ invcarryout $end
+$var wire 1 '$ orall $end
+$var wire 1 ($ orpairintermediate $end
+$var wire 1 )$ orsingleintermediate $end
+$var wire 1 *$ sum $end
+$upscope $end
+$scope module adder2 $end
+$var wire 1 +$ a $end
+$var wire 1 ,$ ab $end
+$var wire 1 -$ acarryin $end
+$var wire 1 .$ andall $end
+$var wire 1 /$ andsingleintermediate $end
+$var wire 1 0$ andsumintermediate $end
+$var wire 1 1$ b $end
+$var wire 1 2$ bcarryin $end
+$var wire 1 x# carryin $end
+$var wire 1 y# carryout $end
+$var wire 1 3$ invcarryout $end
+$var wire 1 4$ orall $end
+$var wire 1 5$ orpairintermediate $end
+$var wire 1 6$ orsingleintermediate $end
+$var wire 1 7$ sum $end
+$upscope $end
+$scope module adder3 $end
+$var wire 1 8$ a $end
+$var wire 1 9$ ab $end
+$var wire 1 :$ acarryin $end
+$var wire 1 ;$ andall $end
+$var wire 1 <$ andsingleintermediate $end
+$var wire 1 =$ andsumintermediate $end
+$var wire 1 >$ b $end
+$var wire 1 ?$ bcarryin $end
+$var wire 1 y# carryin $end
+$var wire 1 z# carryout $end
+$var wire 1 @$ invcarryout $end
+$var wire 1 A$ orall $end
+$var wire 1 B$ orpairintermediate $end
+$var wire 1 C$ orsingleintermediate $end
+$var wire 1 D$ sum $end
+$upscope $end
+$scope module adder4 $end
+$var wire 1 E$ a $end
+$var wire 1 F$ ab $end
+$var wire 1 G$ acarryin $end
+$var wire 1 H$ andall $end
+$var wire 1 I$ andsingleintermediate $end
+$var wire 1 J$ andsumintermediate $end
+$var wire 1 K$ b $end
+$var wire 1 L$ bcarryin $end
+$var wire 1 z# carryin $end
+$var wire 1 ] carryout $end
+$var wire 1 M$ invcarryout $end
+$var wire 1 N$ orall $end
+$var wire 1 O$ orpairintermediate $end
+$var wire 1 P$ orsingleintermediate $end
+$var wire 1 Q$ sum $end
+$upscope $end
+$upscope $end
+$scope module adder3 $end
+$var wire 4 R$ a [3:0] $end
+$var wire 1 S$ aandb $end
+$var wire 1 T$ abandnoror $end
+$var wire 1 U$ anorb $end
+$var wire 4 V$ b [3:0] $end
+$var wire 1 W$ bandsum $end
+$var wire 1 X$ bnorsum $end
+$var wire 1 Y$ bsumandnornor $end
+$var wire 1 ] carryin $end
+$var wire 1 ^ carryout $end
+$var wire 1 Z$ carryout1 $end
+$var wire 1 [$ carryout2 $end
+$var wire 1 \$ carryout3 $end
+$var wire 1 U overflow $end
+$var wire 4 ]$ sum [3:0] $end
+$scope module adder1 $end
+$var wire 1 ^$ a $end
+$var wire 1 _$ ab $end
+$var wire 1 `$ acarryin $end
+$var wire 1 a$ andall $end
+$var wire 1 b$ andsingleintermediate $end
+$var wire 1 c$ andsumintermediate $end
+$var wire 1 d$ b $end
+$var wire 1 e$ bcarryin $end
+$var wire 1 ] carryin $end
+$var wire 1 Z$ carryout $end
+$var wire 1 f$ invcarryout $end
+$var wire 1 g$ orall $end
+$var wire 1 h$ orpairintermediate $end
+$var wire 1 i$ orsingleintermediate $end
+$var wire 1 j$ sum $end
+$upscope $end
+$scope module adder2 $end
+$var wire 1 k$ a $end
+$var wire 1 l$ ab $end
+$var wire 1 m$ acarryin $end
+$var wire 1 n$ andall $end
+$var wire 1 o$ andsingleintermediate $end
+$var wire 1 p$ andsumintermediate $end
+$var wire 1 q$ b $end
+$var wire 1 r$ bcarryin $end
+$var wire 1 Z$ carryin $end
+$var wire 1 [$ carryout $end
+$var wire 1 s$ invcarryout $end
+$var wire 1 t$ orall $end
+$var wire 1 u$ orpairintermediate $end
+$var wire 1 v$ orsingleintermediate $end
+$var wire 1 w$ sum $end
+$upscope $end
+$scope module adder3 $end
+$var wire 1 x$ a $end
+$var wire 1 y$ ab $end
+$var wire 1 z$ acarryin $end
+$var wire 1 {$ andall $end
+$var wire 1 |$ andsingleintermediate $end
+$var wire 1 }$ andsumintermediate $end
+$var wire 1 ~$ b $end
+$var wire 1 !% bcarryin $end
+$var wire 1 [$ carryin $end
+$var wire 1 \$ carryout $end
+$var wire 1 "% invcarryout $end
+$var wire 1 #% orall $end
+$var wire 1 $% orpairintermediate $end
+$var wire 1 %% orsingleintermediate $end
+$var wire 1 &% sum $end
+$upscope $end
+$scope module adder4 $end
+$var wire 1 '% a $end
+$var wire 1 (% ab $end
+$var wire 1 )% acarryin $end
+$var wire 1 *% andall $end
+$var wire 1 +% andsingleintermediate $end
+$var wire 1 ,% andsumintermediate $end
+$var wire 1 -% b $end
+$var wire 1 .% bcarryin $end
+$var wire 1 \$ carryin $end
+$var wire 1 ^ carryout $end
+$var wire 1 /% invcarryout $end
+$var wire 1 0% orall $end
+$var wire 1 1% orpairintermediate $end
+$var wire 1 2% orsingleintermediate $end
+$var wire 1 3% sum $end
+$upscope $end
+$upscope $end
+$scope module adder4 $end
+$var wire 4 4% a [3:0] $end
+$var wire 1 5% aandb $end
+$var wire 1 6% abandnoror $end
+$var wire 1 7% anorb $end
+$var wire 4 8% b [3:0] $end
+$var wire 1 9% bandsum $end
+$var wire 1 :% bnorsum $end
+$var wire 1 ;% bsumandnornor $end
+$var wire 1 ^ carryin $end
+$var wire 1 _ carryout $end
+$var wire 1 <% carryout1 $end
+$var wire 1 =% carryout2 $end
+$var wire 1 >% carryout3 $end
+$var wire 1 V overflow $end
+$var wire 4 ?% sum [3:0] $end
+$scope module adder1 $end
+$var wire 1 @% a $end
+$var wire 1 A% ab $end
+$var wire 1 B% acarryin $end
+$var wire 1 C% andall $end
+$var wire 1 D% andsingleintermediate $end
+$var wire 1 E% andsumintermediate $end
+$var wire 1 F% b $end
+$var wire 1 G% bcarryin $end
+$var wire 1 ^ carryin $end
+$var wire 1 <% carryout $end
+$var wire 1 H% invcarryout $end
+$var wire 1 I% orall $end
+$var wire 1 J% orpairintermediate $end
+$var wire 1 K% orsingleintermediate $end
+$var wire 1 L% sum $end
+$upscope $end
+$scope module adder2 $end
+$var wire 1 M% a $end
+$var wire 1 N% ab $end
+$var wire 1 O% acarryin $end
+$var wire 1 P% andall $end
+$var wire 1 Q% andsingleintermediate $end
+$var wire 1 R% andsumintermediate $end
+$var wire 1 S% b $end
+$var wire 1 T% bcarryin $end
+$var wire 1 <% carryin $end
+$var wire 1 =% carryout $end
+$var wire 1 U% invcarryout $end
+$var wire 1 V% orall $end
+$var wire 1 W% orpairintermediate $end
+$var wire 1 X% orsingleintermediate $end
+$var wire 1 Y% sum $end
+$upscope $end
+$scope module adder3 $end
+$var wire 1 Z% a $end
+$var wire 1 [% ab $end
+$var wire 1 \% acarryin $end
+$var wire 1 ]% andall $end
+$var wire 1 ^% andsingleintermediate $end
+$var wire 1 _% andsumintermediate $end
+$var wire 1 `% b $end
+$var wire 1 a% bcarryin $end
+$var wire 1 =% carryin $end
+$var wire 1 >% carryout $end
+$var wire 1 b% invcarryout $end
+$var wire 1 c% orall $end
+$var wire 1 d% orpairintermediate $end
+$var wire 1 e% orsingleintermediate $end
+$var wire 1 f% sum $end
+$upscope $end
+$scope module adder4 $end
+$var wire 1 g% a $end
+$var wire 1 h% ab $end
+$var wire 1 i% acarryin $end
+$var wire 1 j% andall $end
+$var wire 1 k% andsingleintermediate $end
+$var wire 1 l% andsumintermediate $end
+$var wire 1 m% b $end
+$var wire 1 n% bcarryin $end
+$var wire 1 >% carryin $end
+$var wire 1 _ carryout $end
+$var wire 1 o% invcarryout $end
+$var wire 1 p% orall $end
+$var wire 1 q% orpairintermediate $end
+$var wire 1 r% orsingleintermediate $end
+$var wire 1 s% sum $end
+$upscope $end
+$upscope $end
+$scope module adder5 $end
+$var wire 4 t% a [3:0] $end
+$var wire 1 u% aandb $end
+$var wire 1 v% abandnoror $end
+$var wire 1 w% anorb $end
+$var wire 4 x% b [3:0] $end
+$var wire 1 y% bandsum $end
+$var wire 1 z% bnorsum $end
+$var wire 1 {% bsumandnornor $end
+$var wire 1 _ carryin $end
+$var wire 1 ` carryout $end
+$var wire 1 |% carryout1 $end
+$var wire 1 }% carryout2 $end
+$var wire 1 ~% carryout3 $end
+$var wire 1 W overflow $end
+$var wire 4 !& sum [3:0] $end
+$scope module adder1 $end
+$var wire 1 "& a $end
+$var wire 1 #& ab $end
+$var wire 1 $& acarryin $end
+$var wire 1 %& andall $end
+$var wire 1 && andsingleintermediate $end
+$var wire 1 '& andsumintermediate $end
+$var wire 1 (& b $end
+$var wire 1 )& bcarryin $end
+$var wire 1 _ carryin $end
+$var wire 1 |% carryout $end
+$var wire 1 *& invcarryout $end
+$var wire 1 +& orall $end
+$var wire 1 ,& orpairintermediate $end
+$var wire 1 -& orsingleintermediate $end
+$var wire 1 .& sum $end
+$upscope $end
+$scope module adder2 $end
+$var wire 1 /& a $end
+$var wire 1 0& ab $end
+$var wire 1 1& acarryin $end
+$var wire 1 2& andall $end
+$var wire 1 3& andsingleintermediate $end
+$var wire 1 4& andsumintermediate $end
+$var wire 1 5& b $end
+$var wire 1 6& bcarryin $end
+$var wire 1 |% carryin $end
+$var wire 1 }% carryout $end
+$var wire 1 7& invcarryout $end
+$var wire 1 8& orall $end
+$var wire 1 9& orpairintermediate $end
+$var wire 1 :& orsingleintermediate $end
+$var wire 1 ;& sum $end
+$upscope $end
+$scope module adder3 $end
+$var wire 1 <& a $end
+$var wire 1 =& ab $end
+$var wire 1 >& acarryin $end
+$var wire 1 ?& andall $end
+$var wire 1 @& andsingleintermediate $end
+$var wire 1 A& andsumintermediate $end
+$var wire 1 B& b $end
+$var wire 1 C& bcarryin $end
+$var wire 1 }% carryin $end
+$var wire 1 ~% carryout $end
+$var wire 1 D& invcarryout $end
+$var wire 1 E& orall $end
+$var wire 1 F& orpairintermediate $end
+$var wire 1 G& orsingleintermediate $end
+$var wire 1 H& sum $end
+$upscope $end
+$scope module adder4 $end
+$var wire 1 I& a $end
+$var wire 1 J& ab $end
+$var wire 1 K& acarryin $end
+$var wire 1 L& andall $end
+$var wire 1 M& andsingleintermediate $end
+$var wire 1 N& andsumintermediate $end
+$var wire 1 O& b $end
+$var wire 1 P& bcarryin $end
+$var wire 1 ~% carryin $end
+$var wire 1 ` carryout $end
+$var wire 1 Q& invcarryout $end
+$var wire 1 R& orall $end
+$var wire 1 S& orpairintermediate $end
+$var wire 1 T& orsingleintermediate $end
+$var wire 1 U& sum $end
+$upscope $end
+$upscope $end
+$scope module adder6 $end
+$var wire 4 V& a [3:0] $end
+$var wire 1 W& aandb $end
+$var wire 1 X& abandnoror $end
+$var wire 1 Y& anorb $end
+$var wire 4 Z& b [3:0] $end
+$var wire 1 [& bandsum $end
+$var wire 1 \& bnorsum $end
+$var wire 1 ]& bsumandnornor $end
+$var wire 1 ` carryin $end
+$var wire 1 a carryout $end
+$var wire 1 ^& carryout1 $end
+$var wire 1 _& carryout2 $end
+$var wire 1 `& carryout3 $end
+$var wire 1 X overflow $end
+$var wire 4 a& sum [3:0] $end
+$scope module adder1 $end
+$var wire 1 b& a $end
+$var wire 1 c& ab $end
+$var wire 1 d& acarryin $end
+$var wire 1 e& andall $end
+$var wire 1 f& andsingleintermediate $end
+$var wire 1 g& andsumintermediate $end
+$var wire 1 h& b $end
+$var wire 1 i& bcarryin $end
+$var wire 1 ` carryin $end
+$var wire 1 ^& carryout $end
+$var wire 1 j& invcarryout $end
+$var wire 1 k& orall $end
+$var wire 1 l& orpairintermediate $end
+$var wire 1 m& orsingleintermediate $end
+$var wire 1 n& sum $end
+$upscope $end
+$scope module adder2 $end
+$var wire 1 o& a $end
+$var wire 1 p& ab $end
+$var wire 1 q& acarryin $end
+$var wire 1 r& andall $end
+$var wire 1 s& andsingleintermediate $end
+$var wire 1 t& andsumintermediate $end
+$var wire 1 u& b $end
+$var wire 1 v& bcarryin $end
+$var wire 1 ^& carryin $end
+$var wire 1 _& carryout $end
+$var wire 1 w& invcarryout $end
+$var wire 1 x& orall $end
+$var wire 1 y& orpairintermediate $end
+$var wire 1 z& orsingleintermediate $end
+$var wire 1 {& sum $end
+$upscope $end
+$scope module adder3 $end
+$var wire 1 |& a $end
+$var wire 1 }& ab $end
+$var wire 1 ~& acarryin $end
+$var wire 1 !' andall $end
+$var wire 1 "' andsingleintermediate $end
+$var wire 1 #' andsumintermediate $end
+$var wire 1 $' b $end
+$var wire 1 %' bcarryin $end
+$var wire 1 _& carryin $end
+$var wire 1 `& carryout $end
+$var wire 1 &' invcarryout $end
+$var wire 1 '' orall $end
+$var wire 1 (' orpairintermediate $end
+$var wire 1 )' orsingleintermediate $end
+$var wire 1 *' sum $end
+$upscope $end
+$scope module adder4 $end
+$var wire 1 +' a $end
+$var wire 1 ,' ab $end
+$var wire 1 -' acarryin $end
+$var wire 1 .' andall $end
+$var wire 1 /' andsingleintermediate $end
+$var wire 1 0' andsumintermediate $end
+$var wire 1 1' b $end
+$var wire 1 2' bcarryin $end
+$var wire 1 `& carryin $end
+$var wire 1 a carryout $end
+$var wire 1 3' invcarryout $end
+$var wire 1 4' orall $end
+$var wire 1 5' orpairintermediate $end
+$var wire 1 6' orsingleintermediate $end
+$var wire 1 7' sum $end
+$upscope $end
+$upscope $end
+$scope module adder7 $end
+$var wire 4 8' a [3:0] $end
+$var wire 1 9' aandb $end
+$var wire 1 :' abandnoror $end
+$var wire 1 ;' anorb $end
+$var wire 4 <' b [3:0] $end
+$var wire 1 =' bandsum $end
+$var wire 1 >' bnorsum $end
+$var wire 1 ?' bsumandnornor $end
+$var wire 1 a carryin $end
+$var wire 1 D carryout $end
+$var wire 1 @' carryout1 $end
+$var wire 1 A' carryout2 $end
+$var wire 1 B' carryout3 $end
+$var wire 1 E overflow $end
+$var wire 4 C' sum [3:0] $end
+$scope module adder1 $end
+$var wire 1 D' a $end
+$var wire 1 E' ab $end
+$var wire 1 F' acarryin $end
+$var wire 1 G' andall $end
+$var wire 1 H' andsingleintermediate $end
+$var wire 1 I' andsumintermediate $end
+$var wire 1 J' b $end
+$var wire 1 K' bcarryin $end
+$var wire 1 a carryin $end
+$var wire 1 @' carryout $end
+$var wire 1 L' invcarryout $end
+$var wire 1 M' orall $end
+$var wire 1 N' orpairintermediate $end
+$var wire 1 O' orsingleintermediate $end
+$var wire 1 P' sum $end
+$upscope $end
+$scope module adder2 $end
+$var wire 1 Q' a $end
+$var wire 1 R' ab $end
+$var wire 1 S' acarryin $end
+$var wire 1 T' andall $end
+$var wire 1 U' andsingleintermediate $end
+$var wire 1 V' andsumintermediate $end
+$var wire 1 W' b $end
+$var wire 1 X' bcarryin $end
+$var wire 1 @' carryin $end
+$var wire 1 A' carryout $end
+$var wire 1 Y' invcarryout $end
+$var wire 1 Z' orall $end
+$var wire 1 [' orpairintermediate $end
+$var wire 1 \' orsingleintermediate $end
+$var wire 1 ]' sum $end
+$upscope $end
+$scope module adder3 $end
+$var wire 1 ^' a $end
+$var wire 1 _' ab $end
+$var wire 1 `' acarryin $end
+$var wire 1 a' andall $end
+$var wire 1 b' andsingleintermediate $end
+$var wire 1 c' andsumintermediate $end
+$var wire 1 d' b $end
+$var wire 1 e' bcarryin $end
+$var wire 1 A' carryin $end
+$var wire 1 B' carryout $end
+$var wire 1 f' invcarryout $end
+$var wire 1 g' orall $end
+$var wire 1 h' orpairintermediate $end
+$var wire 1 i' orsingleintermediate $end
+$var wire 1 j' sum $end
+$upscope $end
+$scope module adder4 $end
+$var wire 1 k' a $end
+$var wire 1 l' ab $end
+$var wire 1 m' acarryin $end
+$var wire 1 n' andall $end
+$var wire 1 o' andsingleintermediate $end
+$var wire 1 p' andsumintermediate $end
+$var wire 1 q' b $end
+$var wire 1 r' bcarryin $end
+$var wire 1 B' carryin $end
+$var wire 1 D carryout $end
+$var wire 1 s' invcarryout $end
+$var wire 1 t' orall $end
+$var wire 1 u' orpairintermediate $end
+$var wire 1 v' orsingleintermediate $end
+$var wire 1 w' sum $end
+$upscope $end
+$upscope $end
+$upscope $end
+$scope module xor0 $end
+$var wire 32 x' a [31:0] $end
+$var wire 32 y' b [31:0] $end
+$var wire 32 z' out [31:0] $end
+$upscope $end
+$scope module slt0 $end
+$var wire 32 {' a [31:0] $end
+$var wire 32 |' b [31:0] $end
+$var wire 32 }' out [31:0] $end
+$var wire 1 ~' slt0 $end
+$var wire 1 !( slt1 $end
+$var wire 1 "( slt10 $end
+$var wire 1 #( slt11 $end
+$var wire 1 $( slt12 $end
+$var wire 1 %( slt13 $end
+$var wire 1 &( slt14 $end
+$var wire 1 '( slt15 $end
+$var wire 1 (( slt16 $end
+$var wire 1 )( slt17 $end
+$var wire 1 *( slt18 $end
+$var wire 1 +( slt19 $end
+$var wire 1 ,( slt2 $end
+$var wire 1 -( slt20 $end
+$var wire 1 .( slt21 $end
+$var wire 1 /( slt22 $end
+$var wire 1 0( slt23 $end
+$var wire 1 1( slt24 $end
+$var wire 1 2( slt25 $end
+$var wire 1 3( slt26 $end
+$var wire 1 4( slt27 $end
+$var wire 1 5( slt28 $end
+$var wire 1 6( slt29 $end
+$var wire 1 7( slt3 $end
+$var wire 1 8( slt30 $end
+$var wire 1 9( slt4 $end
+$var wire 1 :( slt5 $end
+$var wire 1 ;( slt6 $end
+$var wire 1 <( slt7 $end
+$var wire 1 =( slt8 $end
+$var wire 1 >( slt9 $end
+$scope module bit0 $end
+$var wire 1 ?( a $end
+$var wire 1 @( abxor $end
+$var wire 1 A( b $end
+$var wire 1 B( bxorand $end
+$var wire 1 C( defaultCompare $end
+$var wire 1 ~' out $end
+$var wire 1 D( xornot $end
+$var wire 1 E( xornotand $end
+$upscope $end
+$scope module bit1 $end
+$var wire 1 F( a $end
+$var wire 1 G( abxor $end
+$var wire 1 H( b $end
+$var wire 1 I( bxorand $end
+$var wire 1 ~' defaultCompare $end
+$var wire 1 !( out $end
+$var wire 1 J( xornot $end
+$var wire 1 K( xornotand $end
+$upscope $end
+$scope module bit2 $end
+$var wire 1 L( a $end
+$var wire 1 M( abxor $end
+$var wire 1 N( b $end
+$var wire 1 O( bxorand $end
+$var wire 1 !( defaultCompare $end
+$var wire 1 ,( out $end
+$var wire 1 P( xornot $end
+$var wire 1 Q( xornotand $end
+$upscope $end
+$scope module bit3 $end
+$var wire 1 R( a $end
+$var wire 1 S( abxor $end
+$var wire 1 T( b $end
+$var wire 1 U( bxorand $end
+$var wire 1 ,( defaultCompare $end
+$var wire 1 7( out $end
+$var wire 1 V( xornot $end
+$var wire 1 W( xornotand $end
+$upscope $end
+$scope module bit4 $end
+$var wire 1 X( a $end
+$var wire 1 Y( abxor $end
+$var wire 1 Z( b $end
+$var wire 1 [( bxorand $end
+$var wire 1 7( defaultCompare $end
+$var wire 1 9( out $end
+$var wire 1 \( xornot $end
+$var wire 1 ]( xornotand $end
+$upscope $end
+$scope module bit5 $end
+$var wire 1 ^( a $end
+$var wire 1 _( abxor $end
+$var wire 1 `( b $end
+$var wire 1 a( bxorand $end
+$var wire 1 9( defaultCompare $end
+$var wire 1 :( out $end
+$var wire 1 b( xornot $end
+$var wire 1 c( xornotand $end
+$upscope $end
+$scope module bit6 $end
+$var wire 1 d( a $end
+$var wire 1 e( abxor $end
+$var wire 1 f( b $end
+$var wire 1 g( bxorand $end
+$var wire 1 :( defaultCompare $end
+$var wire 1 ;( out $end
+$var wire 1 h( xornot $end
+$var wire 1 i( xornotand $end
+$upscope $end
+$scope module bit7 $end
+$var wire 1 j( a $end
+$var wire 1 k( abxor $end
+$var wire 1 l( b $end
+$var wire 1 m( bxorand $end
+$var wire 1 ;( defaultCompare $end
+$var wire 1 <( out $end
+$var wire 1 n( xornot $end
+$var wire 1 o( xornotand $end
+$upscope $end
+$scope module bit8 $end
+$var wire 1 p( a $end
+$var wire 1 q( abxor $end
+$var wire 1 r( b $end
+$var wire 1 s( bxorand $end
+$var wire 1 <( defaultCompare $end
+$var wire 1 =( out $end
+$var wire 1 t( xornot $end
+$var wire 1 u( xornotand $end
+$upscope $end
+$scope module bit9 $end
+$var wire 1 v( a $end
+$var wire 1 w( abxor $end
+$var wire 1 x( b $end
+$var wire 1 y( bxorand $end
+$var wire 1 =( defaultCompare $end
+$var wire 1 >( out $end
+$var wire 1 z( xornot $end
+$var wire 1 {( xornotand $end
+$upscope $end
+$scope module bit10 $end
+$var wire 1 |( a $end
+$var wire 1 }( abxor $end
+$var wire 1 ~( b $end
+$var wire 1 !) bxorand $end
+$var wire 1 >( defaultCompare $end
+$var wire 1 "( out $end
+$var wire 1 ") xornot $end
+$var wire 1 #) xornotand $end
+$upscope $end
+$scope module bit11 $end
+$var wire 1 $) a $end
+$var wire 1 %) abxor $end
+$var wire 1 &) b $end
+$var wire 1 ') bxorand $end
+$var wire 1 "( defaultCompare $end
+$var wire 1 #( out $end
+$var wire 1 () xornot $end
+$var wire 1 )) xornotand $end
+$upscope $end
+$scope module bit12 $end
+$var wire 1 *) a $end
+$var wire 1 +) abxor $end
+$var wire 1 ,) b $end
+$var wire 1 -) bxorand $end
+$var wire 1 #( defaultCompare $end
+$var wire 1 $( out $end
+$var wire 1 .) xornot $end
+$var wire 1 /) xornotand $end
+$upscope $end
+$scope module bit13 $end
+$var wire 1 0) a $end
+$var wire 1 1) abxor $end
+$var wire 1 2) b $end
+$var wire 1 3) bxorand $end
+$var wire 1 $( defaultCompare $end
+$var wire 1 %( out $end
+$var wire 1 4) xornot $end
+$var wire 1 5) xornotand $end
+$upscope $end
+$scope module bit14 $end
+$var wire 1 6) a $end
+$var wire 1 7) abxor $end
+$var wire 1 8) b $end
+$var wire 1 9) bxorand $end
+$var wire 1 %( defaultCompare $end
+$var wire 1 &( out $end
+$var wire 1 :) xornot $end
+$var wire 1 ;) xornotand $end
+$upscope $end
+$scope module bit15 $end
+$var wire 1 <) a $end
+$var wire 1 =) abxor $end
+$var wire 1 >) b $end
+$var wire 1 ?) bxorand $end
+$var wire 1 &( defaultCompare $end
+$var wire 1 '( out $end
+$var wire 1 @) xornot $end
+$var wire 1 A) xornotand $end
+$upscope $end
+$scope module bit16 $end
+$var wire 1 B) a $end
+$var wire 1 C) abxor $end
+$var wire 1 D) b $end
+$var wire 1 E) bxorand $end
+$var wire 1 '( defaultCompare $end
+$var wire 1 (( out $end
+$var wire 1 F) xornot $end
+$var wire 1 G) xornotand $end
+$upscope $end
+$scope module bit17 $end
+$var wire 1 H) a $end
+$var wire 1 I) abxor $end
+$var wire 1 J) b $end
+$var wire 1 K) bxorand $end
+$var wire 1 (( defaultCompare $end
+$var wire 1 )( out $end
+$var wire 1 L) xornot $end
+$var wire 1 M) xornotand $end
+$upscope $end
+$scope module bit18 $end
+$var wire 1 N) a $end
+$var wire 1 O) abxor $end
+$var wire 1 P) b $end
+$var wire 1 Q) bxorand $end
+$var wire 1 )( defaultCompare $end
+$var wire 1 *( out $end
+$var wire 1 R) xornot $end
+$var wire 1 S) xornotand $end
+$upscope $end
+$scope module bit19 $end
+$var wire 1 T) a $end
+$var wire 1 U) abxor $end
+$var wire 1 V) b $end
+$var wire 1 W) bxorand $end
+$var wire 1 *( defaultCompare $end
+$var wire 1 +( out $end
+$var wire 1 X) xornot $end
+$var wire 1 Y) xornotand $end
+$upscope $end
+$scope module bit20 $end
+$var wire 1 Z) a $end
+$var wire 1 [) abxor $end
+$var wire 1 \) b $end
+$var wire 1 ]) bxorand $end
+$var wire 1 +( defaultCompare $end
+$var wire 1 -( out $end
+$var wire 1 ^) xornot $end
+$var wire 1 _) xornotand $end
+$upscope $end
+$scope module bit21 $end
+$var wire 1 `) a $end
+$var wire 1 a) abxor $end
+$var wire 1 b) b $end
+$var wire 1 c) bxorand $end
+$var wire 1 -( defaultCompare $end
+$var wire 1 .( out $end
+$var wire 1 d) xornot $end
+$var wire 1 e) xornotand $end
+$upscope $end
+$scope module bit22 $end
+$var wire 1 f) a $end
+$var wire 1 g) abxor $end
+$var wire 1 h) b $end
+$var wire 1 i) bxorand $end
+$var wire 1 .( defaultCompare $end
+$var wire 1 /( out $end
+$var wire 1 j) xornot $end
+$var wire 1 k) xornotand $end
+$upscope $end
+$scope module bit23 $end
+$var wire 1 l) a $end
+$var wire 1 m) abxor $end
+$var wire 1 n) b $end
+$var wire 1 o) bxorand $end
+$var wire 1 /( defaultCompare $end
+$var wire 1 0( out $end
+$var wire 1 p) xornot $end
+$var wire 1 q) xornotand $end
+$upscope $end
+$scope module bit24 $end
+$var wire 1 r) a $end
+$var wire 1 s) abxor $end
+$var wire 1 t) b $end
+$var wire 1 u) bxorand $end
+$var wire 1 0( defaultCompare $end
+$var wire 1 1( out $end
+$var wire 1 v) xornot $end
+$var wire 1 w) xornotand $end
+$upscope $end
+$scope module bit25 $end
+$var wire 1 x) a $end
+$var wire 1 y) abxor $end
+$var wire 1 z) b $end
+$var wire 1 {) bxorand $end
+$var wire 1 1( defaultCompare $end
+$var wire 1 2( out $end
+$var wire 1 |) xornot $end
+$var wire 1 }) xornotand $end
+$upscope $end
+$scope module bit26 $end
+$var wire 1 ~) a $end
+$var wire 1 !* abxor $end
+$var wire 1 "* b $end
+$var wire 1 #* bxorand $end
+$var wire 1 2( defaultCompare $end
+$var wire 1 3( out $end
+$var wire 1 $* xornot $end
+$var wire 1 %* xornotand $end
+$upscope $end
+$scope module bit27 $end
+$var wire 1 &* a $end
+$var wire 1 '* abxor $end
+$var wire 1 (* b $end
+$var wire 1 )* bxorand $end
+$var wire 1 3( defaultCompare $end
+$var wire 1 4( out $end
+$var wire 1 ** xornot $end
+$var wire 1 +* xornotand $end
+$upscope $end
+$scope module bit28 $end
+$var wire 1 ,* a $end
+$var wire 1 -* abxor $end
+$var wire 1 .* b $end
+$var wire 1 /* bxorand $end
+$var wire 1 4( defaultCompare $end
+$var wire 1 5( out $end
+$var wire 1 0* xornot $end
+$var wire 1 1* xornotand $end
+$upscope $end
+$scope module bit29 $end
+$var wire 1 2* a $end
+$var wire 1 3* abxor $end
+$var wire 1 4* b $end
+$var wire 1 5* bxorand $end
+$var wire 1 5( defaultCompare $end
+$var wire 1 6( out $end
+$var wire 1 6* xornot $end
+$var wire 1 7* xornotand $end
+$upscope $end
+$scope module bit30 $end
+$var wire 1 8* a $end
+$var wire 1 9* abxor $end
+$var wire 1 :* b $end
+$var wire 1 ;* bxorand $end
+$var wire 1 6( defaultCompare $end
+$var wire 1 8( out $end
+$var wire 1 <* xornot $end
+$var wire 1 =* xornotand $end
+$upscope $end
+$scope module bit31 $end
+$var wire 1 >* a $end
+$var wire 1 ?* abxor $end
+$var wire 1 @* axorand $end
+$var wire 1 A* b $end
+$var wire 1 8( defaultCompare $end
+$var wire 1 B* out $end
+$var wire 1 C* xornot $end
+$var wire 1 D* xornotand $end
+$upscope $end
+$upscope $end
+$scope module and0 $end
+$var wire 32 E* a [31:0] $end
+$var wire 32 F* b [31:0] $end
+$var wire 32 G* out [31:0] $end
+$upscope $end
+$scope module nand0 $end
+$var wire 32 H* a [31:0] $end
+$var wire 32 I* b [31:0] $end
+$var wire 32 J* out [31:0] $end
+$upscope $end
+$scope module nor0 $end
+$var wire 32 K* a [31:0] $end
+$var wire 32 L* b [31:0] $end
+$var wire 32 M* out [31:0] $end
+$upscope $end
+$scope module or0 $end
+$var wire 32 N* a [31:0] $end
+$var wire 32 O* b [31:0] $end
+$var wire 32 P* out [31:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$scope task checkResult $end
+$var reg 1 Q* carryout $end
+$var reg 1 R* exp_carryout $end
+$var reg 1 S* exp_overflow $end
+$var reg 32 T* exp_result [31:0] $end
+$var reg 1 U* exp_zero $end
+$var reg 1 V* overflow $end
+$var reg 32 W* result [31:0] $end
+$var reg 1 X* zero $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+xX*
+bx W*
+xV*
+xU*
+bx T*
+xS*
+xR*
+xQ*
+b1111110100 P*
+b1001100100 O*
+b111110100 N*
+b11111111111111111111110000001011 M*
+b1001100100 L*
+b111110100 K*
+b11111111111111111111111110011011 J*
+b1001100100 I*
+b111110100 H*
+b1100100 G*
+b1001100100 F*
+b111110100 E*
+1D*
+1C*
+1B*
+0A*
+0@*
+0?*
+0>*
+1=*
+1<*
+0;*
+0:*
+09*
+08*
+17*
+16*
+05*
+04*
+03*
+02*
+11*
+10*
+0/*
+0.*
+0-*
+0,*
+1+*
+1**
+0)*
+0(*
+0'*
+0&*
+1%*
+1$*
+0#*
+0"*
+0!*
+0~)
+1})
+1|)
+0{)
+0z)
+0y)
+0x)
+1w)
+1v)
+0u)
+0t)
+0s)
+0r)
+1q)
+1p)
+0o)
+0n)
+0m)
+0l)
+1k)
+1j)
+0i)
+0h)
+0g)
+0f)
+1e)
+1d)
+0c)
+0b)
+0a)
+0`)
+1_)
+1^)
+0])
+0\)
+0[)
+0Z)
+1Y)
+1X)
+0W)
+0V)
+0U)
+0T)
+1S)
+1R)
+0Q)
+0P)
+0O)
+0N)
+1M)
+1L)
+0K)
+0J)
+0I)
+0H)
+1G)
+1F)
+0E)
+0D)
+0C)
+0B)
+1A)
+1@)
+0?)
+0>)
+0=)
+0<)
+1;)
+1:)
+09)
+08)
+07)
+06)
+15)
+14)
+03)
+02)
+01)
+00)
+1/)
+1.)
+0-)
+0,)
+0+)
+0*)
+1))
+1()
+0')
+0&)
+0%)
+0$)
+1#)
+1")
+0!)
+0~(
+0}(
+0|(
+0{(
+0z(
+1y(
+1x(
+1w(
+0v(
+0u(
+0t(
+0s(
+0r(
+1q(
+1p(
+0o(
+0n(
+0m(
+0l(
+1k(
+1j(
+0i(
+1h(
+0g(
+1f(
+0e(
+1d(
+0c(
+1b(
+0a(
+1`(
+0_(
+1^(
+0](
+0\(
+0[(
+0Z(
+1Y(
+1X(
+0W(
+1V(
+0U(
+0T(
+0S(
+0R(
+0Q(
+1P(
+0O(
+1N(
+0M(
+1L(
+0K(
+1J(
+0I(
+0H(
+0G(
+0F(
+0E(
+1D(
+0C(
+0B(
+0A(
+0@(
+0?(
+1>(
+0=(
+0<(
+0;(
+0:(
+09(
+18(
+07(
+16(
+15(
+14(
+13(
+12(
+11(
+10(
+1/(
+1.(
+1-(
+0,(
+1+(
+1*(
+1)(
+1((
+1'(
+1&(
+1%(
+1$(
+1#(
+1"(
+0!(
+0~'
+b1 }'
+b1001100100 |'
+b111110100 {'
+b1110010000 z'
+b1001100100 y'
+b111110100 x'
+0w'
+0v'
+0u'
+0t'
+1s'
+0r'
+0q'
+0p'
+0o'
+0n'
+0m'
+0l'
+0k'
+0j'
+0i'
+0h'
+0g'
+1f'
+0e'
+0d'
+0c'
+0b'
+0a'
+0`'
+0_'
+0^'
+0]'
+0\'
+0['
+0Z'
+1Y'
+0X'
+0W'
+0V'
+0U'
+0T'
+0S'
+0R'
+0Q'
+0P'
+0O'
+0N'
+0M'
+1L'
+0K'
+0J'
+0I'
+0H'
+0G'
+0F'
+0E'
+0D'
+b0 C'
+0B'
+0A'
+0@'
+0?'
+1>'
+0='
+b0 <'
+1;'
+1:'
+09'
+b0 8'
+07'
+06'
+05'
+04'
+13'
+02'
+01'
+00'
+0/'
+0.'
+0-'
+0,'
+0+'
+0*'
+0)'
+0('
+0''
+1&'
+0%'
+0$'
+0#'
+0"'
+0!'
+0~&
+0}&
+0|&
+0{&
+0z&
+0y&
+0x&
+1w&
+0v&
+0u&
+0t&
+0s&
+0r&
+0q&
+0p&
+0o&
+0n&
+0m&
+0l&
+0k&
+1j&
+0i&
+0h&
+0g&
+0f&
+0e&
+0d&
+0c&
+0b&
+b0 a&
+0`&
+0_&
+0^&
+0]&
+1\&
+0[&
+b0 Z&
+1Y&
+1X&
+0W&
+b0 V&
+0U&
+0T&
+0S&
+0R&
+1Q&
+0P&
+0O&
+0N&
+0M&
+0L&
+0K&
+0J&
+0I&
+0H&
+0G&
+0F&
+0E&
+1D&
+0C&
+0B&
+0A&
+0@&
+0?&
+0>&
+0=&
+0<&
+0;&
+0:&
+09&
+08&
+17&
+06&
+05&
+04&
+03&
+02&
+01&
+00&
+0/&
+0.&
+0-&
+0,&
+0+&
+1*&
+0)&
+0(&
+0'&
+0&&
+0%&
+0$&
+0#&
+0"&
+b0 !&
+0~%
+0}%
+0|%
+0{%
+1z%
+0y%
+b0 x%
+1w%
+1v%
+0u%
+b0 t%
+0s%
+0r%
+0q%
+0p%
+1o%
+0n%
+0m%
+0l%
+0k%
+0j%
+0i%
+0h%
+0g%
+0f%
+0e%
+0d%
+0c%
+1b%
+0a%
+0`%
+0_%
+0^%
+0]%
+0\%
+0[%
+0Z%
+0Y%
+0X%
+0W%
+0V%
+1U%
+0T%
+0S%
+0R%
+0Q%
+0P%
+0O%
+0N%
+0M%
+0L%
+0K%
+0J%
+0I%
+1H%
+0G%
+0F%
+0E%
+0D%
+0C%
+0B%
+0A%
+0@%
+b0 ?%
+0>%
+0=%
+0<%
+0;%
+1:%
+09%
+b0 8%
+17%
+16%
+05%
+b0 4%
+03%
+02%
+01%
+00%
+1/%
+0.%
+0-%
+0,%
+0+%
+0*%
+0)%
+0(%
+0'%
+0&%
+0%%
+0$%
+0#%
+1"%
+0!%
+0~$
+0}$
+0|$
+0{$
+0z$
+0y$
+0x$
+0w$
+0v$
+0u$
+0t$
+1s$
+0r$
+0q$
+0p$
+0o$
+0n$
+0m$
+0l$
+0k$
+0j$
+0i$
+0h$
+0g$
+1f$
+0e$
+0d$
+0c$
+0b$
+0a$
+0`$
+0_$
+0^$
+b0 ]$
+0\$
+0[$
+0Z$
+0Y$
+1X$
+0W$
+b0 V$
+1U$
+1T$
+0S$
+b0 R$
+0Q$
+0P$
+0O$
+0N$
+1M$
+0L$
+0K$
+0J$
+0I$
+0H$
+0G$
+0F$
+0E$
+1D$
+0C$
+0B$
+1A$
+1@$
+0?$
+0>$
+1=$
+0<$
+0;$
+0:$
+09$
+08$
+07$
+16$
+05$
+14$
+03$
+12$
+11$
+00$
+0/$
+0.$
+0-$
+0,$
+0+$
+0*$
+1)$
+1($
+1'$
+0&$
+0%$
+0$$
+0#$
+0"$
+0!$
+1~#
+0}#
+1|#
+b100 {#
+0z#
+1y#
+1x#
+0w#
+1v#
+0u#
+b10 t#
+1s#
+1r#
+0q#
+b1 p#
+0o#
+1n#
+1m#
+1l#
+0k#
+0j#
+0i#
+0h#
+0g#
+0f#
+1e#
+0d#
+1c#
+1b#
+1a#
+1`#
+1_#
+0^#
+1]#
+1\#
+0[#
+1Z#
+1Y#
+1X#
+1W#
+1V#
+0U#
+1T#
+1S#
+1R#
+0Q#
+0P#
+1O#
+0N#
+1M#
+0L#
+0K#
+1J#
+1I#
+1H#
+1G#
+0F#
+1E#
+1D#
+0C#
+0B#
+1A#
+0@#
+0?#
+0>#
+0=#
+1<#
+b101 ;#
+1:#
+19#
+08#
+07#
+16#
+05#
+b110 4#
+03#
+02#
+01#
+b1111 0#
+1/#
+0.#
+0-#
+1,#
+1+#
+0*#
+0)#
+1(#
+0'#
+0&#
+0%#
+0$#
+0##
+0"#
+1!#
+1~"
+1}"
+0|"
+0{"
+1z"
+0y"
+1x"
+0w"
+0v"
+1u"
+1t"
+0s"
+0r"
+0q"
+0p"
+1o"
+0n"
+0m"
+0l"
+0k"
+0j"
+0i"
+0h"
+0g"
+0f"
+0e"
+0d"
+0c"
+1b"
+0a"
+0`"
+0_"
+0^"
+0]"
+0\"
+0["
+0Z"
+b1000 Y"
+1X"
+0W"
+0V"
+0U"
+1T"
+0S"
+0R"
+b100 Q"
+1P"
+1O"
+0N"
+b100 M"
+b1001100100 L"
+1K"
+0J"
+0I"
+0H"
+0G"
+0F"
+0E"
+0D"
+0C"
+0B"
+0A"
+0@"
+0?"
+0>"
+0="
+0<"
+0;"
+0:"
+09"
+08"
+07"
+06"
+05"
+04"
+03"
+02"
+01"
+00"
+0/"
+0."
+0-"
+0,"
+0+"
+b11111111111111111111110110011011 *"
+1)"
+0("
+0'"
+1&"
+1%"
+0$"
+0#"
+0""
+0!"
+1~
+0}
+0|
+0{
+0z
+0y
+0x
+0w
+0v
+0u
+0t
+0s
+0r
+0q
+0p
+0o
+0n
+0m
+0l
+0k
+0j
+0i
+0h
+b1001100100 g
+0f
+b1001100100 e
+b111110100 d
+b11111111111111111111110110011011 c
+b1001100100 b
+0a
+0`
+0_
+0^
+0]
+1\
+0[
+b0 Z
+b10001011000 Y
+0X
+0W
+0V
+0U
+0T
+0S
+1R
+0Q
+0P
+b10001011000 O
+0N
+b1110010000 M
+b1 L
+b1111110100 K
+b11111111111111111111110000001011 J
+b11111111111111111111111110011011 I
+b1001100100 H
+b1100100 G
+b10001011000 F
+0E
+0D
+b111110100 C
+b0 B
+b1001100100 A
+b1011010 @
+b1001100100 ?
+b1011010 >
+b10001011000 =
+b1011010 <
+b0 ;
+b1001100100 :
+b1001100100 9
+b111110100 8
+07
+b1011010 6
+b1001100100 5
+b111110100 4
+b0 3
+02
+01
+b10001011000 0
+0/
+0.
+bx -
+bz ,
+bz +
+z*
+x)
+x(
+z'
+z&
+z%
+x$
+z#
+bz "
+bz !
+$end
+#1000
+0V*
+0Q*
+0X*
+b10001011000 W*
+0S*
+0R*
+0U*
+b10001011000 T*
+#1500
+b1001001110 O
+b1001001110 0
+b1001001110 =
+0B*
+b0 L
+b0 }'
+0D*
+08(
+0=*
+06(
+07*
+05(
+01*
+04(
+0+*
+03(
+0%*
+02(
+0})
+01(
+0w)
+00(
+0q)
+0/(
+0k)
+0.(
+0e)
+0-(
+0_)
+0+(
+0Y)
+0*(
+0S)
+0)(
+0M)
+0((
+0G)
+0'(
+0A)
+0&(
+0H#
+0;)
+1"#
+0U#
+0%(
+1y"
+1/#
+0A#
+0N#
+1b#
+b100 ;#
+17$
+0D$
+b10 {#
+05)
+1s"
+b1001001110 F
+b1001001110 Y
+b1110 Y"
+1|"
+1(#
+0D#
+1K#
+0Q#
+1X#
+1]#
+1Y#
+10$
+0=$
+0$(
+1l"
+0X"
+1+#
+0>#
+0C#
+0?#
+0R
+18#
+19#
+13$
+0A$
+0/)
+1p"
+0~"
+0[
+0O"
+0T"
+1F#
+1S#
+0y#
+0#(
+1r"
+0u"
+0x"
+0*#
+1.#
+0P"
+1R"
+1=#
+1@#
+0J#
+0M#
+02$
+06$
+0))
+1m"
+0z"
+1)#
+1B#
+0O#
+01$
+1](
+0"(
+b1010 Q"
+b101 4#
+b0 t#
+1!(
+17(
+0#)
+b1011010 b
+b1011010 L"
+1I(
+0J(
+0P(
+1U(
+0V(
+1\(
+19(
+0b(
+1z(
+0>(
+b11111111111111111111111110100101 c
+b11111111111111111111111110100101 *"
+1s
+0~
+1#"
+1$"
+0%"
+0)"
+b110101110 M
+b110101110 z'
+1G(
+1M(
+1S(
+0Y(
+0[(
+1_(
+0w(
+0y(
+b1010000 G
+b1010000 G*
+b11111111111111111111111110101111 I
+b11111111111111111111111110101111 J*
+b11111111111111111111111000000001 J
+b11111111111111111111111000000001 M*
+b111111110 K
+b111111110 P*
+1H(
+0N(
+1T(
+1Z(
+0`(
+0x(
+b1011010 A
+b1011010 :
+b1011010 H
+b1011010 e
+b1011010 g
+b1011010 y'
+b1011010 |'
+b1011010 F*
+b1011010 I*
+b1011010 L*
+b1011010 O*
+12
+17
+#2500
+1Q
+11
+1N
+1.
+b0 O
+b0 0
+b0 =
+0s'
+1D
+0f'
+1r'
+1B'
+0Y'
+1e'
+1A'
+0L'
+1X'
+1@'
+03'
+1K'
+1a
+0&'
+12'
+1`&
+0w&
+1%'
+1_&
+0j&
+1v&
+1^&
+0Q&
+1i&
+1`
+0D&
+1P&
+1~%
+07&
+1C&
+1}%
+0*&
+16&
+1|%
+0o%
+1)&
+1_
+0b%
+1n%
+1>%
+0U%
+1a%
+07#
+0*$
+1=%
+16#
+0#$
+0H%
+1T%
+0&$
+1<%
+0o#
+1x#
+0/%
+1G%
+0h#
+1($
+1^
+0k#
+1~#
+0"%
+1.%
+1\
+1\$
+1T"
+0[#
+1m#
+0s$
+1!%
+0R"
+0^#
+1e#
+1[$
+0U#
+1:#
+0f$
+1r$
+0/#
+0N#
+1`#
+1Z$
+0(#
+0Q#
+1X#
+0M$
+1e$
+0"#
+0+#
+1>#
+0H#
+19#
+1]
+0u#
+0W$
+09%
+0y%
+0[&
+0='
+0y"
+1[
+0A#
+1S#
+07$
+0@$
+1L$
+0s"
+b0 Y"
+0|"
+1*#
+0D#
+1K#
+00$
+1z#
+0D$
+0Q$
+b0 {#
+0j$
+0w$
+0&%
+03%
+b0 ]$
+0L%
+0Y%
+0f%
+0s%
+b0 ?%
+0.&
+0;&
+0H&
+0U&
+b0 !&
+0n&
+0{&
+0*'
+07'
+b0 a&
+0P'
+0]'
+0j'
+0w'
+b0 C'
+0l"
+1X"
+18#
+0b#
+b0 F
+b0 Y
+b0 ;#
+03$
+1?$
+0=$
+0J$
+0c$
+0p$
+0}$
+0,%
+0E%
+0R%
+0_%
+0l%
+0'&
+04&
+0A&
+0N&
+0g&
+0t&
+0#'
+00'
+0I'
+0V'
+0c'
+0p'
+0p"
+1~"
+1F#
+0Y#
+1y#
+1A$
+1N$
+0r#
+1w#
+1g$
+1t$
+1#%
+10%
+0T$
+1Y$
+1I%
+1V%
+1c%
+1p%
+06%
+1;%
+1+&
+18&
+1E&
+1R&
+0v%
+1{%
+1k&
+1x&
+1''
+14'
+0X&
+1]&
+1M'
+1Z'
+1g'
+1t'
+0:'
+1?'
+0r"
+1u"
+1x"
+0=#
+0@#
+0W#
+0]#
+0Z#
+12$
+16$
+1C$
+1P$
+0s#
+0v#
+1i$
+1v$
+1%%
+12%
+0U$
+0X$
+1K%
+1X%
+1e%
+1r%
+07%
+0:%
+1-&
+1:&
+1G&
+1T&
+0w%
+0z%
+1m&
+1z&
+1)'
+16'
+0Y&
+0\&
+1O'
+1\'
+1i'
+1v'
+0;'
+0>'
+0m"
+1z"
+0B#
+0\#
+11$
+1>$
+1K$
+1d$
+1q$
+1~$
+1-%
+1F%
+1S%
+1`%
+1m%
+1(&
+15&
+1B&
+1O&
+1h&
+1u&
+1$'
+11'
+1J'
+1W'
+1d'
+1q'
+09(
+b1100 Q"
+b0 4#
+b1110 t#
+b1111 V$
+b1111 8%
+b1111 x%
+b1111 Z&
+b1111 <'
+0](
+1>(
+1"(
+1#(
+1$(
+1%(
+1&(
+1'(
+1((
+1)(
+1*(
+1+(
+1-(
+1.(
+1/(
+10(
+11(
+12(
+13(
+14(
+15(
+16(
+18(
+b11111111111111111111111000001100 b
+b11111111111111111111111000001100 L"
+1J(
+0!(
+1P(
+0,(
+0\(
+0h(
+1y(
+0z(
+1!)
+0")
+1')
+0()
+1-)
+0.)
+13)
+04)
+19)
+0:)
+1?)
+0@)
+1E)
+0F)
+1K)
+0L)
+1Q)
+0R)
+1W)
+0X)
+1])
+0^)
+1c)
+0d)
+1i)
+0j)
+1o)
+0p)
+1u)
+0v)
+1{)
+0|)
+1#*
+0$*
+1)*
+0**
+1/*
+00*
+15*
+06*
+1;*
+0<*
+0C*
+b111110011 c
+b111110011 *"
+0s
+1~
+0$"
+0&"
+1)"
+1i
+1j
+1k
+1l
+1m
+1n
+1o
+1p
+1q
+1r
+1t
+1u
+1v
+1w
+1x
+1y
+1z
+1{
+1|
+1}
+1!"
+1""
+b11111111111111111111111111111000 M
+b11111111111111111111111111111000 z'
+0G(
+0I(
+0M(
+0O(
+1Y(
+1e(
+1w(
+1}(
+1%)
+1+)
+11)
+17)
+1=)
+1C)
+1I)
+1O)
+1U)
+1[)
+1a)
+1g)
+1m)
+1s)
+1y)
+1!*
+1'*
+1-*
+13*
+19*
+1?*
+b100 G
+b100 G*
+b11111111111111111111111111111011 I
+b11111111111111111111111111111011 J*
+b11 J
+b11 M*
+b11111111111111111111111111111100 K
+b11111111111111111111111111111100 P*
+0H(
+1N(
+0Z(
+0f(
+1x(
+1~(
+1&)
+1,)
+12)
+18)
+1>)
+1D)
+1J)
+1P)
+1V)
+1\)
+1b)
+1h)
+1n)
+1t)
+1z)
+1"*
+1(*
+1.*
+14*
+1:*
+1A*
+b11111111111111111111111000001100 A
+b11111111111111111111111000001100 :
+b11111111111111111111111000001100 H
+b11111111111111111111111000001100 e
+b11111111111111111111111000001100 g
+b11111111111111111111111000001100 y'
+b11111111111111111111111000001100 |'
+b11111111111111111111111000001100 F*
+b11111111111111111111111000001100 I*
+b11111111111111111111111000001100 L*
+b11111111111111111111111000001100 O*
+b11111111111111111111111000001100 >
+b11111111111111111111111000001100 @
+b1111111000001100 6
+b1111111000001100 <
+b1001001110 W*
+b1001001110 T*
+#3500
+1Q*
+1X*
+b0 W*
+1R*
+1U*
+b0 T*
+#6500

@@ -48,13 +48,14 @@ module memory
 );
 
   reg [31:0] mem[4095:0];  
-  //initial $readmemh("data", mem);
+  initial $readmemh("data", mem);
 
   always @(Addr) begin
     if (regWE) begin
       mem[Addr] <= DataIn;
     end
   end
+
   assign DataOut = mem[{2'b0, Addr[31:2]}];
-  
+
 endmodule

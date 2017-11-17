@@ -50,6 +50,8 @@ module testExecute();
 	endtask
 
 	initial begin
+		$dumpfile("dump_exec.vcd");
+		$dumpvars();
 		// try adding two iputs
 		Da = 32'd500;
 		Db = 32'd612;
@@ -59,17 +61,18 @@ module testExecute();
 		#1000;
 		checkResult(32'd1112,0,0,0,
 			result, zero, carryout, overflow);
-		// add the immidiate to the input
+		// add the immediate to the input
+		#500
 		ALU_OperandSource = `IMM;
 		#1000;
 		checkResult(32'd590,0,0,0,
 			result, zero, carryout, overflow);
 		// Test negative numbers, carryout, overflow and zero flag
 		imm = -32'sd500;
-		#10000;
+		#1000;
 		checkResult(32'd0,1,1,0,
 			result, zero, carryout, overflow);
-		
+		#3000;
 
 	end // initial
 endmodule // testControl
