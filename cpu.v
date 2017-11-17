@@ -42,7 +42,7 @@ module cpu (
 	wire[2:0] command;
 
 	// Control Wires
-	wire writeReg, linkToPC, ALU_OperandSource, memoryRead, memoryWrite, memoryToRegister, is_jump, isjr, is_branch;
+	wire writeReg, linkToPC, ALU_OperandSource, memoryRead, memoryWrite, memoryToRegister, is_jump, isjr, is_branch, branch_taken;
 
 	control CPU_control(.opcode(opcode),
 						.funct(funct),
@@ -60,9 +60,10 @@ module cpu (
 // ----------------------------Instruction Fetch-------------------------
 	// Tests: [DONE]
 	wire[31:0] instruction;
+	and (branch_taken, is_branch, !zero);
 	ifetch IF(.clk(clk),
 				.write_pc(1'b1),
-				.is_branch(is_branch),
+				.is_branch(branch_taken),
 				.is_jump(is_jump),
 				.branch_addr(imm[15:0]),
 				.jump_addr(jump_target[25:0]),

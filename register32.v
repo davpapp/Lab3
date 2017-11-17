@@ -6,7 +6,7 @@ input		wrenable,
 input		clk
 );
 
-    always @(clk) begin
+    always @(negedge clk) begin
     	if (wrenable == 1)
     		q = d;
     end
