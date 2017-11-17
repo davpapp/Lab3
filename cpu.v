@@ -1,4 +1,5 @@
 // Single cycle-cpu
+`ifdef 
 `include "ifetch.v"
 `include "control.v"
 `include "regfile.v"
@@ -6,6 +7,7 @@
 `include "instructionDecoderR.v"
 `include "instructionDecoderI.v"
 `include "instructionDecoderJ.v"
+`endif
 
 // This is the top level module for our single cycle CPU
 // It consists of 5 sub-modules:
