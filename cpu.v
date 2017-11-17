@@ -97,7 +97,7 @@ module cpu (
 																			//  Register File.
 //----------------------------Misc.-----------------------------------
 
-	mux #(26) jumpto(jump_target, isjr, temp_jump_target, Da[25:0]); // If instruction is j/jal, jump to temp_jump_target.
+	mux #(26) jumpto(jump_target, isjr, temp_jump_target, Da[27:2]); // If instruction is j/jal, jump to temp_jump_target.
 																	 //  If instruction is jr, jump to the value stored in the register given 
 																	 //  (jr $ra means PC = Reg[ra])
 	mux #(5) Rd_or_Rt(.out(reg_to_write), 

@@ -21,7 +21,7 @@
 `define XORI 6'h0e
 `define ADDI 6'h08
 `define JRF  6'h08
-`define ADDF 6'h24
+`define ADDF 6'h20
 `define SUBF 6'h22
 `define SLTF 6'h2a
 
