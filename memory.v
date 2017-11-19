@@ -50,9 +50,10 @@ module memory
   reg [31:0] mem[4095:0];  
   //initial $readmemh("data", mem);
 
-  always @(Addr) begin
+  always @(negedge clk) begin
     if (regWE) begin
       mem[Addr] <= DataIn;
+      $display("Wrote %h to Memory at address %h", DataIn, Addr);
     end
   end
 
